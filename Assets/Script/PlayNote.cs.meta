@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2adffe99296dca645a48d94e57038e87
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tapNotePrefab: {instanceID: 0}
+  - holdNotePrefab: {instanceID: 0}
+  - mashNotePrefab: {instanceID: 0}
+  - spawnPointUp: {instanceID: 0}
+  - spawnPointDown: {instanceID: 0}
+  - judgeManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

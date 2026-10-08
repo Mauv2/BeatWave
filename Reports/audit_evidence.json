@@ -1,0 +1,1887 @@
+{
+  "scenes": {
+    "Assets/Scenes/ResultScene.unity": {
+      "objects": 25,
+      "components": [
+        {
+          "script": "Assets/Script/Result/ResultUI.cs",
+          "component": "918958069",
+          "object": {
+            "name": "ResultManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "scoreText": "{fileID: 1475436302}",
+            "perfectText": "{fileID: 78016966}",
+            "greatText": "{fileID: 2101864141}",
+            "goodText": "{fileID: 1760145914}",
+            "missText": "{fileID: 1876400761}",
+            "accuracyText": "{fileID: 299698340}",
+            "rankText": "{fileID: 989194690}",
+            "bookEffect": "{fileID: 1251171667}",
+            "blackFade": "{fileID: 1031240080}",
+            "fadeDuration": "0.5",
+            "sceneChangeDelay": "0.9"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/BookOpenEffect.cs",
+          "component": "1251171667",
+          "object": {
+            "name": "BookRoot",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "closedBook": "{fileID: 785373786}",
+            "openBook": "{fileID: 1181442931}",
+            "contentPanel": "{fileID: 1895087351}",
+            "openOnStart": "1",
+            "startDelay": "0.3",
+            "closedShrinkScale": "0.8",
+            "closedShrinkDuration": "0.2",
+            "openDuration": "0.45",
+            "openEase": "5",
+            "contentFadeDelay": "0.2",
+            "contentFadeDuration": "0.3"
+          }
+        }
+      ],
+      "mono_behaviours": 29
+    },
+    "Assets/Scenes/SampleScene.unity": {
+      "objects": 15,
+      "components": [
+        {
+          "script": "Assets/Script/CreateNote.cs",
+          "component": "2101944518",
+          "object": {
+            "name": "NoteManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "mashNeedHitCount": "5",
+            "mashLimitTime": "2",
+            "holdTime": "1.5"
+          }
+        }
+      ],
+      "mono_behaviours": 20
+    },
+    "Assets/Scenes/Select.unity": {
+      "objects": 25,
+      "components": [
+        {
+          "script": "Assets/Script/Select/MusicButton.cs",
+          "component": "195591768",
+          "object": {
+            "name": "Song2Button",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "musicData": "{fileID: 11400000, guid: 5d0678de11a2c5d44991683ff56312ef, type: 2}",
+            "musicSelectManager": "{fileID: 2014620559}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/SelectedMusic.cs",
+          "component": "262493956",
+          "object": {
+            "name": "SelectedMusicManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "selectedMusic": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/MusicButton.cs",
+          "component": "405236415",
+          "object": {
+            "name": "Song4Button",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "musicData": "{fileID: 11400000, guid: 1049b8f4ce7c3d14d8042487bb9eec9b, type: 2}",
+            "musicSelectManager": "{fileID: 2014620559}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/MusicButton.cs",
+          "component": "521022181",
+          "object": {
+            "name": "Song4Button (1)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "musicData": "{fileID: 11400000, guid: 1049b8f4ce7c3d14d8042487bb9eec9b, type: 2}",
+            "musicSelectManager": "{fileID: 2014620559}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/GameSelectManager.cs",
+          "component": "1002640918",
+          "object": {
+            "name": "Dotween",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "selectedMusicImage": "{fileID: 538055483}",
+            "previewAudioSource": "{fileID: 2014620560}",
+            "vinylCircle": "{fileID: 326213406}",
+            "rotateAmount": "35",
+            "rotateDuration": "0.35",
+            "moveDuration": "0.35",
+            "moveEase": "27",
+            "baseX": "-300",
+            "cardSpacing": "200",
+            "arcAmount": "120",
+            "normalScale": "0.8",
+            "selectedScale": "1.15"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/MusicButton.cs",
+          "component": "1140921965",
+          "object": {
+            "name": "Song1Button",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "musicData": "{fileID: 11400000, guid: 4fee80f0f1b21004195628fa0c102336, type: 2}",
+            "musicSelectManager": "{fileID: 2014620559}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/MusicButton.cs",
+          "component": "1761968212",
+          "object": {
+            "name": "Song3Button",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "musicData": "{fileID: 11400000, guid: 1049b8f4ce7c3d14d8042487bb9eec9b, type: 2}",
+            "musicSelectManager": "{fileID: 2014620559}"
+          }
+        },
+        {
+          "script": "Assets/Script/Select/MusicSelectManager.cs",
+          "component": "2014620559",
+          "object": {
+            "name": "MusicSelectManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "previewAudioSource": "{fileID: 2014620560}",
+            "firstMusic": "{fileID: 11400000, guid: 4fee80f0f1b21004195628fa0c102336, type: 2}",
+            "blackFade": "{fileID: 955718335}",
+            "fadeDuration": "0.5"
+          }
+        }
+      ],
+      "mono_behaviours": 37
+    },
+    "Assets/Scenes/Stage1.unity": {
+      "objects": 117,
+      "components": [
+        {
+          "script": "Assets/Script/Player/MapLoop.cs",
+          "component": "8314813",
+          "object": {
+            "name": "RawImage",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "scrollSpeed": "0.1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "16125564",
+          "object": {
+            "name": "JumpTrigger (2)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/FixedEventManager.cs",
+          "component": "88891526",
+          "object": {
+            "name": "'FixedEventManager '",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "playerMove": "{fileID: 1755936713}",
+            "playerRb": "{fileID: 1755936712}",
+            "playerAnim": "{fileID: 1755936714}",
+            "music": "{fileID: 1298131813}",
+            "eventVolume": "0.25",
+            "volumeFadeTime": "0.5",
+            "judgeManager": "{fileID: 1298131814}",
+            "noteRoot": "{fileID: 2109741190}",
+            "backgroundImage": "{fileID: 1520089012}",
+            "eventBackgroundTexture": "{fileID: 2800000, guid: ae145fb3c6d8c9440bac897f8b434d78, type: 3}",
+            "eventNoteSpawner": "{fileID: 318095083}",
+            "caveEventManager": "{fileID: 632122692}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "169681022",
+          "object": {
+            "name": "JumpTrigger",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "10",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/GameResultManager.cs",
+          "component": "184641894",
+          "object": {
+            "name": "GameResultManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {}
+        },
+        {
+          "script": "Assets/Script/CreateNote.cs",
+          "component": "201995905",
+          "object": {
+            "name": "CreateNote",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "mashNeedHitCount": "5",
+            "mashLimitTime": "2",
+            "holdTime": "1.5"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "202120645",
+          "object": {
+            "name": "TitleButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "228889922",
+          "object": {
+            "name": "JumpTrigger (15)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "8",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/NoteMapPlacer.cs",
+          "component": "297332112",
+          "object": {
+            "name": "CaveNotePlacer",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "placeOnStart": "0",
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "mashNotePrefab": "{fileID: 1118826034674867454, guid: 1864b71284d8a224b872b25a09cc0e40, type: 3}",
+            "noteRoot": "{fileID: 2109741190}",
+            "playerSpeed": "5",
+            "rayStartY": "100",
+            "rayDistance": "1000",
+            "judgePointUp": "{fileID: 2000446771}",
+            "judgePointDown": "{fileID: 1672892501}",
+            "groundCheck": "{fileID: 970105159}",
+            "player": "{fileID: 1755936709}",
+            "mainStartPoint": "{fileID: 1755936709}",
+            "caveStartPoint": "{fileID: 1675723031}",
+            "caveStartTime": "20",
+            "playerCollider": "{fileID: 1755936711}",
+            "noteHeightAdjust": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "303098744",
+          "object": {
+            "name": "JumpTrigger (13)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "8",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventNoteSpawner.cs",
+          "component": "318095083",
+          "object": {
+            "name": "EventNoteSpawner",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "approachCirclePrefab": "{fileID: 2584770665863544421, guid: 4c8ecf872390ef54eb43198814587d76, type: 3}",
+            "eventJudgePoint": "{fileID: 153374488}",
+            "noteScale": "1.5",
+            "noteSortingOrder": "50",
+            "circleStartScale": "3",
+            "circleEndScale": "0.4",
+            "noteRoot": "{fileID: 2109741190}",
+            "eventNoteJudge": "{fileID: 1999809524}",
+            "isPlaying": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/FallTransitionEffect.cs",
+          "component": "321298560",
+          "object": {
+            "name": "FallTransitionEffect",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "player": "{fileID: 1755936709}",
+            "playerRb": "{fileID: 1755936712}",
+            "blackFade": "{fileID: 975419091}",
+            "fadeInDuration": "0.5",
+            "fadeOutDuration": "0.5",
+            "jumpHeight": "1.5",
+            "jumpDuration": "0.3",
+            "fallDistance": "9",
+            "fallDuration": "1.3",
+            "jumpForwardDistance": "3",
+            "backgroundImage": "{fileID: 8314814}",
+            "nextBackground": "{fileID: 2800000, guid: 877c64a491601bd41b7dcfd1ee121f75, type: 3}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "505450844",
+          "object": {
+            "name": "JumpTrigger (14)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "7",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/CaveEventManager.cs",
+          "component": "632122692",
+          "object": {
+            "name": "CaveEventManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "fallTransition": "{fileID: 321298560}",
+            "playerMove": "{fileID: 1755936713}",
+            "player": "{fileID: 1755936709}",
+            "playerRb": "{fileID: 1755936712}",
+            "playerAnim": "{fileID: 1755936714}",
+            "caveStartPoint": "{fileID: 1675723031}",
+            "music1": "{fileID: 0}",
+            "music2": "{fileID: 0}",
+            "caveMusic": "{fileID: 8300000, guid: f8b574bf96723ac4eb2cfdb9ec56fab3, type: 3}",
+            "normalVolume": "0.5",
+            "crossFadeTime": "1",
+            "useSecondMusic": "0",
+            "judgeManager": "{fileID: 1298131814}",
+            "stopDelay": "1",
+            "restartDelay": "1",
+            "noteMapPlacer": "{fileID: 297332112}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "706976609",
+          "object": {
+            "name": "JumpTrigger (1)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "9",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/PauseMenuEffect.cs",
+          "component": "912453666",
+          "object": {
+            "name": "PauseMenu",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "darkPanel": "{fileID: 1083368199}",
+            "frameGroup": "{fileID: 1945728497}",
+            "frameRect": "{fileID: 1945728496}",
+            "buttonGroup": "{fileID: 1540003076}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "965787346",
+          "object": {
+            "name": "JumpTrigger (7)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "7",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/PauseManager.cs",
+          "component": "1106266563",
+          "object": {
+            "name": "PauseManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "blackFade": "{fileID: 975419091}",
+            "fadeDuration": "0.8",
+            "PauseMenu": "{fileID: 912453664}",
+            "gameAudio": "{fileID: 1298131813}",
+            "pauseEffect": "{fileID: 912453666}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1210811134",
+          "object": {
+            "name": "JumpTrigger (12)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "8",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/PlayNote.cs",
+          "component": "1298131811",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "judgeManager": "{fileID: 1298131814}",
+            "playerMover": "{fileID: 1755936713}",
+            "isNoteFlowPaused": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgeManager.cs",
+          "component": "1298131814",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "judgePointUp": "{fileID: 2000446773}",
+            "judgePointDown": "{fileID: 1672892503}",
+            "judgeTextPrefab": "{fileID: 8550629993828623691, guid: dacc8d1037023d04b819ccf0f7568d80, type: 3}",
+            "holdEffectPrefab": "{fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}",
+            "score": "0",
+            "combo": "0",
+            "perfectCount": "0",
+            "greatCount": "0",
+            "goodCount": "0",
+            "missCount": "0",
+            "scoreText": "{fileID: 1924353868}",
+            "comboText": "{fileID: 1950906303}",
+            "hpText": "{fileID: 465824247}",
+            "maxHp": "45",
+            "currentHp": "45",
+            "hitEffectPrefab": "{fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}",
+            "playerAnim": "{fileID: 1755936714}",
+            "blackFade": "{fileID: 975419091}",
+            "fadeDuration": "0.5"
+          }
+        },
+        {
+          "script": "Assets/Script/NoteMapPlacer.cs",
+          "component": "1298131815",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "placeOnStart": "1",
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "mashNotePrefab": "{fileID: 1118826034674867454, guid: 1864b71284d8a224b872b25a09cc0e40, type: 3}",
+            "noteRoot": "{fileID: 2109741190}",
+            "playerSpeed": "5",
+            "rayStartY": "20",
+            "rayDistance": "50",
+            "judgePointUp": "{fileID: 2000446771}",
+            "judgePointDown": "{fileID: 1672892501}",
+            "groundCheck": "{fileID: 970105159}",
+            "player": "{fileID: 1755936709}",
+            "mainStartPoint": "{fileID: 1755936709}",
+            "caveStartPoint": "{fileID: 1675723031}",
+            "caveStartTime": "20",
+            "playerCollider": "{fileID: 1755936711}",
+            "noteHeightAdjust": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventTrigger.cs",
+          "component": "1369520403",
+          "object": {
+            "name": "EventTrigger",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "fixedEventManager": "{fileID: 88891526}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1577267311",
+          "object": {
+            "name": "JumpTrigger (6)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "9",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "1584155177",
+          "object": {
+            "name": "SelectButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1611028231",
+          "object": {
+            "name": "JumpTrigger (3)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "10",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1628176430",
+          "object": {
+            "name": "JumpTrigger (11)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "8",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1631498777",
+          "object": {
+            "name": "JumpTrigger (4)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "9",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgePoint.cs",
+          "component": "1672892503",
+          "object": {
+            "name": "JudgePoint_Down",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1709830851",
+          "object": {
+            "name": "JumpTrigger (5)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "9",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/PlayerMove.cs",
+          "component": "1755936713",
+          "object": {
+            "name": "Player",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "moveSpeed": "5",
+            "isPaused": "0",
+            "jumpForce": "8",
+            "groundCheck": "{fileID: 970105159}",
+            "groundCheckRadius": "0.15"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/PlayerAnimController.cs",
+          "component": "1755936714",
+          "object": {
+            "name": "Player",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "animator": "{fileID: 4822398208919762009}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1851979854",
+          "object": {
+            "name": "JumpTrigger (9)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "11",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventNoteJudge.cs",
+          "component": "1999809524",
+          "object": {
+            "name": "EventNoteJudge",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}",
+            "playerAnim": "{fileID: 1755936714}",
+            "hitEffectPrefab": "{fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}",
+            "perfectWindow": "0.15",
+            "goodWindow": "0.35"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgePoint.cs",
+          "component": "2000446773",
+          "object": {
+            "name": "JudgePoint_Up",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "2028222311",
+          "object": {
+            "name": "ResumeButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "2028222312",
+          "object": {
+            "name": "ResumeButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "2036860298",
+          "object": {
+            "name": "RetryButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "2075981592",
+          "object": {
+            "name": "JumpTrigger (10)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "9",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "2144099015",
+          "object": {
+            "name": "JumpTrigger (8)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "7",
+            "oneTimeOnly": "1"
+          }
+        }
+      ],
+      "mono_behaviours": 82
+    },
+    "Assets/Scenes/Stage2.unity": {
+      "objects": 140,
+      "components": [
+        {
+          "script": "Assets/Stage2/script/BackgroundTrigger.cs",
+          "component": "42992509",
+          "object": {
+            "name": "BackgroundTrigger_1",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "backgroundIndex": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/PauseMenuEffect.cs",
+          "component": "60777875",
+          "object": {
+            "name": "PauseMenu",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "darkPanel": "{fileID: 45556703}",
+            "frameGroup": "{fileID: 1542532463}",
+            "frameRect": "{fileID: 1542532466}",
+            "buttonGroup": "{fileID: 1119668056}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/PlayerAnimController.cs",
+          "component": "79916001",
+          "object": {
+            "name": "Player",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "animator": "{fileID: 1428309691}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/PlayerMove.cs",
+          "component": "79916002",
+          "object": {
+            "name": "Player",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "moveSpeed": "5",
+            "isPaused": "0",
+            "jumpForce": "8",
+            "groundCheck": "{fileID: 58813683}",
+            "groundCheckRadius": "0.15"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "105450207",
+          "object": {
+            "name": "JumpTrigger (5)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/CaveEventManager.cs",
+          "component": "136805120",
+          "object": {
+            "name": "CaveEventManager",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "fallTransition": "{fileID: 1141675933}",
+            "playerMove": "{fileID: 0}",
+            "player": "{fileID: 0}",
+            "playerRb": "{fileID: 0}",
+            "caveStartPoint": "{fileID: 914085386}",
+            "music": "{fileID: 675615436}",
+            "judgeManager": "{fileID: 675615435}",
+            "stopDelay": "0.5",
+            "restartDelay": "0.5",
+            "noteMapPlacer": "{fileID: 634048939}"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "142524353",
+          "object": {
+            "name": "ResumeButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "142524355",
+          "object": {
+            "name": "ResumeButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventTrigger.cs",
+          "component": "244415042",
+          "object": {
+            "name": "EventTrigger",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "fixedEventManager": "{fileID: 1807878256}"
+          }
+        },
+        {
+          "script": "Assets/Stage2/script/Camera Test.cs",
+          "component": "291645577",
+          "object": {
+            "name": "Main Camera",
+            "active": "1"
+          },
+          "enabled": "0",
+          "settings": {}
+        },
+        {
+          "script": "Assets/Stage2/script/BackgroundLoop.cs",
+          "component": "291645578",
+          "object": {
+            "name": "Main Camera",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "background1": "{fileID: 1778109822}",
+            "background2": "{fileID: 1093713631}",
+            "mainCamera": "{fileID: 291645575}",
+            "scrollSpeed": "4"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgePoint.cs",
+          "component": "293575129",
+          "object": {
+            "name": "JudgePoint_Down",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "336222684",
+          "object": {
+            "name": "JumpTrigger (10)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "7",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "497871418",
+          "object": {
+            "name": "JumpTrigger (11)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "5",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "537647218",
+          "object": {
+            "name": "RetryButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "602440562",
+          "object": {
+            "name": "JumpTrigger (1)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/NoteMapPlacer.cs",
+          "component": "634048939",
+          "object": {
+            "name": "CaveNotePlacer",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "mashNotePrefab": "{fileID: 1118826034674867454, guid: 1864b71284d8a224b872b25a09cc0e40, type: 3}",
+            "noteRoot": "{fileID: 0}",
+            "playerSpeed": "5",
+            "rayStartY": "20",
+            "rayDistance": "50",
+            "judgePointUp": "{fileID: 0}",
+            "judgePointDown": "{fileID: 0}",
+            "groundCheck": "{fileID: 0}",
+            "player": "{fileID: 0}",
+            "mainStartPoint": "{fileID: 0}",
+            "caveStartPoint": "{fileID: 914085386}",
+            "caveStartTime": "20",
+            "playerCollider": "{fileID: 0}",
+            "noteHeightAdjust": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgeManager.cs",
+          "component": "675615435",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "judgePointUp": "{fileID: 1001457510}",
+            "judgePointDown": "{fileID: 293575129}",
+            "judgeTextPrefab": "{fileID: 8550629993828623691, guid: dacc8d1037023d04b819ccf0f7568d80, type: 3}",
+            "score": "0",
+            "combo": "0",
+            "perfectCount": "0",
+            "greatCount": "0",
+            "goodCount": "0",
+            "missCount": "0",
+            "scoreText": "{fileID: 144388013}",
+            "comboText": "{fileID: 741986203}",
+            "hpText": "{fileID: 1571787808}",
+            "maxHp": "45",
+            "currentHp": "45",
+            "hitEffectPrefab": "{fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}",
+            "playerAnim": "{fileID: 79916001}",
+            "blackFade": "{fileID: 348764885}",
+            "fadeDuration": "0.5"
+          }
+        },
+        {
+          "script": "Assets/Script/NoteMapPlacer.cs",
+          "component": "675615437",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jsonFileName": "notedata.json",
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "mashNotePrefab": "{fileID: 1118826034674867454, guid: 1864b71284d8a224b872b25a09cc0e40, type: 3}",
+            "noteRoot": "{fileID: 0}",
+            "playerSpeed": "5",
+            "rayStartY": "20",
+            "rayDistance": "50",
+            "judgePointUp": "{fileID: 1001457508}",
+            "judgePointDown": "{fileID: 293575127}",
+            "groundCheck": "{fileID: 58813683}",
+            "player": "{fileID: 79915998}",
+            "mainStartPoint": "{fileID: 0}",
+            "caveStartPoint": "{fileID: 914085386}",
+            "caveStartTime": "20",
+            "playerCollider": "{fileID: 79916000}",
+            "noteHeightAdjust": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/PlayNote.cs",
+          "component": "675615438",
+          "object": {
+            "name": "PlayManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "judgeManager": "{fileID: 675615435}",
+            "playerMover": "{fileID: 79916002}",
+            "isNoteFlowPaused": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "701931000",
+          "object": {
+            "name": "JumpTrigger (4)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "5",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "724552131",
+          "object": {
+            "name": "TitleButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "815523474",
+          "object": {
+            "name": "JumpTrigger (6)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "8",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Stage2/script/BackgroundTrigger.cs",
+          "component": "823643985",
+          "object": {
+            "name": "BackgroundTrigger_3",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "backgroundIndex": "3"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventNoteJudge.cs",
+          "component": "909079708",
+          "object": {
+            "name": "EventNoteJudge",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}",
+            "playerAnim": "{fileID: 0}",
+            "hitEffectPrefab": "{fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}",
+            "perfectWindow": "0.15",
+            "goodWindow": "0.35"
+          }
+        },
+        {
+          "script": "Assets/Script/JudgePoint.cs",
+          "component": "1001457510",
+          "object": {
+            "name": "JudgePoint_Up",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "currentNote": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1053594584",
+          "object": {
+            "name": "JumpTrigger",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "5",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/FallTransitionEffect.cs",
+          "component": "1141675933",
+          "object": {
+            "name": "FallTransitionEffect",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "player": "{fileID: 0}",
+            "playerRb": "{fileID: 0}",
+            "blackFade": "{fileID: 348764885}",
+            "fadeInDuration": "0.5",
+            "fadeOutDuration": "0.5",
+            "jumpHeight": "1.5",
+            "jumpDuration": "0.3",
+            "fallDistance": "9",
+            "fallDuration": "1.3",
+            "jumpForwardDistance": "3",
+            "backgroundImage": "{fileID: 0}",
+            "nextBackground": "{fileID: 2800000, guid: e9e0c87c892cbbe4da5da05aad174681, type: 3}"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/EventNoteSpawner.cs",
+          "component": "1262334139",
+          "object": {
+            "name": "EventNoteSpawner",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "tapNotePrefab": "{fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}",
+            "holdNotePrefab": "{fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}",
+            "approachCirclePrefab": "{fileID: 2584770665863544421, guid: 4c8ecf872390ef54eb43198814587d76, type: 3}",
+            "eventJudgePoint": "{fileID: 0}",
+            "noteScale": "1.5",
+            "noteSortingOrder": "50",
+            "circleStartScale": "3",
+            "circleEndScale": "0.4",
+            "noteRoot": "{fileID: 0}",
+            "eventNoteJudge": "{fileID: 909079708}",
+            "isPlaying": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/CreateNote.cs",
+          "component": "1290797793",
+          "object": {
+            "name": "CreateNote",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "mashNeedHitCount": "5",
+            "mashLimitTime": "2",
+            "holdTime": "1.5"
+          }
+        },
+        {
+          "script": "Assets/Script/PauseManager.cs",
+          "component": "1314835453",
+          "object": {
+            "name": "PauseManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "blackFade": "{fileID: 348764885}",
+            "fadeDuration": "0.8",
+            "PauseMenu": "{fileID: 60777873}",
+            "gameAudio": "{fileID: 675615436}",
+            "pauseEffect": "{fileID: 60777875}"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1368860516",
+          "object": {
+            "name": "JumpTrigger (12)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "5",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/MapLoop.cs",
+          "component": "1569553017",
+          "object": {
+            "name": "S1BackGround",
+            "active": "0"
+          },
+          "enabled": "0",
+          "settings": {
+            "scrollSpeed": "0.1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/BackgroundFollowCamera.cs",
+          "component": "1569553018",
+          "object": {
+            "name": "S1BackGround",
+            "active": "0"
+          },
+          "enabled": "0",
+          "settings": {
+            "targetCamera": "{fileID: 0}"
+          }
+        },
+        {
+          "script": "Assets/Stage2/script/BackgroundTrigger.cs",
+          "component": "1598893249",
+          "object": {
+            "name": "BackgroundTrigger_2",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "backgroundIndex": "2"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "1629755594",
+          "object": {
+            "name": "SelectButton",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "hoverMultiplier": "1.08"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1691997634",
+          "object": {
+            "name": "JumpTrigger (7)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Event/FixedEventManager.cs",
+          "component": "1807878256",
+          "object": {
+            "name": "'FixedEventManager '",
+            "active": "0"
+          },
+          "enabled": "1",
+          "settings": {
+            "playerMove": "{fileID: 0}",
+            "playerRb": "{fileID: 0}",
+            "playerAnim": "{fileID: 0}",
+            "music": "{fileID: 675615436}",
+            "judgeManager": "{fileID: 675615435}",
+            "noteRoot": "{fileID: 0}",
+            "backgroundImage": "{fileID: 1977410969}",
+            "eventBackgroundTexture": "{fileID: 2800000, guid: ae145fb3c6d8c9440bac897f8b434d78, type: 3}",
+            "eventNoteSpawner": "{fileID: 1262334139}",
+            "caveEventManager": "{fileID: 136805120}"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/GameResultManager.cs",
+          "component": "1811716178",
+          "object": {
+            "name": "GameResultManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {}
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1840870394",
+          "object": {
+            "name": "JumpTrigger (2)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1846381643",
+          "object": {
+            "name": "JumpTrigger (8)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "7",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "1867826593",
+          "object": {
+            "name": "JumpTrigger (3)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "6",
+            "oneTimeOnly": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Player/JumpTrigger.cs",
+          "component": "2068483911",
+          "object": {
+            "name": "JumpTrigger (9)",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "jumpPower": "5",
+            "oneTimeOnly": "1"
+          }
+        }
+      ],
+      "mono_behaviours": 82
+    },
+    "Assets/Scenes/Title.unity": {
+      "objects": 22,
+      "components": [
+        {
+          "script": "Assets/Script/Title/RotateTween.cs",
+          "component": "70056795",
+          "object": {
+            "name": "Clock minute",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "duration": "8",
+            "reverse": "1"
+          }
+        },
+        {
+          "script": "Assets/Script/Result/GameResultManager.cs",
+          "component": "464993821",
+          "object": {
+            "name": "GameResultManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {}
+        },
+        {
+          "script": "Assets/Script/Title/RotateTween.cs",
+          "component": "642659786",
+          "object": {
+            "name": "Clock second",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "duration": "8",
+            "reverse": "0"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/TitleStart.cs",
+          "component": "702447693",
+          "object": {
+            "name": "TitleManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "menuPanel": "{fileID: 1741092033}",
+            "pressText": "{fileID: 1746898207}",
+            "titleImage": "{fileID: 647497032}"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/TitleButtonHandler.cs",
+          "component": "702447694",
+          "object": {
+            "name": "TitleManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "blackFade": "{fileID: 560626585}",
+            "fadeDuration": "1",
+            "bgmSource": "{fileID: 292803922}",
+            "selectSceneName": "Select"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/MenuBottonTween.cs",
+          "component": "897594585",
+          "object": {
+            "name": "Title",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "delay": "0.75"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/TitleEffect.cs",
+          "component": "1437618062",
+          "object": {
+            "name": "Post-process Volume",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "volume": "{fileID: 1437618063}",
+            "speed": "2.1",
+            "minIntensity": "8",
+            "maxIntensity": "40"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "1806941727",
+          "object": {
+            "name": "BtnOption",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "normalScale": "1",
+            "hoverScale": "1.08",
+            "enterScaleDuration": "0.15",
+            "exitScaleDuration": "0.3"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/MenuBottonTween.cs",
+          "component": "1806941728",
+          "object": {
+            "name": "BtnOption",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "delay": "0.6"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "1905138402",
+          "object": {
+            "name": "BtnQuit",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "normalScale": "1",
+            "hoverScale": "1.08",
+            "enterScaleDuration": "0.15",
+            "exitScaleDuration": "0.3"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/MenuBottonTween.cs",
+          "component": "1905138403",
+          "object": {
+            "name": "BtnQuit",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "delay": "0.75"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/MenuBottonTween.cs",
+          "component": "1947233504",
+          "object": {
+            "name": "BtnStart",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "delay": "0.5"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/ButtonHoverTween.cs",
+          "component": "1947233505",
+          "object": {
+            "name": "BtnStart",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "normalScale": "1",
+            "hoverScale": "1.08",
+            "enterScaleDuration": "0.15",
+            "exitScaleDuration": "0.3"
+          }
+        }
+      ],
+      "mono_behaviours": 39
+    },
+    "Assets/Scenes/Titleee.unity": {
+      "objects": 15,
+      "components": [
+        {
+          "script": "Assets/Script/Result/GameResultManager.cs",
+          "component": "464993821",
+          "object": {
+            "name": "GameResultManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {}
+        },
+        {
+          "script": "Assets/Script/Title/TitleStart.cs",
+          "component": "702447693",
+          "object": {
+            "name": "TitleManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {
+            "menuPanel": "{fileID: 1741092033}",
+            "pressText": "{fileID: 1746898207}"
+          }
+        },
+        {
+          "script": "Assets/Script/Title/TitleButtonHandler.cs",
+          "component": "702447694",
+          "object": {
+            "name": "TitleManager",
+            "active": "1"
+          },
+          "enabled": "1",
+          "settings": {}
+        }
+      ],
+      "mono_behaviours": 20
+    }
+  },
+  "unresolved_script_guids": [
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1806941729",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    },
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1905138404",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    },
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1947233506",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    }
+  ],
+  "charts": [
+    {
+      "path": "Assets/notedata.json",
+      "count": 92,
+      "kinds": {
+        "0": 90,
+        "1": 2
+      },
+      "first": 1.27997732162476,
+      "last": 98.9013137817383,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "763f5419910f836a824ead81a049b0bdf55cbf2348ddbaf2eb4b57cec7192311"
+    },
+    {
+      "path": "Assets/notedata_Stage2.json",
+      "count": 62,
+      "kinds": {
+        "0": 60,
+        "1": 2
+      },
+      "first": 2.38933324813843,
+      "last": 63.1466674804688,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "e2551880ccc2243fb59048eb9656ad21a068a1fa633c8bdbd75002969b7bb5c2"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata.json",
+      "count": 31,
+      "kinds": {
+        "0": 31
+      },
+      "first": 1.17331063747406,
+      "last": 31.4026527404785,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "f504f9c80944b217539098fa51dbd618cb5dfd4e89339c941b78269a12173ab8"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata_cave.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata_Stage2.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata.json",
+      "count": 31,
+      "kinds": {
+        "0": 31
+      },
+      "first": 1.17331063747406,
+      "last": 31.4026527404785,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "f504f9c80944b217539098fa51dbd618cb5dfd4e89339c941b78269a12173ab8"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata_cave.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata_Stage2.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    }
+  ],
+  "music": [
+    {
+      "asset": "Assets/Prefab/Song1Data.asset",
+      "name": "lily",
+      "scene": "Stage1",
+      "preview": "{fileID: 8300000, guid: 789e5211307ef1e4494945aecc977852, type: 3}",
+      "game": "{fileID: 8300000, guid: 789e5211307ef1e4494945aecc977852, type: 3}"
+    },
+    {
+      "asset": "Assets/Prefab/Song2Data.asset",
+      "name": "\"\\uBCC4\\uBE5B \\uC220\\uB798\\uC7A1\\uAE30\"",
+      "scene": "Stage2",
+      "preview": "{fileID: 8300000, guid: d7e3da29193d23046a916fbc35c96e96, type: 3}",
+      "game": "{fileID: 8300000, guid: d7e3da29193d23046a916fbc35c96e96, type: 3}"
+    },
+    {
+      "asset": "Assets/Prefab/Song3Data.asset",
+      "name": "",
+      "scene": "",
+      "preview": "{fileID: 8300000, guid: f93e4c47b3471284baf53d1c72ba4353, type: 3}",
+      "game": "{fileID: 8300000, guid: f93e4c47b3471284baf53d1c72ba4353, type: 3}"
+    }
+  ],
+  "asset_counts": {
+    ".jpg": 3,
+    ".prefab": 19,
+    ".mp3": 9,
+    ".mat": 235,
+    ".json": 9,
+    ".pdf": 2,
+    ".asset": 372,
+    ".ttf": 8,
+    ".unitypackage": 5,
+    ".txt": 12,
+    ".cs": 82,
+    ".png": 427,
+    ".mp4": 1,
+    ".rendertexture": 1,
+    ".shader": 18,
+    ".physicsmaterial2d": 1,
+    ".unity": 23,
+    ".lighting": 14,
+    ".fbx": 17,
+    ".flare": 3,
+    ".psd": 1,
+    ".psb": 1,
+    ".anim": 24,
+    ".controller": 1,
+    ".asmdef": 2,
+    ".cginc": 8,
+    ".xls": 1,
+    ".dll": 17,
+    ".php": 3,
+    ".xml": 9,
+    ".mdb": 6
+  },
+  "asset_folder_bytes": {
+    "alpha.jpg": 57862,
+    "Cube.prefab": 3244,
+    "metal.mp3": 2668800,
+    "Note.mat": 2292,
+    "Note.prefab": 6069,
+    "notedata.json": 10116,
+    "notedata_Stage2.json": 6817,
+    "Test.mp3": 4633495,
+    "testMusic.mp3": 2912172,
+    "AllSkyFree": 335313986,
+    "Audio": 15278209,
+    "Cinzel": 1555828255,
+    "Editor": 2149,
+    "Image": 191408377,
+    "LJR": 7051013,
+    "MagicCliffsArtwork": 5597243,
+    "notedata JSON": 9346,
+    "Prefab": 2930849,
+    "Resources": 1306,
+    "Scenes": 5528778,
+    "Script": 103187,
+    "Generic Cute 2D": 4145330,
+    "JMO Assets": 10868799,
+    "Plugins": 14474814,
+    "Stage2": 18906591,
+    "TextMesh Pro": 3560738
+  }
+}

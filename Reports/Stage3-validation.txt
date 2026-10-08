@@ -1,0 +1,24 @@
+PASS wrong lane cannot hit
+PASS too early cannot hit
+PASS exact tap scores perfect
+PASS tap resolves once
+PASS late tap inside window scores good
+PASS expired note reduces health
+PASS hold requires full duration
+PASS held ribbon completes
+PASS early hold release misses
+PASS broken hold cannot be recovered
+PASS zero health stops further judgement
+PASS miss resets combo but keeps maximum
+PASS chart contains 135 notes and 8 holds
+PASS chart sorted by time
+PASS all notes inside song and valid lanes
+PASS same-lane holds and taps have safe spacing
+PASS all route joins are continuous
+PASS six authored jumps
+PASS route includes leftward travel
+PASS complete chart at 30 FPS without dropped notes
+PASS complete chart at 60 FPS without dropped notes
+PASS complete chart at 144 FPS without dropped notes
+PASS scene audio and chart references exist
+PASS Stage3 registered in build

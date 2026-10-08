@@ -1,0 +1,290 @@
+[
+  {
+    "x": 10.1198864,
+    "y": -0.100000858,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 14.2799768,
+    "y": -0.100000858,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 53.2133141,
+    "y": 9.738316,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 57.15991,
+    "y": 7.69000053,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 61.5332642,
+    "y": 9.900001,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 66.01331,
+    "y": 7.064999,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 74.43995,
+    "y": 7.064999,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 81.5865555,
+    "y": 9.275,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 83.39993,
+    "y": 7.064999,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 88.51989,
+    "y": 7.064999,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 93.3198853,
+    "y": 6.768823,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 96.94664,
+    "y": 8.980667,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 100.999931,
+    "y": 6.77272654,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 105.2666,
+    "y": 8.744333,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 109.319893,
+    "y": 11.9994946,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 113.47998,
+    "y": 9.789715,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 118.173286,
+    "y": 14.0064163,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 122.759911,
+    "y": 14.9688034,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 126.919884,
+    "y": 15.9178543,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 131.186554,
+    "y": 15.9194813,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 135.5599,
+    "y": 13.7111511,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 139.7199,
+    "y": 13.3004189,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 143.879974,
+    "y": 10.8279266,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 148.679977,
+    "y": 10.9810143,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 152.94664,
+    "y": 5.785113,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 161.586548,
+    "y": 2.274735,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 166.1733,
+    "y": -0.234968662,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 170.013321,
+    "y": -1.887012,
+    "lane": "Down",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 179.186554,
+    "y": -0.100000858,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 411.719879,
+    "y": -25.476799,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 418.546661,
+    "y": -22.8425732,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  },
+  {
+    "x": 421.106628,
+    "y": -22.8243256,
+    "lane": "Up",
+    "kind": "Tap",
+    "tag": "Note",
+    "moveEnabled": false,
+    "trigger": true
+  }
+]

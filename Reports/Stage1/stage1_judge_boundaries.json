@@ -1,0 +1,42 @@
+[
+  {
+    "distance": 0.0,
+    "result": "Perfect"
+  },
+  {
+    "distance": 0.1999,
+    "result": "Perfect"
+  },
+  {
+    "distance": 0.2001,
+    "result": "Great"
+  },
+  {
+    "distance": 0.3999,
+    "result": "Great"
+  },
+  {
+    "distance": 0.4001,
+    "result": "Good"
+  },
+  {
+    "distance": 0.5999,
+    "result": "Good"
+  },
+  {
+    "distance": 0.6001,
+    "result": ""
+  },
+  {
+    "distance": 0.587567,
+    "result": "Good"
+  },
+  {
+    "distance": 0.697073,
+    "result": ""
+  },
+  {
+    "distance": 0.682648,
+    "result": ""
+  }
+]

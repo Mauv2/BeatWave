@@ -1,0 +1,38 @@
+[
+  {
+    "endX": 7.5,
+    "endY": 0.0,
+    "start": "(0.00, 0.00, 0.00)",
+    "actualEnd": "(7.50, 0.00, 0.00)",
+    "bodyX": 3.75,
+    "bodyY": 0.0,
+    "angle": 0.0,
+    "length": 7.5,
+    "bodyHeight": 0.15,
+    "rootCollider": "(0.64, 0.64)"
+  },
+  {
+    "endX": 7.5,
+    "endY": 4.0,
+    "start": "(0.00, 0.00, 0.00)",
+    "actualEnd": "(7.50, 4.00, 0.00)",
+    "bodyX": 3.75,
+    "bodyY": 2.0,
+    "angle": 28.0724869,
+    "length": 8.5,
+    "bodyHeight": 0.15,
+    "rootCollider": "(0.64, 0.64)"
+  },
+  {
+    "endX": 7.5,
+    "endY": -4.0,
+    "start": "(0.00, 0.00, 0.00)",
+    "actualEnd": "(7.50, -4.00, 0.00)",
+    "bodyX": 3.75,
+    "bodyY": -2.0,
+    "angle": 331.927521,
+    "length": 8.5,
+    "bodyHeight": 0.15,
+    "rootCollider": "(0.64, 0.64)"
+  }
+]

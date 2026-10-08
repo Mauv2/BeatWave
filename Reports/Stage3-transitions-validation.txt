@@ -1,0 +1,51 @@
+PASS Stage3 uses the requested Last Wish clip
+PASS Stage1 UI identical: text
+PASS Stage1 UI identical: PauseMenu
+PASS Stage1 UI identical: Image
+PASS Exact Stage1 tap and hold prefab references
+PASS Stage1 button binding: ResumeGame
+PASS Stage1 button binding: RetryGame
+PASS Stage1 button binding: GoToSelectScene
+PASS Stage1 button binding: GoToTitle
+PASS All environment sprite assets owned by Stage3
+PASS No old background or ground reused
+PASS Only one seesaw remains
+PASS Six straight, four uphill and three downhill sections
+PASS Route extends to the exact clip end, with motion in the final audio tail
+PASS Entire song has continuous time coverage without gaps
+PASS Mash presents only an input hint, without count or completion ring
+PASS Three musical Mash gates and five falling ground slabs
+PASS Playable route follows actual inclined ground colliders
+PASS Route remains continuous across slopes, collapse and transfer
+PASS Chart: 105 regular notes including 5 holds, plus 3 Mash gates
+PASS Mash phrases do not overlap regular notes or holds
+PASS All notes finish before the actual audio clip ends
+PASS No missing scripts
+PASS All 105 ordinary runtime notes registered
+PASS Out-of-window press rejected
+PASS ESC menu pauses audio and gameplay
+PASS Clock and player remain frozen while menu open
+PASS Mash cannot advance or accept input while ESC menu is open
+PASS Camera zooms toward Mash gate 1
+PASS Collapse moves visible terrain and disables its collision
+PASS Collapse reveals the new underground background
+PASS Camera zooms toward Mash gate 4
+PASS Camera zooms toward Mash gate 6
+PASS All three Mash gates accept continued hits beyond the hidden threshold and resolve once
+PASS Every accepted Mash press spawns a hit effect, including hits after the threshold
+PASS Resolved Mash hides its hint without showing a count or clear label
+PASS Mash gates preserve continuous music playback
+PASS Full chart resolved through Stage1 judgement APIs; late editor-driven inputs: 1
+PASS Result scene opens after full audio playback (53.160 s), never at the final note or Mash threshold
+PASS Stage1 score copied to result scene
+PASS Result retry destination is Stage3
+PASS Original pause/resume animation completed
+PASS Audio / DSP clock drift <150 ms; observed 134.7 ms
+PASS Mash rejects presses before its musical window
+PASS Mash focus also works without any hits
+PASS Unplayed Mash produces one Miss, not a forced success
+PASS Failed Mash still advances into the next stage without softlock
+PASS Retry button reloads Stage3 and restarts music
+PASS Retry resets Mash progress and reconstructs collapsed ground
+PASS Song select button opens Select
+PASS Title button opens Title

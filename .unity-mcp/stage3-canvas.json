@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"return UnityEngine.Object.FindObjectsOfType<Canvas>().Select(c=>new{name=c.name,mode=c.renderMode.ToString(),sort=c.sortingOrder,layer=c.sortingLayerName,camera=c.worldCamera==null?\"null\":c.worldCamera.name,plane=c.planeDistance}).ToArray();"}}

@@ -1,0 +1,30 @@
+PASS Stage3 uses the requested Last Wish clip
+PASS Stage1 UI identical: text
+PASS Stage1 UI identical: PauseMenu
+PASS Stage1 UI identical: Image
+PASS Exact Stage1 tap and hold prefab references
+PASS Stage1 button binding: ResumeGame
+PASS Stage1 button binding: RetryGame
+PASS Stage1 button binding: GoToSelectScene
+PASS Stage1 button binding: GoToTitle
+PASS All environment sprite assets owned by Stage3
+PASS No old background or ground reused
+PASS Six jumps and seven new walkways
+PASS Chart: 135 notes including 8 holds
+PASS All notes finish before the actual audio clip ends
+PASS No missing scripts
+PASS All 135 runtime notes registered
+PASS Out-of-window press rejected
+PASS ESC menu pauses audio and gameplay
+PASS Clock and player remain frozen while menu open
+PASS Full chart resolved through Stage1 judgement APIs
+PASS Stage1 score copied to result scene
+PASS Result retry destination is Stage3
+PASS Original pause/resume animation completed
+PASS Audio / DSP clock drift <150 ms; observed 49.3 ms
+PASS Retry button reloads Stage3 and restarts music
+PASS Song select button opens Select
+PASS Title button opens Title
+PASS Final pause menu visually verified at 1920x1080, UI above character and notes
+PASS Stage3 build GUID matches the newly created scene and is saved to disk
+PASS Final scene saved in edit mode with the original JudgeManager enabled

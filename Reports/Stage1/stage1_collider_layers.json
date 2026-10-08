@@ -1,0 +1,882 @@
+{
+  "colliders": [
+    {
+      "name": "Tilemap",
+      "type": "TilemapCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 431,
+      "x0": -9.0,
+      "x1": 183.0,
+      "y0": -15.0,
+      "y1": 7.0
+    },
+    {
+      "name": "Tilemap_VisualSlope",
+      "type": "EdgeCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 1,
+      "x0": 89.04863,
+      "x1": 170.8307,
+      "y0": -2.98181534,
+      "y1": 13.0224152
+    },
+    {
+      "name": "Tilemap_Jump",
+      "type": "TilemapCollider2D",
+      "layer": 0,
+      "layerName": "Default",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 0,
+      "x0": 0.0,
+      "x1": 0.0,
+      "y0": 0.0,
+      "y1": 0.0
+    },
+    {
+      "name": "Tilemap_Jump",
+      "type": "CompositeCollider2D",
+      "layer": 0,
+      "layerName": "Default",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 9,
+      "x0": 18.4375,
+      "x1": 209.500015,
+      "y0": -4.875,
+      "y1": 5.5
+    },
+    {
+      "name": "Tilempa_Cave1",
+      "type": "TilemapCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": false,
+      "active": true,
+      "trigger": false,
+      "shapes": 0,
+      "x0": 0.0,
+      "x1": 0.0,
+      "y0": 0.0,
+      "y1": 0.0
+    },
+    {
+      "name": "Tilempa_Cave1",
+      "type": "EdgeCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 1,
+      "x0": 206.594574,
+      "x1": 428.3085,
+      "y0": -52.03275,
+      "y1": -25.6729927
+    },
+    {
+      "name": "Tilempa_Cave1 (1)",
+      "type": "TilemapCollider2D",
+      "layer": 0,
+      "layerName": "Default",
+      "enabled": true,
+      "active": true,
+      "trigger": false,
+      "shapes": 899,
+      "x0": 429.4375,
+      "x1": 489.0,
+      "y0": -60.0,
+      "y1": -23.28125
+    },
+    {
+      "name": "Tilempa_Cave1 (1)",
+      "type": "EdgeCollider2D",
+      "layer": 0,
+      "layerName": "Default",
+      "enabled": false,
+      "active": true,
+      "trigger": false,
+      "shapes": 0,
+      "x0": 0.0,
+      "x1": 0.0,
+      "y0": 0.0,
+      "y1": 0.0
+    },
+    {
+      "name": "Tilempa_Cave1 (2)",
+      "type": "TilemapCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": false,
+      "active": false,
+      "trigger": false,
+      "shapes": 0,
+      "x0": 0.0,
+      "x1": 0.0,
+      "y0": 0.0,
+      "y1": 0.0
+    },
+    {
+      "name": "Tilempa_Cave1 (2)",
+      "type": "EdgeCollider2D",
+      "layer": 6,
+      "layerName": "Ground",
+      "enabled": true,
+      "active": false,
+      "trigger": false,
+      "shapes": 0,
+      "x0": 0.0,
+      "x1": 0.0,
+      "y0": 0.0,
+      "y1": 0.0
+    }
+  ],
+  "allLayerHits": [
+    {
+      "index": 1,
+      "x": 10.1198864,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -2.99999237
+    },
+    {
+      "index": 2,
+      "x": 14.2799768,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -2.99999237
+    },
+    {
+      "index": 3,
+      "x": 18.5466423,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -0.3751526
+    },
+    {
+      "index": 4,
+      "x": 22.4932423,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -0.125007629
+    },
+    {
+      "index": 5,
+      "x": 27.2932434,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": 1.87224579
+    },
+    {
+      "index": 6,
+      "x": 31.5599079,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": 1.875
+    },
+    {
+      "index": 7,
+      "x": 35.8265762,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": 2.499977
+    },
+    {
+      "index": 8,
+      "x": 40.1999321,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 9,
+      "x": 44.7865524,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 10,
+      "x": 48.9466438,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": 5.5
+    },
+    {
+      "index": 11,
+      "x": 53.2133141,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.838318
+    },
+    {
+      "index": 12,
+      "x": 57.15991,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.99999237
+    },
+    {
+      "index": 13,
+      "x": 61.5332642,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.99999237
+    },
+    {
+      "index": 14,
+      "x": 66.01331,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.37499237
+    },
+    {
+      "index": 15,
+      "x": 74.43995,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.37499237
+    },
+    {
+      "index": 16,
+      "x": 81.5865555,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.37499237
+    },
+    {
+      "index": 17,
+      "x": 83.39993,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.37499237
+    },
+    {
+      "index": 18,
+      "x": 88.51989,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.37499237
+    },
+    {
+      "index": 19,
+      "x": 93.3198853,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.07881165
+    },
+    {
+      "index": 20,
+      "x": 96.94664,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.080658
+    },
+    {
+      "index": 21,
+      "x": 100.999931,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 6.08272552
+    },
+    {
+      "index": 22,
+      "x": 105.2666,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 8.054337
+    },
+    {
+      "index": 23,
+      "x": 109.319893,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 9.099495
+    },
+    {
+      "index": 24,
+      "x": 113.47998,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 9.099716
+    },
+    {
+      "index": 25,
+      "x": 118.173286,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 11.1064072
+    },
+    {
+      "index": 26,
+      "x": 122.759911,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 12.0688019
+    },
+    {
+      "index": 27,
+      "x": 126.919884,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 13.0178528
+    },
+    {
+      "index": 28,
+      "x": 131.186554,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 13.0194855
+    },
+    {
+      "index": 29,
+      "x": 135.5599,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 13.0211563
+    },
+    {
+      "index": 30,
+      "x": 139.7199,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 12.61042
+    },
+    {
+      "index": 31,
+      "x": 143.879974,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 10.1379166
+    },
+    {
+      "index": 32,
+      "x": 148.679977,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 8.081017
+    },
+    {
+      "index": 33,
+      "x": 152.94664,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 5.095108
+    },
+    {
+      "index": 34,
+      "x": 161.586548,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": 1.584732
+    },
+    {
+      "index": 35,
+      "x": 166.1733,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -0.9249649
+    },
+    {
+      "index": 36,
+      "x": 170.013321,
+      "name": "Tilemap_VisualSlope",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -2.57701874
+    },
+    {
+      "index": 37,
+      "x": 179.186554,
+      "name": "Tilemap",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -2.99999237
+    },
+    {
+      "index": 38,
+      "x": 183.026581,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 39,
+      "x": 187.293243,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -2.33734131
+    },
+    {
+      "index": 40,
+      "x": 194.439941,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 41,
+      "x": 196.039948,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -2.500023
+    },
+    {
+      "index": 42,
+      "x": 201.693253,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 43,
+      "x": 204.039963,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 44,
+      "x": 209.0532,
+      "name": "Tilemap_Jump",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -2.50000763
+    },
+    {
+      "index": 45,
+      "x": 212.78656,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -52.0065155
+    },
+    {
+      "index": 46,
+      "x": 221.746643,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.9681778
+    },
+    {
+      "index": 47,
+      "x": 228.573288,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.9389725
+    },
+    {
+      "index": 48,
+      "x": 230.599945,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.9302826
+    },
+    {
+      "index": 49,
+      "x": 235.933273,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -50.9096756
+    },
+    {
+      "index": 50,
+      "x": 239.13327,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -50.9040146
+    },
+    {
+      "index": 51,
+      "x": 243.506622,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.8980942
+    },
+    {
+      "index": 52,
+      "x": 247.6666,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.88044
+    },
+    {
+      "index": 53,
+      "x": 256.093231,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -47.02465
+    },
+    {
+      "index": 54,
+      "x": 264.5199,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -50.5621643
+    },
+    {
+      "index": 55,
+      "x": 275.506622,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.868576
+    },
+    {
+      "index": 56,
+      "x": 278.8133,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.858284
+    },
+    {
+      "index": 57,
+      "x": 290.9733,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.8204575
+    },
+    {
+      "index": 58,
+      "x": 295.6666,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.8058777
+    },
+    {
+      "index": 59,
+      "x": 299.506622,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.79393
+    },
+    {
+      "index": 60,
+      "x": 307.399933,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.76938
+    },
+    {
+      "index": 61,
+      "x": 312.519867,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.7534332
+    },
+    {
+      "index": 62,
+      "x": 316.78656,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.74018
+    },
+    {
+      "index": 63,
+      "x": 320.306641,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -51.7292252
+    },
+    {
+      "index": 64,
+      "x": 325.533264,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -50.7916565
+    },
+    {
+      "index": 65,
+      "x": 332.146637,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -47.3991241
+    },
+    {
+      "index": 66,
+      "x": 334.493225,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -46.1953735
+    },
+    {
+      "index": 67,
+      "x": 338.119873,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -44.33497
+    },
+    {
+      "index": 68,
+      "x": 342.813324,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -41.9273071
+    },
+    {
+      "index": 69,
+      "x": 346.7599,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -39.9028
+    },
+    {
+      "index": 70,
+      "x": 351.026581,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.71405
+    },
+    {
+      "index": 71,
+      "x": 368.733276,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.64894
+    },
+    {
+      "index": 72,
+      "x": 375.453217,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.6469727
+    },
+    {
+      "index": 73,
+      "x": 377.2666,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.6464462
+    },
+    {
+      "index": 74,
+      "x": 382.386536,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.64496
+    },
+    {
+      "index": 75,
+      "x": 386.333252,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.6438
+    },
+    {
+      "index": 76,
+      "x": 394.653229,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -37.04592
+    },
+    {
+      "index": 77,
+      "x": 407.453217,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -30.544075
+    },
+    {
+      "index": 78,
+      "x": 411.719879,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -28.3767929
+    },
+    {
+      "index": 79,
+      "x": 418.546661,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -25.742569
+    },
+    {
+      "index": 80,
+      "x": 421.106628,
+      "name": "Tilempa_Cave1",
+      "layer": 6,
+      "layerName": "Ground",
+      "y": -25.72432
+    },
+    {
+      "index": 81,
+      "x": 430.386566,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -24.1249924
+    },
+    {
+      "index": 82,
+      "x": 433.586548,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -24.1249924
+    },
+    {
+      "index": 83,
+      "x": 443.9333,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -24.1249924
+    },
+    {
+      "index": 84,
+      "x": 446.7066,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -24.1249924
+    },
+    {
+      "index": 85,
+      "x": 455.453217,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -24.1771545
+    },
+    {
+      "index": 86,
+      "x": 459.933258,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -27.6653519
+    },
+    {
+      "index": 87,
+      "x": 464.199921,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -30.3833847
+    },
+    {
+      "index": 88,
+      "x": 470.5999,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -27.1500549
+    },
+    {
+      "index": 89,
+      "x": 472.733246,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -26.0722885
+    },
+    {
+      "index": 90,
+      "x": 481.47998,
+      "name": "Tilempa_Cave1 (1)",
+      "layer": 0,
+      "layerName": "Default",
+      "y": -25.0
+    },
+    {
+      "index": 91,
+      "x": 490.119873,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    },
+    {
+      "index": 92,
+      "x": 498.226563,
+      "name": null,
+      "layer": -1,
+      "layerName": null,
+      "y": null
+    }
+  ]
+}

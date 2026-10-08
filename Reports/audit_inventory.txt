@@ -1,0 +1,252 @@
+{
+  "scenes": {
+    "Assets/Scenes/ResultScene.unity": {
+      "objects": 25,
+      "custom_components": 2
+    },
+    "Assets/Scenes/SampleScene.unity": {
+      "objects": 15,
+      "custom_components": 1
+    },
+    "Assets/Scenes/Select.unity": {
+      "objects": 25,
+      "custom_components": 8
+    },
+    "Assets/Scenes/Stage1.unity": {
+      "objects": 117,
+      "custom_components": 40
+    },
+    "Assets/Scenes/Stage2.unity": {
+      "objects": 140,
+      "custom_components": 43
+    },
+    "Assets/Scenes/Title.unity": {
+      "objects": 22,
+      "custom_components": 13
+    },
+    "Assets/Scenes/Titleee.unity": {
+      "objects": 15,
+      "custom_components": 3
+    }
+  },
+  "unresolved_count": 3,
+  "unresolved": [
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1806941729",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    },
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1905138404",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    },
+    {
+      "asset": "Assets/Scenes/Title.unity",
+      "component": "1947233506",
+      "script": "UNRESOLVED:11c3a43f1ba6f47449cfec67862c2c18"
+    }
+  ],
+  "charts": [
+    {
+      "path": "Assets/notedata.json",
+      "count": 92,
+      "kinds": {
+        "0": 90,
+        "1": 2
+      },
+      "first": 1.27997732162476,
+      "last": 98.9013137817383,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "763f5419910f836a824ead81a049b0bdf55cbf2348ddbaf2eb4b57cec7192311"
+    },
+    {
+      "path": "Assets/notedata_Stage2.json",
+      "count": 62,
+      "kinds": {
+        "0": 60,
+        "1": 2
+      },
+      "first": 2.38933324813843,
+      "last": 63.1466674804688,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "e2551880ccc2243fb59048eb9656ad21a068a1fa633c8bdbd75002969b7bb5c2"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata.json",
+      "count": 31,
+      "kinds": {
+        "0": 31
+      },
+      "first": 1.17331063747406,
+      "last": 31.4026527404785,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "f504f9c80944b217539098fa51dbd618cb5dfd4e89339c941b78269a12173ab8"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata_cave.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Assets/notedata JSON/notedata_Stage2.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata.json",
+      "count": 31,
+      "kinds": {
+        "0": 31
+      },
+      "first": 1.17331063747406,
+      "last": 31.4026527404785,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "f504f9c80944b217539098fa51dbd618cb5dfd4e89339c941b78269a12173ab8"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata_cave.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    },
+    {
+      "path": "Build/BeatWave1_Data/notedata_Stage2.json",
+      "count": 27,
+      "kinds": {
+        "0": 26,
+        "2": 1
+      },
+      "first": 1.59997737407684,
+      "last": 27.3706569671631,
+      "sorted": true,
+      "issues": [],
+      "same_lane_hold_overlaps": [],
+      "sha256": "ae48c47d08d39d2f3365087763538e2d310436071e76c2e3b73ba573850acb97"
+    }
+  ],
+  "music": [
+    {
+      "asset": "Assets/Prefab/Song1Data.asset",
+      "name": "lily",
+      "scene": "Stage1",
+      "preview": "{fileID: 8300000, guid: 789e5211307ef1e4494945aecc977852, type: 3}",
+      "game": "{fileID: 8300000, guid: 789e5211307ef1e4494945aecc977852, type: 3}"
+    },
+    {
+      "asset": "Assets/Prefab/Song2Data.asset",
+      "name": "\"\\uBCC4\\uBE5B \\uC220\\uB798\\uC7A1\\uAE30\"",
+      "scene": "Stage2",
+      "preview": "{fileID: 8300000, guid: d7e3da29193d23046a916fbc35c96e96, type: 3}",
+      "game": "{fileID: 8300000, guid: d7e3da29193d23046a916fbc35c96e96, type: 3}"
+    },
+    {
+      "asset": "Assets/Prefab/Song3Data.asset",
+      "name": "",
+      "scene": "",
+      "preview": "{fileID: 8300000, guid: f93e4c47b3471284baf53d1c72ba4353, type: 3}",
+      "game": "{fileID: 8300000, guid: f93e4c47b3471284baf53d1c72ba4353, type: 3}"
+    }
+  ],
+  "asset_counts": {
+    ".jpg": 3,
+    ".prefab": 19,
+    ".mp3": 9,
+    ".mat": 235,
+    ".json": 9,
+    ".pdf": 2,
+    ".asset": 372,
+    ".ttf": 8,
+    ".unitypackage": 5,
+    ".txt": 12,
+    ".cs": 82,
+    ".png": 427,
+    ".mp4": 1,
+    ".rendertexture": 1,
+    ".shader": 18,
+    ".physicsmaterial2d": 1,
+    ".unity": 23,
+    ".lighting": 14,
+    ".fbx": 17,
+    ".flare": 3,
+    ".psd": 1,
+    ".psb": 1,
+    ".anim": 24,
+    ".controller": 1,
+    ".asmdef": 2,
+    ".cginc": 8,
+    ".xls": 1,
+    ".dll": 17,
+    ".php": 3,
+    ".xml": 9,
+    ".mdb": 6
+  },
+  "largest_folders": [
+    [
+      "Cinzel",
+      1555828255
+    ],
+    [
+      "AllSkyFree",
+      335313986
+    ],
+    [
+      "Image",
+      191408377
+    ],
+    [
+      "Stage2",
+      18906591
+    ],
+    [
+      "Audio",
+      15278209
+    ],
+    [
+      "Plugins",
+      14474814
+    ],
+    [
+      "JMO Assets",
+      10868799
+    ],
+    [
+      "LJR",
+      7051013
+    ]
+  ]
+}

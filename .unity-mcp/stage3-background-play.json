@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"UnityEngine.Application.runInBackground=true; var window=UnityEditor.EditorWindow.GetWindow(System.Type.GetType(\"UnityEditor.GameView,UnityEditor\")); window.Repaint(); return UnityEngine.Application.runInBackground;"}}

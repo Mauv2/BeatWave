@@ -1,0 +1,86 @@
+// Run through Unity MCP execute_code with Stage1 open in edit mode.
+// Queries original terrain; physics simulation uses disposable preview copies only.
+var sourceScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+if (sourceScene.name != "Stage1" || UnityEditor.EditorApplication.isPlaying) throw new System.InvalidOperationException("Open Stage1 in edit mode.");
+var mover = UnityEngine.Object.FindObjectOfType<PlayerMove>();
+var placer = UnityEngine.Object.FindObjectsOfType<NoteMapPlacer>().First(x => x.placeOnStart);
+var capsule = mover.GetComponent<UnityEngine.CapsuleCollider2D>();
+var sourceBody = mover.GetComponent<UnityEngine.Rigidbody2D>();
+var eventTrigger = UnityEngine.Object.FindObjectOfType<EventTrigger>().GetComponent<UnityEngine.Collider2D>();
+var groundColliders = UnityEngine.Object.FindObjectsOfType<UnityEngine.Collider2D>().Where(x => (placer.groundLayer.value & (1 << x.gameObject.layer)) != 0 && x.enabled).ToArray();
+var jumps = UnityEngine.Object.FindObjectsOfType<JumpTrigger>().Where(x => x.enabled).OrderBy(x => x.transform.position.x).ToArray();
+var chart = Newtonsoft.Json.Linq.JArray.Parse(System.IO.File.ReadAllText(System.IO.Path.Combine(UnityEngine.Application.dataPath, placer.jsonFileName)));
+var initialX = mover.transform.position.x;
+var initialY = mover.transform.position.y;
+var foot = capsule.bounds.min.y;
+var upDx = placer.judgePointUp.position.x - initialX;
+var downDx = placer.judgePointDown.position.x - initialX;
+var upDy = placer.judgePointUp.position.y - initialY;
+var downDy = placer.judgePointDown.position.y - initialY;
+var terrain = new System.Collections.Generic.List<object>();
+for (float x = -5f; x <= 505f; x += .25f) {
+    var h = UnityEngine.Physics2D.Raycast(new UnityEngine.Vector2(x, placer.rayStartY), UnityEngine.Vector2.down, placer.rayDistance, placer.groundLayer);
+    var deep = UnityEngine.Physics2D.Raycast(new UnityEngine.Vector2(x, 100f), UnityEngine.Vector2.down, 1000f, placer.groundLayer);
+    terrain.Add(new {x=x, y=h.collider == null ? (float?)null : h.point.y, deepY=deep.collider == null ? (float?)null : deep.point.y, normalX=h.normal.x, normalY=h.normal.y, name=h.collider == null ? null : h.collider.name});
+}
+var notes = new System.Collections.Generic.List<object>();
+for (int i=0; i<chart.Count; i++) {
+    var q=chart[i]; var t=(float)q["createTime"]; var lane=(int)q["noteType"]; var kind=(int)q["noteKind"];
+    float dx=lane==0?upDx:downDx; float dy=lane==0?upDy:downDy;
+    float x=initialX+dx+t*placer.playerSpeed;
+    var h=UnityEngine.Physics2D.Raycast(new UnityEngine.Vector2(x,placer.rayStartY),UnityEngine.Vector2.down,placer.rayDistance,placer.groundLayer);
+    var hp=UnityEngine.Physics2D.Raycast(new UnityEngine.Vector2(x-dx,placer.rayStartY),UnityEngine.Vector2.down,placer.rayDistance,placer.groundLayer);
+    float duration=kind==1?(float)q["holdTime"]:0f;
+    var end=UnityEngine.Physics2D.Raycast(new UnityEngine.Vector2(x+duration*placer.playerSpeed,placer.rayStartY),UnityEngine.Vector2.down,placer.rayDistance,placer.groundLayer);
+    notes.Add(new {index=i+1,time=t,lane=lane,kind=kind,x=x,y=h.collider==null?(float?)null:h.point.y+(initialY-foot)+dy+placer.noteHeightAdjust,ground=h.collider==null?(float?)null:h.point.y,playerGround=hp.collider==null?(float?)null:hp.point.y,angle=h.collider==null?(float?)null:UnityEngine.Mathf.Atan2(-h.normal.x,h.normal.y)*UnityEngine.Mathf.Rad2Deg,groundName=h.collider==null?null:h.collider.name,holdTime=duration,endX=x+duration*placer.playerSpeed,endGround=end.collider==null?(float?)null:end.point.y});
+}
+var preview=UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();
+var trace=new System.Collections.Generic.List<object>();
+var jumpHits=new System.Collections.Generic.List<object>();
+bool simulated=false;
+try {
+    var ps=UnityEngine.PhysicsSceneExtensions2D.GetPhysicsScene2D(preview);
+    if (!ps.IsValid() || ps.Equals(UnityEngine.Physics2D.defaultPhysicsScene)) throw new System.InvalidOperationException("Preview physics must be isolated.");
+    foreach (var src in groundColliders.Select(c=>c.GetComponentInParent<UnityEngine.Grid>() != null ? c.GetComponentInParent<UnityEngine.Grid>().gameObject : c.gameObject).Distinct()) {
+        var clone=UnityEngine.Object.Instantiate(src);
+        UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(clone,preview);
+        clone.transform.position=src.transform.position; clone.transform.rotation=src.transform.rotation; clone.transform.localScale=src.transform.lossyScale;
+        foreach(var mb in clone.GetComponentsInChildren<UnityEngine.MonoBehaviour>(true)) UnityEngine.Object.DestroyImmediate(mb);
+        foreach(var tm in clone.GetComponentsInChildren<UnityEngine.Tilemaps.TilemapCollider2D>(true)) tm.ProcessTilemapChanges();
+    }
+    var bodyGo=new UnityEngine.GameObject("AuditPlayer");
+    UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(bodyGo,preview);
+    bodyGo.transform.position=mover.transform.position; bodyGo.transform.rotation=mover.transform.rotation; bodyGo.transform.localScale=mover.transform.lossyScale;
+    var body=bodyGo.AddComponent<UnityEngine.Rigidbody2D>(); UnityEditor.EditorUtility.CopySerialized(sourceBody,body);
+    var pc=bodyGo.AddComponent<UnityEngine.CapsuleCollider2D>(); UnityEditor.EditorUtility.CopySerialized(capsule,pc);
+    var copiedJumps=new System.Collections.Generic.List<UnityEngine.Collider2D>();
+    foreach(var jump in jumps) {
+        var src=jump.GetComponent<UnityEngine.BoxCollider2D>();
+        var go=new UnityEngine.GameObject("AuditJump"); UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go,preview);
+        go.transform.position=src.transform.position; go.transform.rotation=src.transform.rotation; go.transform.localScale=src.transform.lossyScale;
+        var col=go.AddComponent<UnityEngine.BoxCollider2D>(); UnityEditor.EditorUtility.CopySerialized(src,col); copiedJumps.Add(col);
+    }
+    var used=new bool[jumps.Length];
+    UnityEngine.Physics2D.SyncTransforms();
+    int copiedGroundShapes=preview.GetRootGameObjects().SelectMany(x=>x.GetComponentsInChildren<UnityEngine.Collider2D>()).Where(x=>(placer.groundLayer.value&(1<<x.gameObject.layer))!=0 && x.enabled).Sum(x=>x.shapeCount);
+    if(copiedGroundShapes != groundColliders.Sum(x=>x.shapeCount)) throw new System.InvalidOperationException("Ground collider shape counts differ: "+copiedGroundShapes);
+    float dt=UnityEngine.Time.fixedDeltaTime;
+    for(int step=0;step<6000;step++) {
+        float time=step*dt;
+        var pos=body.position;
+        trace.Add(new {time=time,x=pos.x,y=pos.y,vx=body.velocity.x,vy=body.velocity.y});
+        if (pos.x+pc.bounds.extents.x>=eventTrigger.bounds.min.x || pos.y < -100f) break;
+        body.velocity=new UnityEngine.Vector2(mover.moveSpeed,body.velocity.y);
+        for(int k=0;k<jumps.Length;k++) if(!used[k] && pc.Distance(copiedJumps[k]).isOverlapped) {
+            used[k]=true; body.velocity=new UnityEngine.Vector2(body.velocity.x,0f);
+            body.AddForce(UnityEngine.Vector2.up*jumps[k].jumpPower,UnityEngine.ForceMode2D.Impulse);
+            jumpHits.Add(new {name=jumps[k].name,time=time,x=pos.x,y=pos.y,power=jumps[k].jumpPower});
+        }
+        simulated=ps.Simulate(dt);
+        if(!simulated) throw new System.InvalidOperationException("Physics simulation refused.");
+    }
+} finally {UnityEditor.SceneManagement.EditorSceneManager.ClosePreviewScene(preview);}
+var data=new {scene=sourceScene.name,sceneDirty=sourceScene.isDirty,initialX=initialX,initialY=initialY,initialFoot=foot,upDx=upDx,downDx=downDx,upDy=upDy,downDy=downDy,playerSpeed=mover.moveSpeed,placementSpeed=placer.playerSpeed,rayStartY=placer.rayStartY,rayDistance=placer.rayDistance,eventX=eventTrigger.bounds.min.x,eventY=eventTrigger.bounds.center.y,caveX=placer.caveStartPoint.position.x,caveY=placer.caveStartPoint.position.y,chart=placer.jsonFileName,terrain=terrain,notes=notes,trace=trace,jumpHits=jumpHits,simulationSuccess=simulated,sourcePlayerX=mover.transform.position.x,sourcePlayerY=mover.transform.position.y,groundCount=groundColliders.Length};
+string output=System.IO.Path.Combine(UnityEngine.Application.dataPath,"../Reports/Stage1/stage1_geometry.json");
+System.IO.File.WriteAllText(output,Newtonsoft.Json.JsonConvert.SerializeObject(data,Newtonsoft.Json.Formatting.Indented));
+return Newtonsoft.Json.JsonConvert.SerializeObject(new {output=output,notes=notes.Count,traceFrames=trace.Count,jumps=jumpHits.Count,simulationSuccess=simulated,sceneDirty=sourceScene.isDirty});

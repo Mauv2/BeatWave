@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"UnityEngine.Time.timeScale=1; UnityEditor.EditorApplication.isPlaying=false; return \"Stop preview\";"}}

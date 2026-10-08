@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene(); var g=UnityEngine.Object.FindObjectOfType<BeatWave.Stage3.Stage3Gameplay>(); return new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,judge=g.judge.enabled,mash=g.transitions.gates.Length,seesaws=g.seesaws.Length};"}}
