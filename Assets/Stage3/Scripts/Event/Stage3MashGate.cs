@@ -47,7 +47,7 @@ namespace BeatWave.Stage3
             // The instruction stays constant; hit totals and completion thresholds
             // are internal judging data, never a counter or filled progress ring.
             caption.text=Resolved ? "" : "MASH  W / S";
-            rings.localRotation=Quaternion.Euler(0,0,-time*35);
+            rings.localRotation=Quaternion.Euler(0,0,actionLabel=="LAST WISH"?-time*20:Mathf.Sin(time*6)*3);
             float pulse=Mathf.Exp(-Mathf.Max(0,time-LastPressTime)*12);
             note.transform.localScale=Vector3.one*(1.3f+.16f*pulse);
             note.isMashActive=Active;note.currentHitCount=Hits;

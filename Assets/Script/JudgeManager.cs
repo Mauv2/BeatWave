@@ -284,16 +284,18 @@ public class JudgeManager : MonoBehaviour
 
     IEnumerator FadeAndGoToResult()
     {
-        if (blackFade != null)
+        clock.SuspendTravel();
+        clock.SetFlowPaused(true);
+        if (playerAnim != null) playerAnim.SetRunning(false);
+        foreach (var pause in FindObjectsOfType<PauseManager>())
         {
-            blackFade.raycastTarget = true;
-
-            yield return blackFade
-                .DOFade(1f, fadeDuration)
-                .SetUpdate(true)
-                .WaitForCompletion();
+            pause.StopAllCoroutines();
+            pause.enabled = false;
+            if (pause.PauseMenu != null) pause.PauseMenu.SetActive(false);
         }
-
+        Time.timeScale = 0f;
+        yield return ResultTransition.FadeToBlack();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("ResultScene");
     }
 

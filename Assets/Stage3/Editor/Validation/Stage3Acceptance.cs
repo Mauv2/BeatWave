@@ -23,15 +23,29 @@ namespace BeatWave.Stage3
         static int phase, shot;
         static double deadline, at, frozen;
         static Vector3 frozenPosition;
+        static Quaternion frozenPendulum;
         static float drift;
         static bool paused, resumed, mashVerified, failureZoom;
+        static bool reloadLocked;
         static float nextMashPress;
         static int frozenHits, lateSyntheticInputs;
         static float clipDuration, lastSongTime;
+        static int expectedNotes;
         static readonly MethodInfo Complete = typeof(JudgeManager).GetMethod("Complete", BindingFlags.Instance|BindingFlags.NonPublic);
         static readonly MethodInfo Miss = typeof(JudgeManager).GetMethod("Miss", BindingFlags.Instance|BindingFlags.NonPublic);
-        static readonly float[] Shots = {7,18.6f,20.6f,27,35.8f,42,51.7f,52.9f};
-        static Stage3Acceptance() { EditorApplication.update += Tick; }
+        static readonly float[] Shots = {12,28,Stage3Route.FractureStart+1.2f,Stage3Route.FractureRelease+1.4f,54,63,78,88,104,
+            Stage3Route.LiftStart+1.2f,133,Stage3Route.FinaleStart+1.2f,160};
+        static Stage3Acceptance()
+        {
+            EditorApplication.update += Tick;
+            EditorApplication.playModeStateChanged += state =>
+            {
+                if(state!=PlayModeStateChange.ExitingPlayMode)return;
+                SessionState.SetBool(Key,false);
+                if(reloadLocked){reloadLocked=false;EditorApplication.UnlockReloadAssemblies();}
+            };
+        }
+        [MenuItem("BeatWave/Validate Stage3 - Full Original Playback")]
         public static void Start()
         {
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Stop Play mode before starting acceptance.");
@@ -45,8 +59,9 @@ namespace BeatWave.Stage3
         {
             report.Add((ok?"PASS ":"FAIL ")+message);
             Directory.CreateDirectory("Reports");
-            File.WriteAllLines("Reports/Stage3-transitions-validation.txt",report);
+            File.WriteAllLines("Reports/Stage3-variety-validation.txt",report);
         }
+        [MenuItem("BeatWave/Validate Stage3 - Scene and Chart")]
         public static void ValidateScene()
         {
             report.Clear();
@@ -54,7 +69,8 @@ namespace BeatWave.Stage3
             if (active.name != "Stage3") throw new InvalidOperationException("Open Stage3 first.");
             game = Object.FindObjectOfType<Stage3Gameplay>();
             Stage3Route.ConfigureDuration(game.music.clip.length);
-            Check(game != null && game.music.clip.name == "lastwish_inst", "Stage3 uses the requested Last Wish clip");
+            // Unity rounds the source length to one extra sample when exposing AudioClip.samples.
+            Check(game != null && game.music.clip.name == "LastWishOriginal" && Mathf.Abs(game.music.clip.samples-7452755)<=1 && game.music.clip.frequency==44100 && game.music.clip.channels==2, "Full original: 7,452,755 source samples (+/- 1 import rounding), stereo 44.1 kHz");
             var stage1 = EditorSceneManager.OpenScene("Assets/Scenes/Stage1.unity", OpenSceneMode.Additive);
             try
             {
@@ -75,9 +91,11 @@ namespace BeatWave.Stage3
             }
             Check(game.GetComponentsInChildren<SpriteRenderer>(true).All(s=>s.GetComponentInParent<Note>(true)!=null || s.sprite == null || AssetDatabase.GetAssetPath(s.sprite).StartsWith("Assets/Stage3/Art/")), "All environment sprite assets owned by Stage3");
             Check(!game.GetComponentsInChildren<SpriteRenderer>(true).Any(s=>s.sprite != null && AssetDatabase.GetAssetPath(s.sprite).Contains("S1BackGround")), "No old background or ground reused");
-            Check(game.seesaws.Length==1, "Only one seesaw remains");
-            Check(Stage3Route.Legs.Count(l=>l.kind==Stage3LegKind.Ground && l.to.y>l.from.y)==4 && Stage3Route.Legs.Count(l=>l.kind==Stage3LegKind.Ground && l.to.y<l.from.y)==3 && Stage3Route.Legs.Count(l=>l.kind==Stage3LegKind.Ground && l.to.y==l.from.y)==6, "Six straight, four uphill and three downhill sections");
-            Check(Mathf.Abs(Stage3Route.Legs.Last().end-game.music.clip.length)<.001f && Vector2.Distance(Stage3Route.Position(game.music.clip.length-.3f),Stage3Route.Position(game.music.clip.length))>1,"Route extends to the exact clip end, with motion in the final audio tail");
+            Check(game.seesaws.Length==1 && Stage3Route.Legs.Count(l=>l.kind==Stage3LegKind.Jump)==4, "One seesaw and three differently staged jumps");
+            Check(Stage3Route.Legs.Length==35 && Stage3Route.Legs.Any(l=>l.kind==Stage3LegKind.Lift) && Stage3Route.Legs.Count(l=>l.to.x<l.from.x)==2, "35 route legs include a vertical lift and two leftward climbs");
+            Check(game.scenery!=null && game.scenery.actSets.Length==7 && game.scenery.backdrops.Select(b=>b.sprite).Distinct().Count()==4,"Seven staged acts use four distinct painted backdrops");
+            Check(game.scenery.lift.GetComponent<BoxCollider2D>()!=null && game.scenery.gears.Length==5 && game.scenery.liftDoors.Length==2 && game.scenery.finalWings.Length==2,"Moving lift, five gears, split doors and unfolding finale are bound");
+            Check(Mathf.Abs(Stage3Route.Legs.Last().end-game.music.clip.length)<.001f && Vector2.Distance(Stage3Route.Position(game.music.clip.length-.3f),Stage3Route.Position(game.music.clip.length))>.1f,"Route extends to the exact clip end, with gentle motion in the final audio tail");
             Check(Stage3Route.Legs.All(l=>l.end>l.start) && Enumerable.Range(1,Stage3Route.Legs.Length-1).All(i=>Mathf.Abs(Stage3Route.Legs[i-1].end-Stage3Route.Legs[i].start)<.001f),"Entire song has continuous time coverage without gaps");
             Check(game.transitions.gates.All(g=>g.caption.text=="MASH  W / S" && !g.presentation.GetComponentsInChildren<Transform>(true).Any(t=>t.name=="Mash progress")),"Mash presents only an input hint, without count or completion ring");
             Check(game.transitions.gates.Length==3 && game.transitions.collapsePieces.Length==5, "Three musical Mash gates and five falling ground slabs");
@@ -88,7 +106,18 @@ namespace BeatWave.Stage3
             Check(grounded,"Playable route follows actual inclined ground colliders");
             Check(Enumerable.Range(1,Stage3Route.Legs.Length-1).All(i=>Vector2.Distance(Stage3Route.Legs[i-1].to,Stage3Route.Legs[i].from)<.001f),"Route remains continuous across slopes, collapse and transfer");
             var chart = JsonUtility.FromJson<Stage3Chart>(game.chartFile.text);
-            Check(chart.notes.Length==105 && chart.notes.Count(n=>n.duration>0)==5, "Chart: 105 regular notes including 5 holds, plus 3 Mash gates");
+            Check(chart.notes.Length==279 && chart.notes.Count(n=>n.duration>0)==16, "Chart: 279 regular notes including 16 holds, plus 3 Mash gates");
+            Check(chart.notes.All(n=>Mathf.Abs(n.time-Stage3Route.Beat(184))>.19f && Mathf.Abs(n.time-Stage3Route.Beat(216))>.19f),"Turn cues have a readable break in the chart");
+            Check(Mathf.Abs(chart.duration-game.music.clip.length)<.001f && chart.bpm==Stage3Route.Bpm && chart.offset==Stage3Route.Offset,"Chart, route and original audio share duration and beat grid");
+            Check(chart.notes.Zip(chart.notes.Skip(1),(a,b)=>a.time<b.time).All(v=>v),"Chart is strictly time ordered");
+            Check(chart.notes.All(n=>n.time>=0 && n.duration>=0 && n.lane>=0 && n.lane<=1),"Every note has valid time, duration and lane");
+            foreach(int lane in new[]{0,1})
+            {
+                var laneNotes=chart.notes.Where(n=>n.lane==lane).ToArray();
+                Check(laneNotes.Zip(laneNotes.Skip(1),(a,b)=>a.time+a.duration+.17f<b.time).All(v=>v),"No conflicting taps or holds in lane "+lane);
+            }
+            Check(chart.notes.Where(n=>n.duration>0).All(n=>Stage3Route.Leg(n.time).end>=n.time+n.duration),"Hold ribbons stay on one straight route leg");
+            Check(chart.notes.Last().time>160 && chart.notes.Last().time<164,"Quiet coda is charted, natural silent tail is clear");
             Check(chart.notes.All(n=>game.transitions.gates.All(g=>n.time+n.duration<g.startTime || n.time>g.releaseTime)),"Mash phrases do not overlap regular notes or holds");
             Check(chart.notes.All(n=>n.time+n.duration<game.music.clip.length), "All notes finish before the actual audio clip ends");
             Check(!active.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<Transform>(true)).Any(t=>GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject)>0), "No missing scripts");
@@ -120,7 +149,10 @@ namespace BeatWave.Stage3
                 game=Object.FindObjectOfType<Stage3Gameplay>();
                 Application.runInBackground=true;
                 if(game==null || game.NoteCount==0 || game.Clock.Source==null)return;
-                if(File.Exists("Reports/Stage3-transitions-validation.txt"))report.AddRange(File.ReadAllLines("Reports/Stage3-transitions-validation.txt"));
+                // Deferred refresh requests must not hot-reload the test halfway
+                // through the song and discard its judgement/clock state.
+                if(!reloadLocked){EditorApplication.LockReloadAssemblies();reloadLocked=true;}
+                if(report.Count==0 && File.Exists("Reports/Stage3-variety-validation.txt"))report.AddRange(File.ReadAllLines("Reports/Stage3-variety-validation.txt"));
                 Application.runInBackground=true;
                 // Exercise the original timing/score APIs with synthetic presses.
                 // Holds complete via the original Complete method; physical held-key
@@ -128,9 +160,10 @@ namespace BeatWave.Stage3
                 game.judge.enabled=false;
                 clipDuration=game.music.clip.length;
                 notes=Object.FindObjectsOfType<Note>().Where(n=>!n.isEventNote).OrderBy(n=>n.judgeTime).ToArray();
-                Check(notes.Length==105,"All 105 ordinary runtime notes registered");
+                expectedNotes=JsonUtility.FromJson<Stage3Chart>(game.chartFile.text).notes.Length;
+                Check(notes.Length==expectedNotes,"All "+expectedNotes+" ordinary runtime notes registered");
                 Check(!game.judge.TryHit(NoteLine.Up),"Out-of-window press rejected");
-                deadline=now+130;phase=1;
+                deadline=now+clipDuration+90;phase=1;
             }
             if(now>deadline){Check(false,"Acceptance timeout in phase "+phase);Finish();return;}
             if(phase==1)
@@ -138,7 +171,7 @@ namespace BeatWave.Stage3
                 if(SceneManager.GetActiveScene().name=="ResultScene")
                 {
                     var data=GameResultManager.Instance.resultData;
-                    Check(data.perfect+data.great+data.good+data.miss==108 && data.miss==lateSyntheticInputs,"Full chart resolved through Stage1 judgement APIs; late editor-driven inputs: "+lateSyntheticInputs);
+                    Check(data.perfect+data.great+data.good+data.miss==expectedNotes+3 && data.miss==lateSyntheticInputs,"Full chart resolved through Stage1 judgement APIs; late editor-driven inputs: "+lateSyntheticInputs);
                     Check(lastSongTime>=clipDuration-.02f,"Result scene opens after full audio playback ("+clipDuration.ToString("F3")+" s), never at the final note or Mash threshold");
                     Check(data.score==data.perfect*100+data.great*80+data.good*50,"Stage1 score copied to result scene");
                     Check(GameResultManager.Instance.lastStageName=="Stage3","Result retry destination is Stage3");
@@ -180,21 +213,30 @@ namespace BeatWave.Stage3
                 {
                     Object.FindObjectOfType<PauseManager>().PauseGame();
                     frozen=game.Clock.SongTime;frozenPosition=game.player.position;frozenHits=game.transitions.gates[0].Hits;at=now;paused=true;
+                    frozenPendulum=game.scenery.pendulum.localRotation;
                 }
                 if(paused && !resumed && now-at>=.8)
                 {
                     Check(game.Clock.MenuPaused && !game.music.isPlaying && Time.timeScale==0,"ESC menu pauses audio and gameplay");
+                    Check(Quaternion.Angle(frozenPendulum,game.scenery.pendulum.localRotation)<.01f,"Musical stage machinery freezes with the pause menu");
                     Check(Math.Abs(game.Clock.SongTime-frozen)<.001 && Vector3.Distance(game.player.position,frozenPosition)<.001,"Clock and player remain frozen while menu open");
                     Check(game.transitions.gates[0].Hits==frozenHits && !game.transitions.gates[0].Press(),"Mash cannot advance or accept input while ESC menu is open");
-                    Capture("V3-Pause-during-Mash");
+                    Capture("Variety-Pause-during-Mash");
                     InvokeButton("ResumeGame");resumed=true;
                 }
                 if(shot<Shots.Length && time>=Shots[shot] && !game.Clock.IsPaused)
                 {
-                    if(shot==1||shot==4||shot==6)Check(game.view.orthographicSize<4.6f,"Camera zooms toward Mash gate "+shot);
-                    if(shot==2)Check(game.transitions.collapseColliders.All(c=>!c.enabled) && game.transitions.collapsePieces[2].position.y<7,"Collapse moves visible terrain and disables its collision");
-                    if(shot==3)Check(game.transitions.depths.color.a>.95f,"Collapse reveals the new underground background");
-                    game.Clock.SetMenuPaused(true);Capture("V3-Stage3-"+(shot+1));game.Clock.SetMenuPaused(false);shot++;
+                    if(shot==2)Check(game.view.orthographicSize<4.6f,"Fracture uses a close camera");
+                    if(shot==3)Check(game.transitions.collapseColliders.All(c=>!c.enabled) && game.transitions.collapsePieces[2].position.y<14,"Collapse moves visible terrain and disables its collision");
+                    if(shot==4)Check(game.transitions.depths.color.a>.95f,"Collapse reveals the underwater background");
+                    if(shot==5)Check(game.scenery.LiftProgress>.2f && game.scenery.LiftProgress<.9f && Vector2.Distance(game.scenery.lift.position,(Vector2)game.player.position-Vector2.up*game.footOffset)<.15f,"Moving lift stays under the player through its ascent");
+                    if(shot==6)Check(Stage3Route.Facing(time)<0 && game.upMarker.localPosition.x<0,"Reverse passage mirrors character markers and travel direction");
+                    if(shot==7)Check(Stage3Route.Facing(time)>0,"Second turn restores forward travel");
+                    if(shot==8)Check(game.scenery.CurrentAct==4 && game.scenery.eclipse.gameObject.activeInHierarchy,"Eclipse constellation is a distinct active set");
+                    if(shot==9)Check(game.view.orthographicSize>9,"Astral doors use a wide reveal camera");
+                    if(shot==10)Check(game.scenery.CurrentAct==5 && game.scenery.paperSlips.All(p=>p.gameObject.activeSelf),"Sky act reveals the new backdrop and drifting wish slips");
+                    if(shot==11)Check(game.view.orthographicSize>7,"Final wish unfolds on a wide stage");
+                    game.Clock.SetMenuPaused(true);Capture("Variety-Stage3-"+(shot+1));game.Clock.SetMenuPaused(false);shot++;
                 }
                 return;
             }

@@ -63,7 +63,17 @@ namespace BeatWave.Stage3
             game.noteRoot=Child(world,"Notes - Stage1 original prefabs",Vector3.zero);
             var audio=manager.GetComponent<AudioSource>();
             if(audio==null)audio=manager.AddComponent<AudioSource>();
-            audio.clip=AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/lastwish_inst.mp3");
+            const string audioPath=Folder+"/Audio/LastWishOriginal.wav";
+            var audioImporter=(AudioImporter)AssetImporter.GetAtPath(audioPath);
+            var audioSettings=audioImporter.defaultSampleSettings;
+            audioSettings.loadType=AudioClipLoadType.DecompressOnLoad;
+            audioSettings.compressionFormat=AudioCompressionFormat.PCM;
+            audioSettings.sampleRateSetting=AudioSampleRateSetting.PreserveSampleRate;
+            audioSettings.preloadAudioData=true;
+            audioImporter.defaultSampleSettings=audioSettings;
+            audioImporter.forceToMono=false;audioImporter.loadInBackground=false;
+            audioImporter.SaveAndReimport();
+            audio.clip=AssetDatabase.LoadAssetAtPath<AudioClip>(audioPath);
             audio.enabled=true;audio.playOnAwake=false;audio.loop=false;audio.spatialBlend=0;audio.volume=.7f;game.music=audio;
             Stage3Route.ConfigureDuration(audio.clip.length);
             UnityEngine.Object.FindObjectOfType<PauseManager>().gameAudio=audio;
@@ -105,8 +115,9 @@ namespace BeatWave.Stage3
         static LineRenderer Ring(Transform p,string n,float radius,Color c,float width,int order)=>Stage3Drawing.Ring(p,n,radius,c,width,order,lines);
         static void BuildWorld(Stage3Gameplay game)
         {
+            Stage3SceneryBuilder.Configure(square,lines);
             var platforms=Child(world,"New floating walkways",Vector3.zero);
-            var mechanisms=Child(world,"One seesaw - varied terrain",Vector3.zero);
+            var mechanisms=Child(world,"Phrase seesaws - varied terrain",Vector3.zero);
             var beams=new List<Transform>();var times=new List<float>();int section=0;
             var events=world.gameObject.AddComponent<Stage3Transitions>();game.transitions=events;events.game=game;
             var pieces=new List<Transform>();var colliders=new List<Collider2D>();
@@ -114,20 +125,27 @@ namespace BeatWave.Stage3
             {
                 if(leg.kind==Stage3LegKind.Jump)
                 {
-                    var pivot=Child(mechanisms,"Single seesaw launch",leg.from);
+                    var pivot=Child(mechanisms,"Phrase seesaw launch",leg.from);
+                    if(beams.Count==0)
+                    {
                     Line(pivot,"Fulcrum",new[]{new Vector3(-.5f,-.7f),new Vector3(.5f,-.7f),new Vector3(0,-.05f),new Vector3(-.5f,-.7f)},Gold,.065f,14);
                     var beam=Child(pivot,"Resonating beam",new Vector3(0,-.08f));
                     Rect(beam,"Obsidian",Vector2.zero,new Vector2(3,.16f),new Color(.16f,.19f,.3f),16);
                     Rect(beam,"Gilded edge",new Vector2(0,.08f),new Vector2(3,.04f),Gold,17);
                     beams.Add(beam);times.Add(leg.start);
+                    }
+                    else
+                    {
+                        for(int k=0;k<3;k++)Line(pivot,"Launch spring",new[]{new Vector3(-1,.05f+k*.15f),new Vector3(0,-.2f+k*.15f),new Vector3(1,.05f+k*.15f)},Gold,.05f,12);
+                    }
                     for(int j=1;j<15;j++)
                     {
                         var star=Rect(platforms,"Jump guide",leg.At(Mathf.Lerp(leg.start,leg.end,j/15f))+Vector2.up*.4f,Vector2.one*.08f,Gold,12);star.transform.localRotation=Quaternion.Euler(0,0,45);
                     }
                     continue;
                 }
-                if(leg.Airborne)continue;
-                if(leg.kind==Stage3LegKind.Gate && Mathf.Abs(leg.start-Stage3Route.Beat(44))<.01f)
+                if(leg.Airborne || leg.kind==Stage3LegKind.Lift)continue;
+                if(leg.kind==Stage3LegKind.Gate && Mathf.Abs(leg.start-Stage3Route.FractureStart)<.01f)
                 {
                     for(int i=0;i<5;i++)
                     {
@@ -144,7 +162,7 @@ namespace BeatWave.Stage3
                 if(leg.kind==Stage3LegKind.Gate){p.x-=3;q.x+=3;}
                 if(section==0)p.x=-14;
                 string kind=Mathf.Abs(q.y-p.y)<.01f?"Level":q.y>p.y?"Uphill":"Downhill";
-                Ground(platforms,kind+" walkway "+(++section),p,q,.1f);
+                Ground(platforms,kind+" walkway "+(++section),p,q,.1f,Stage3Route.Act(leg.start+.01f));
             }
             events.collapsePieces=pieces.ToArray();events.collapseColliders=colliders.ToArray();
             game.seesaws=beams.ToArray();game.launchTimes=times.ToArray();
@@ -156,12 +174,12 @@ namespace BeatWave.Stage3
             var shards=new List<Transform>();
             for(int i=0;i<24;i++)
             {
-                var r=Rect(world,"Falling stone shard "+i,new Vector2(82+i%8,7.7f-(i/8)*.25f),new Vector2(.12f+(i%3)*.15f,.14f+(i%4)*.1f),new Color(.35f,.5f,.69f),15);
+                var r=Rect(world,"Falling stone shard "+i,phrases[0].from+new Vector2(-4+i%8,-.3f-(i/8)*.25f),new Vector2(.12f+(i%3)*.15f,.14f+(i%4)*.1f),new Color(.35f,.5f,.69f),15);
                 shards.Add(r.transform);r.gameObject.SetActive(false);
             }
             events.debris=shards.ToArray();
-            events.portal=Portal("Astral lift",new Vector3(161,-.3f),2.2f);
-            events.portalExit=Portal("Upper terrace arrival",new Vector3(183,10),2.5f);
+            events.portal=Portal("Astral lift",(Vector3)phrases[1].from+new Vector3(2,2.7f),2.2f);
+            events.portalExit=Portal("Upper terrace arrival",(Vector3)Stage3Route.Position(Stage3Route.Beat(312))+Vector3.up*2,2.5f);
             events.finale=Portal("Final wish shockwave",(Vector3)phrases[2].from+new Vector3(1,2.8f),3.2f);
             game.clockHand=Child(events.finale,"Celestial hand",Vector3.zero);
             Rect(game.clockHand,"Gold hand",new Vector2(0,1.3f),new Vector2(.045f,2.6f),Gold,-2);
@@ -173,49 +191,31 @@ namespace BeatWave.Stage3
             var rt=(RectTransform)wash.transform;rt.anchorMin=Vector2.zero;rt.anchorMax=Vector2.one;rt.offsetMin=rt.offsetMax=Vector2.zero;
             events.wash=wash.GetComponent<Image>();events.wash.raycastTarget=false;events.wash.color=Color.clear;
             var random=new System.Random(314);var dust=Child(world,"Wish motes",Vector3.zero);
-            for(int i=0;i<260;i++)
+            float routeWidth=Stage3Route.Position(Stage3Route.Duration).x+24;
+            for(int i=0;i<800;i++)
             {
-                float x=(float)random.NextDouble()*270-8,y=(float)random.NextDouble()*35-13,s=.018f+(float)random.NextDouble()*.04f;
+                float x=(float)random.NextDouble()*routeWidth-8,y=(float)random.NextDouble()*39-13,s=.018f+(float)random.NextDouble()*.04f;
                 var mote=Rect(dust,"Mote",new Vector2(x,y),Vector2.one*s,new Color(.7f,.84f,1,.5f),-8);mote.transform.localRotation=Quaternion.Euler(0,0,45);
             }
-            BuildLandmarks();
+            Stage3SceneryBuilder.Build(game,square,lines,
+                ImportSprite(Folder+"/Art/ClockworkTheater.png",new Vector2(.5f,.5f)),
+                ImportSprite(Folder+"/Art/PaperSky.png",new Vector2(.5f,.5f)));
         }
-        static void BuildLandmarks()
+        static Transform Ground(Transform parent,string name,Vector2 from,Vector2 to,float padding,int act=0)
         {
-            var props=Child(world,"Section landmarks - colonnade archive and dawn",Vector3.zero);
-            // Uneven spacing and distinct silhouettes give each long passage its
-            // own identity. All pieces use Stage3's generated art or native lines.
-            foreach(float x in new[]{8f,23f,45f})
-            {
-                var arch=Child(props,"Observatory broken arch",new Vector3(x,-.2f));
-                Line(arch,"Open arch",new[]{new Vector3(-2,0),new Vector3(-2,5),new Vector3(-.8f,6.3f),new Vector3(.1f,6.5f)},new Color(.31f,.41f,.62f,.4f),.12f,-12);
-                Line(arch,"Gold inlay",new[]{new Vector3(-1.8f,1),new Vector3(-1.8f,4.8f)},new Color(.66f,.58f,.4f,.6f),.035f,-11);
-            }
-            foreach(float x in new[]{111f,120f,133f})
-            {
-                var pillar=Child(props,"Submerged archive buttress",new Vector3(x,-8.15f));
-                Rect(pillar,"Deep stone support",new Vector2(0,-4),new Vector2(.55f,8),new Color(.07f,.14f,.22f,.7f),-6);
-                Line(pillar,"Support bevel",new[]{new Vector3(-.26f,-8),new Vector3(-.26f,-.4f),new Vector3(.26f,-.4f),new Vector3(.26f,-8)},new Color(.33f,.49f,.56f,.55f),.018f,-5);
-                Rect(pillar,"Stone capital",new Vector2(0,-.25f),new Vector2(.85f,.14f),new Color(.17f,.3f,.39f,.8f),-5);
-                Line(pillar,"Suspended archive frame",new[]{new Vector3(-.6f,4),new Vector3(-.6f,6),new Vector3(0,6.65f),new Vector3(.6f,6),new Vector3(.6f,4)},new Color(.27f,.47f,.6f,.3f),.035f,-10);
-                Rect(pillar,"Archive blue light",new Vector2(0,5.5f),new Vector2(.035f,.8f),new Color(.36f,.74f,.86f,.4f),-9);
-            }
-            foreach(float x in new[]{189f,225f,237f})
-            {
-                float y=x<200?8:6;
-                var terrace=Child(props,"Dawn terrace fin",new Vector3(x,y-.12f));
-                Line(terrace,"Hanging gold fin",new[]{new Vector3(-1,0),new Vector3(0,-3),new Vector3(1,0)},new Color(.82f,.74f,.52f,.5f),.025f,7);
-            }
-            Line(props,"Archive long cornice",new[]{new Vector3(110,-1.5f),new Vector3(120,-.8f),new Vector3(131,-1.5f)},new Color(.3f,.46f,.58f,.25f),.055f,-15);
-        }
-        static Transform Ground(Transform parent,string name,Vector2 from,Vector2 to,float padding)
-        {
+            // Reverse traversal must not rotate painted terrain upside down.
+            if(to.x<from.x){var swap=from;from=to;to=swap;}
             Vector2 delta=to-from;float length=delta.magnitude;
             var platform=Child(parent,name,from);platform.localRotation=Quaternion.Euler(0,0,Mathf.Atan2(delta.y,delta.x)*Mathf.Rad2Deg);
-            bool archive=from.x>=94 && from.x<160,upper=from.x>=180;
+            bool archive=act==2,upper=act>=5;
             int count=Mathf.Max(1,Mathf.CeilToInt(length/(upper?5:archive?8:14)));float width=length/count;
             for(int i=0;i<count;i++)
             {
+                if(act==1 || act==3 || act==4 || act>=5)
+                {
+                    Stage3SceneryBuilder.Platform(platform,act,i*width,width);
+                    continue;
+                }
                 var tile=Child(platform,"Painted ramp stone "+i,new Vector3((i+.5f)*width,0));
                 var r=tile.gameObject.AddComponent<SpriteRenderer>();r.sprite=archive||upper?SlabSprite((i+(upper?2:0))%5):bridge;r.sortingOrder=8;
                 r.color=archive?new Color(.5f,.72f,.83f):upper?new Color(1,.93f,.8f):Color.white;
@@ -245,8 +245,13 @@ namespace BeatWave.Stage3
             foreach(var r in n.GetComponentsInChildren<SpriteRenderer>())r.sortingOrder=45;
             foreach(var c in n.GetComponentsInChildren<Collider2D>())c.enabled=false;
             var movement=n.GetComponent<NoteMove>();if(movement!=null)movement.enabled=false;
-            gate.rings=Child(p,"Charge rings",Vector3.zero);Ring(gate.rings,"Outer orbit",1.4f,new Color(.8f,.7f,.9f,.55f),.025f,44);
-            Ring(gate.rings,"Inner orbit",1.12f,new Color(.55f,.9f,1,.65f),.035f,44);
+            gate.rings=Child(p,"Charge geometry",Vector3.zero);
+            if(action=="BREAK")
+                Line(gate.rings,"Fracture glyph",new[]{new Vector3(-1.3f,1.2f),new Vector3(-.4f,.4f),new Vector3(-.7f,-.1f),new Vector3(.5f,-.5f),new Vector3(1.2f,-1.3f)},new Color(.5f,.86f,1,.8f),.06f,44);
+            else if(action=="ASCEND")
+                for(int j=0;j<3;j++)Line(gate.rings,"Rising chevron",new[]{new Vector3(-1,j*.5f-.8f),new Vector3(0,j*.5f),new Vector3(1,j*.5f-.8f)},Gold,.06f,44);
+            else
+                for(int j=0;j<6;j++){float a=j*Mathf.PI/3;Line(gate.rings,"Wish ray",new[]{new Vector3(Mathf.Cos(a),Mathf.Sin(a))*.7f,new Vector3(Mathf.Cos(a),Mathf.Sin(a))*1.5f},Gold,.045f,44);}
             var label=Child(p,"Mash input hint",new Vector3(0,1.95f));gate.caption=label.gameObject.AddComponent<TextMeshPro>();
             gate.caption.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
             gate.caption.text="MASH  W / S";gate.caption.fontSize=3.2f;gate.caption.alignment=TextAlignmentOptions.Center;gate.caption.rectTransform.sizeDelta=new Vector2(7,1);gate.caption.color=Gold;
@@ -255,8 +260,19 @@ namespace BeatWave.Stage3
         }
         static Transform Portal(string name,Vector3 position,float radius)
         {
-            var root=Child(world,name,position);Ring(root,"Outer dial",radius,Gold,.055f,-4);Ring(root,"Inner dial",radius*.88f,new Color(.48f,.78f,.9f,.7f),.025f,-4);
-            for(int i=0;i<12;i++){float a=i*Mathf.PI/6;var tick=Rect(root,"Hour "+i,new Vector2(Mathf.Sin(a),Mathf.Cos(a))*radius*.93f,new Vector2(.045f,.22f),Gold,-3);tick.transform.localRotation=Quaternion.Euler(0,0,-i*30);}
+            var root=Child(world,name,position);
+            if(name=="Final wish shockwave")
+            {
+                for(int i=0;i<8;i++)
+                {
+                    float a=i*Mathf.PI/4;var direction=new Vector3(Mathf.Cos(a),Mathf.Sin(a));
+                    Line(root,"Radiating wish",new[]{direction*radius*.6f,direction*radius*1.7f},Gold,.055f,-4);
+                }
+            }
+            else
+            {
+                Line(root,"Diamond transit frame",new[]{Vector3.up*radius,Vector3.right*radius,Vector3.down*radius,Vector3.left*radius,Vector3.up*radius},new Color(.48f,.78f,.9f,.7f),.055f,-4);
+            }
             root.gameObject.SetActive(false);return root;
         }
     }

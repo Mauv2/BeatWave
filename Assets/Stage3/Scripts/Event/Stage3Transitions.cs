@@ -52,8 +52,8 @@ namespace BeatWave.Stage3
             portal.localRotation=Quaternion.Euler(0,0,-time*40);
             portalExit.localRotation=Quaternion.Euler(0,0,time*30);
             float end=time-gates[2].releaseTime;
-            finale.gameObject.SetActive(time>=gates[2].startTime-1);
-            finale.localScale=Vector3.one*(1+gates[2].Charge*.2f+Mathf.Max(0,end)*3.5f);
+            finale.gameObject.SetActive(time>=gates[2].startTime-1 && end<6);
+            finale.localScale=Vector3.one*(1+gates[2].Charge*.2f+Mathf.Clamp(end,0,6)*3.5f);
             finale.localRotation=Quaternion.Euler(0,0,time*12);
             float flash=0;
             for(int i=0;i<gates.Length;i++)
@@ -61,6 +61,7 @@ namespace BeatWave.Stage3
                 float dt=time-gates[i].releaseTime;
                 if(dt>=0)flash=Mathf.Max(flash,Mathf.Exp(-dt*5)*(gates[i].Success?.5f:.18f));
             }
+            flash=Mathf.Max(flash,Mathf.SmoothStep(0,.65f,Mathf.InverseLerp(Stage3Route.Beat(412),Stage3Route.Duration,time)));
             wash.color=new Color(.7f,.88f,1,flash);
         }
         public float Focus(float time,out Vector3 target)
@@ -77,6 +78,7 @@ namespace BeatWave.Stage3
         void LateUpdate()
         {
             if(game.Clock==null)return;
+            if(game.scenery!=null)return;
             float time=(float)game.Clock.SongTime;
             depths.transform.position=game.backdrop.transform.position+Vector3.back*.2f;
             depths.transform.localScale=game.backdrop.transform.localScale;

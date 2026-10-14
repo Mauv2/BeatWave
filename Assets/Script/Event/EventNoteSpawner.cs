@@ -30,6 +30,9 @@ public class EventNoteSpawner : MonoBehaviour
 
     [Header("Event Pattern")]
     public EventNoteData[] eventNotes;
+    [Tooltip("Use absolute music timestamps for authored charts instead of measuring from event entry.")]
+    public bool useAbsoluteSongTime;
+    public float completionSongTime;
 
     public bool isPlaying = false;
 
@@ -49,7 +52,7 @@ public class EventNoteSpawner : MonoBehaviour
         currentIndex = 0;
         eventTimer = 0f;
         clock = RhythmClock.GetOrCreate();
-        eventStartTime = clock.SongTime;
+        eventStartTime = useAbsoluteSongTime ? 0d : clock.SongTime;
 
         if (eventNoteJudge != null)
             eventNoteJudge.StartEventJudge();
@@ -83,15 +86,19 @@ public class EventNoteSpawner : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        if (useAbsoluteSongTime && completionSongTime > 0f)
+        {
+            while (clock.SongTime < completionSongTime) yield return null;
+        }
+        else yield return new WaitForSeconds(0.5f);
 
         isPlaying = false;
     }
 
     void SpawnEventNote(EventNoteData data)
     {
-        GameObject prefab =
-            data.noteKind == 0 ? tapNotePrefab : holdNotePrefab;
+        // Fixed presentation events always use single-press Tap notes.
+        GameObject prefab = tapNotePrefab;
 
         if (prefab == null)
             return;
@@ -157,10 +164,8 @@ public class EventNoteSpawner : MonoBehaviour
         if (noteScript != null)
         {
             noteScript.isEventNote = true;
-            noteScript.kind =
-                data.noteKind == 0 ? NoteKind.Tap : NoteKind.Hold;
-
-            noteScript.holdTime = data.holdTime;
+            noteScript.kind = NoteKind.Tap;
+            noteScript.holdTime = 0f;
             noteScript.line = NoteLine.Up;
         }
 

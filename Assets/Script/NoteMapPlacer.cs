@@ -6,6 +6,10 @@ using UnityEngine;
 public class NoteMapPlacer : MonoBehaviour
 {
     public string jsonFileName = "notedata.json";
+    [Tooltip("Assigned charts are included in builds. When empty, the legacy JSON path is used.")]
+    public TextAsset chartFile;
+    [Tooltip("Keeps the route moving until the music ends, including its quiet outro.")]
+    public AudioClip songClip;
     public bool placeOnStart = true;
     public GameObject tapNotePrefab, holdNotePrefab, mashNotePrefab;
     public Transform noteRoot;
@@ -29,6 +33,7 @@ public class NoteMapPlacer : MonoBehaviour
     void Start() { if (placeOnStart) { LoadJson(); PlaceAllNotes(); } }
     public void LoadJson()
     {
+        if (chartFile != null) { noteData = JsonMapper.ToObject(chartFile.text); return; }
         string path = Path.Combine(Application.streamingAssetsPath, jsonFileName);
         if (!File.Exists(path)) path = Path.Combine(Application.dataPath, jsonFileName);
         if (!File.Exists(path)) { Debug.LogError("Missing note chart: " + jsonFileName, this); noteData = null; return; }
@@ -47,12 +52,12 @@ public class NoteMapPlacer : MonoBehaviour
         sectionCeiling = sectionStart != null && sectionStart != mainStartPoint
             ? player.position.y + sectionRayHeadroom : float.PositiveInfinity;
         float originX = player.position.x;
-        float endTime = float.PositiveInfinity;
+        float endTime = songClip != null ? songClip.length : float.PositiveInfinity;
         if (sectionEndPoint != null)
         {
             var endCollider = sectionEndPoint.GetComponent<Collider2D>();
             float endX = endCollider != null ? endCollider.bounds.min.x - playerCollider.bounds.extents.x : sectionEndPoint.position.x;
-            endTime = startTime + Mathf.Max(0, endX - originX) / playerSpeed;
+            endTime = Mathf.Min(endTime, startTime + Mathf.Max(0, endX - originX) / playerSpeed);
         }
         path = null;
         if (syncAutomaticJumps && mover != null)
@@ -60,7 +65,8 @@ public class NoteMapPlacer : MonoBehaviour
             float lastTime = startTime + 1;
             for (int i = 0; i < noteData.Count; i++)
                 lastTime = Mathf.Max(lastTime, ReadFloat(noteData[i], "createTime") + ReadFloat(noteData[i], "holdTime"));
-            path = RhythmPath.Build(mover, playerCollider, groundLayer, startTime, Mathf.Min(lastTime + 3, endTime) - startTime);
+            float routeEnd = songClip != null ? endTime : Mathf.Min(lastTime + 3, endTime);
+            path = RhythmPath.Build(mover, playerCollider, groundLayer, startTime, routeEnd - startTime);
             upOffset = judgePointUp.position - player.position;
             downOffset = judgePointDown.position - player.position;
             mover.BindPath(path);

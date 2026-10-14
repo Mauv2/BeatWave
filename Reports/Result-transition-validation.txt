@@ -1,0 +1,16 @@
+Result transition validation — 2026-10-14
+Stage1/2/3: focused Play Mode checks seek to the final second after clearing pending notes; actual stage completion invokes the shared result path.
+Fade: 0.5 seconds; opaque hold: at least 0.35 seconds plus scene loading. Observed blackHold includes scene loading.
+Freeze checks use the paused rhythm clock and disabled pause controls; timeScale returns to 1 before deferred scene activation.
+Initial observer iterations incorrectly required timeScale=0 during deferred scene loading; corrected observer passes below. Raw observations retained in Temp/Result-transition-observer-raw.txt.
+
+PASS Stage3 intermediate=True topOverlay=True gameplayFrozen=True total=1.211 blackHold=0.725 frames=98 timeScale=1
+PASS Stage2 intermediate=True topOverlay=True gameplayFrozen=True total=1.232 blackHold=0.747 frames=127 timeScale=1
+PASS Stage1 legacy Hold event input spawns Tap with zero hold duration
+PASS Stage1 intermediate=True topOverlay=True gameplayFrozen=True total=1.407 blackHold=0.947 frames=85 timeScale=1
+
+PASS All 11 moved script .meta hashes preserved
+PASS Stage1 and Stage3 scenes have zero missing script references
+PASS Unity compilation succeeds and final console contains zero errors
+PASS Stage1 uninterrupted full playback: 105 regular notes (8 Holds) and 8 fixed-event Taps, zero misses; see Stage1-rhythm-validation.txt
+Stage2/Stage3 full-song input playback was not rerun for this change.

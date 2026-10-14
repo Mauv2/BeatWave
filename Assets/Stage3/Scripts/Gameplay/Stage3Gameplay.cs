@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BeatWave.Stage3
@@ -21,6 +22,9 @@ namespace BeatWave.Stage3
         public float[] launchTimes;
         public Transform clockHand;
         public float footOffset;
+        public Stage3Scenography scenery;
+        readonly List<Note> visibleNotes=new List<Note>();
+        readonly List<Renderer[]> noteRenderers=new List<Renderer[]>();
         RhythmClock clock;
         Vector3 visualScale, upOffset, downOffset;
         bool resultSent;
@@ -47,6 +51,7 @@ namespace BeatWave.Stage3
                     NotePosition(item.time, item.lane), Quaternion.identity, noteRoot);
                 obj.name = (item.duration > 0 ? "Hold " : "Tap ") + item.time.ToString("F3");
                 var note = obj.GetComponent<Note>();
+                visibleNotes.Add(note);noteRenderers.Add(obj.GetComponentsInChildren<Renderer>());
                 note.line = item.lane == 0 ? NoteLine.Down : NoteLine.Up;
                 note.kind = item.duration > 0 ? NoteKind.Hold : NoteKind.Tap;
                 note.holdTime = item.duration;
@@ -91,7 +96,13 @@ namespace BeatWave.Stage3
             var leg=Stage3Route.Leg(time);
             bool jumping = leg.Airborne;
             playerAnimation.SetFlying(jumping);
-            playerAnimation.SetRunning(!jumping && leg.kind!=Stage3LegKind.Gate);
+            playerAnimation.SetRunning(!jumping && leg.kind!=Stage3LegKind.Gate && leg.kind!=Stage3LegKind.Lift);
+            for(int i=0;i<visibleNotes.Count;i++)
+            {
+                var note=visibleNotes[i];if(note==null)continue;
+                bool visible=note.judgeTime-time<3.5 && note.judgeTime+note.holdTime-time>-.2;
+                foreach(var renderer in noteRenderers[i])if(renderer!=null)renderer.enabled=visible;
+            }
             bool gateActive=transitions!=null && transitions.ActiveGate!=null;
             upMarker.gameObject.SetActive(!gateActive);downMarker.gameObject.SetActive(!gateActive);
             for (int i = 0; i < seesaws.Length; i++)
@@ -113,15 +124,25 @@ namespace BeatWave.Stage3
             Vector3 target = new Vector3(ahead.x + facing * 3, ahead.y + 3.2f, -10);
             float smooth = 1 - Mathf.Exp(-4.5f * Time.deltaTime);
             float size = Stage3Route.Leg(time).Airborne ? 8.4f : 6.6f;
+            int act=Stage3Route.Act(time);
+            if(act==1)size=8.1f; // Reveal the clock's enormous scale.
+            if(act==3){size=9.2f;target.y+=2;} // Keep both switchback tiers in frame.
+            if(act==4)size=7.6f;
+            if(Stage3Route.Leg(time).kind==Stage3LegKind.Lift){size=8.8f;target.y+=2.5f;}
+            // Let the quiet closing piano and natural decay breathe after the finale.
+            float coda=Mathf.SmoothStep(0,1,Mathf.InverseLerp(Stage3Route.Beat(380),Stage3Route.Beat(412),time));
+            size=Mathf.Lerp(size,8.8f,coda);
             if(transitions!=null)
             {
                 Vector3 focus;float amount=transitions.Focus(time,out focus);
                 target=Vector3.Lerp(target,focus,amount);
-                size=Mathf.Lerp(size,3.9f,amount);
+                float eventSize=time<Stage3Route.LiftStart?3.9f:time<Stage3Route.FinaleStart?9.8f:7.8f;
+                size=Mathf.Lerp(size,eventSize,amount);
             }
             view.transform.position = Vector3.Lerp(view.transform.position, target, smooth);
             view.orthographicSize = Mathf.Lerp(view.orthographicSize, size, smooth);
-            // Overscan keeps the entire viewport covered while allowing slow parallax.
+            if(scenery!=null)return;
+            // Legacy scene fallback; new scenes use the layered act backdrops.
             float scale = Mathf.Max(view.orthographicSize * 2.55f / backdrop.sprite.bounds.size.y,
                 view.orthographicSize * 2.55f * view.aspect / backdrop.sprite.bounds.size.x);
             backdrop.transform.localScale = Vector3.one * scale;

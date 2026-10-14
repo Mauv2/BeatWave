@@ -3672,7 +3672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: Charts/Stage1Notes.json
+  chartFile: {fileID: 4900000, guid: 907ee6a72f554024a89c157ae901f5cd, type: 3}
+  songClip: {fileID: 8300000, guid: dea87fa8e439e9e49bd6e1a4a648b705, type: 3}
   placeOnStart: 0
   tapNotePrefab: {fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}
   holdNotePrefab: {fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}
@@ -4254,26 +4256,40 @@ MonoBehaviour:
   noteRoot: {fileID: 2109741190}
   eventNoteJudge: {fileID: 1999809524}
   eventNotes:
-  - showTime: 0.5
-    judgeTime: 2
+  - showTime: 40.05441
+    judgeTime: 40.73441
     noteKind: 0
     holdTime: 0
-  - showTime: 2
-    judgeTime: 3.5
-    noteKind: 0
-    holdTime: 1.5
-  - showTime: 4
-    judgeTime: 5.5
-    noteKind: 0
-    holdTime: 1
-  - showTime: 6
-    judgeTime: 8
+  - showTime: 40.913548
+    judgeTime: 41.593548
     noteKind: 0
     holdTime: 0
-  - showTime: 8
-    judgeTime: 9.5
+  - showTime: 41.772686
+    judgeTime: 42.452686
     noteKind: 0
     holdTime: 0
+  - showTime: 42.63763
+    judgeTime: 43.31763
+    noteKind: 0
+    holdTime: 0
+  - showTime: 44.367516
+    judgeTime: 45.047516
+    noteKind: 0
+    holdTime: 0
+  - showTime: 46.10321
+    judgeTime: 46.78321
+    noteKind: 0
+    holdTime: 0
+  - showTime: 46.973957
+    judgeTime: 47.653957
+    noteKind: 0
+    holdTime: 0
+  - showTime: 47.833096
+    judgeTime: 48.513096
+    noteKind: 0
+    holdTime: 0
+  useAbsoluteSongTime: 1
+  completionSongTime: 49.37804
   isPlaying: 0
 --- !u!4 &318095084
 Transform:
@@ -8398,7 +8414,7 @@ Transform:
   m_GameObject: {fileID: 792313842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.18, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55419,7 +55435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   judgeManager: {fileID: 1298131814}
   playerMover: {fileID: 1755936713}
-  musicSource: {fileID: 0}
+  musicSource: {fileID: 997522521}
   isNoteFlowPaused: 0
 --- !u!4 &1298131812
 Transform:
@@ -55581,7 +55597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: Charts/Stage1Notes.json
+  chartFile: {fileID: 4900000, guid: 907ee6a72f554024a89c157ae901f5cd, type: 3}
+  songClip: {fileID: 8300000, guid: dea87fa8e439e9e49bd6e1a4a648b705, type: 3}
   placeOnStart: 1
   tapNotePrefab: {fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}
   holdNotePrefab: {fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}
@@ -56220,7 +56238,7 @@ Transform:
   m_GameObject: {fileID: 1369520400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 197.26, y: -2.04, z: 0}
+  m_LocalPosition: {x: 196.47502, y: -2.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,0 +1,22 @@
+PASS Both sections use the dedicated build-included Stage1 JSON
+PASS Chart route duration equals imported audio: 101.6163s
+PASS Eight event notes use absolute song timestamps
+PASS Fixed event chart contains Tap notes only
+PASS Regular chart count and strict chronological order: 105
+PASS Every regular note starts on a measured imported-audio attack
+PASS No same-lane taps overlap held notes or their release window
+PASS Regular chart has clear event boundaries and no notes past music end
+PASS Every event judgement starts on a measured audio attack
+PASS Original selected Stage1 music is retained
+PASS Pause freezes song and player together
+PASS Cave resumes at authored phrase boundary: 49.386
+PASS Route continues through the final audio tail
+PASS Existing tilemap covers the song ending at (468.65, -27.12)
+PASS Result opens only at the actual audio end (last sample 101.616)
+PASS All 105 regular notes spawned across both sections
+PASS All regular timing judgements and 8 holds completed
+PASS All eight event notes completed before cave transition
+PASS Result totals include every note; misses=0
+PASS Note positions match their scheduled marker positions; max error=0.0000
+PASS Hold ribbons follow straight ground; max deviation=0.0000
+PASS Cave continuation and pause/resume completed
