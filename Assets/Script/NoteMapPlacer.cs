@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NoteMapPlacer : MonoBehaviour
 {
-    public string jsonFileName = "notedata.json";
+    public string jsonFileName = "notedata JSON/notedata.json";
     [Tooltip("Assigned charts are included in builds. When empty, the legacy JSON path is used.")]
     public TextAsset chartFile;
     [Tooltip("Keeps the route moving until the music ends, including its quiet outro.")]

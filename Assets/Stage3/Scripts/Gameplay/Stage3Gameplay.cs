@@ -116,13 +116,16 @@ namespace BeatWave.Stage3
         void LateUpdate()
         {
             if (clock == null) return;
-            float time = (float)clock.SongTime;
+            PresentCamera((float)clock.SongTime,Time.deltaTime);
+        }
+        public void PresentCamera(float time,float deltaTime)
+        {
             // The lookahead is sampled on the same route, so the camera rises before
             // each leap and turns with the short leftward passage.
             float facing = Stage3Route.Facing(time + .35f);
             Vector2 ahead = Stage3Route.Position(time + .35f);
             Vector3 target = new Vector3(ahead.x + facing * 3, ahead.y + 3.2f, -10);
-            float smooth = 1 - Mathf.Exp(-4.5f * Time.deltaTime);
+            float smooth = 1 - Mathf.Exp(-4.5f * deltaTime);
             float size = Stage3Route.Leg(time).Airborne ? 8.4f : 6.6f;
             int act=Stage3Route.Act(time);
             if(act==1)size=8.1f; // Reveal the clock's enormous scale.
@@ -138,6 +141,7 @@ namespace BeatWave.Stage3
                 target=Vector3.Lerp(target,focus,amount);
                 float eventSize=time<Stage3Route.LiftStart?3.9f:time<Stage3Route.FinaleStart?9.8f:7.8f;
                 size=Mathf.Lerp(size,eventSize,amount);
+                transitions.FrameFracture(time,ref target,ref size);
             }
             view.transform.position = Vector3.Lerp(view.transform.position, target, smooth);
             view.orthographicSize = Mathf.Lerp(view.orthographicSize, size, smooth);

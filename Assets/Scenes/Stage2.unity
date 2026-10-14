@@ -3913,7 +3913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: notedata JSON/notedata.json
   placeOnStart: 1
   tapNotePrefab: {fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}
   holdNotePrefab: {fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata_Stage2.json
+  jsonFileName: notedata JSON/notedata_Stage2.json
   placeOnStart: 1
   tapNotePrefab: {fileID: 1118826034674867454, guid: f7bf0e15c4e4cce4c87a66adc5b69131, type: 3}
   holdNotePrefab: {fileID: 6632684372888099927, guid: 2bbf4747a7062b74d869900a4f2816db, type: 3}
@@ -7119,7 +7119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965d729545f5cfd49bcd7fcc53734d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: notedata JSON/notedata.json
   mashNeedHitCount: 5
   mashLimitTime: 2
   holdTime: 1.5

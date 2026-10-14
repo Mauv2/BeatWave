@@ -15,7 +15,7 @@ public static class Stage1RhythmBuilder
         public EventNoteData[] eventNotes;
         public float[] attackTimes;
     }
-    public static Timing ReadTiming() => JsonUtility.FromJson<Timing>(File.ReadAllText("Assets/Charts/Stage1Timing.json"));
+    public static Timing ReadTiming() => JsonUtility.FromJson<Timing>(File.ReadAllText("Assets/notedata JSON/Stage1Timing.json"));
 
     [MenuItem("BeatWave/Stage1/Apply Music Chart")]
     public static void Apply()
@@ -35,8 +35,8 @@ public static class Stage1RhythmBuilder
         main.sectionEndPoint = trigger.transform;
         foreach (var placer in Object.FindObjectsOfType<NoteMapPlacer>())
         {
-            placer.chartFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Charts/Stage1Notes.json");
-            placer.jsonFileName = "Charts/Stage1Notes.json";
+            placer.chartFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/notedata JSON/Stage1Notes.json");
+            placer.jsonFileName = "notedata JSON/Stage1Notes.json";
             placer.songClip = music.clip;
             EditorUtility.SetDirty(placer);
         }
@@ -70,7 +70,7 @@ public static class Stage1RhythmBuilder
         for (double t = path.StartTime; t < end; t += 2) report.AppendLine(t.ToString("F3") + " " + path.Evaluate(t));
         report.AppendLine("END " + path.Evaluate(end));
         foreach (var cue in path.Jumps) report.AppendLine("JUMP " + cue.time + " to " + cue.endTime + " " + cue.trigger);
-        var notes = LitJson.JsonMapper.ToObject(File.ReadAllText("Assets/Charts/Stage1Notes.json"));
+        var notes = LitJson.JsonMapper.ToObject(File.ReadAllText("Assets/notedata JSON/Stage1Notes.json"));
         for (int i = 0; i < notes.Count; i++)
         {
             float t = float.Parse(notes[i]["createTime"].ToString(), System.Globalization.CultureInfo.InvariantCulture);

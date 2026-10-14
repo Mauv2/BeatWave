@@ -10,7 +10,7 @@ public class CreateNote : MonoBehaviour
     string path;
 
     [Header("JSON Save")]
-    public string jsonFileName = "notedata.json";
+    public string jsonFileName = "notedata JSON/notedata.json";
 
     public List<NoteData> listNoteData = new List<NoteData>();
 

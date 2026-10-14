@@ -24,6 +24,8 @@ namespace BeatWave.Stage3
         public static float Duration { get; private set; }=168.996712f;
         public static float FractureStart => Beat(104);
         public static float FractureRelease => Beat(112);
+        public static float FractureLanding => Beat(120);
+        public static float FractureResume => Beat(122);
         public static float LiftStart => Beat(296);
         public static float LiftRelease => Beat(304);
         public static float FinaleStart => Beat(368);

@@ -106,7 +106,8 @@ namespace BeatWave.Stage3
             Check(grounded,"Playable route follows actual inclined ground colliders");
             Check(Enumerable.Range(1,Stage3Route.Legs.Length-1).All(i=>Vector2.Distance(Stage3Route.Legs[i-1].to,Stage3Route.Legs[i].from)<.001f),"Route remains continuous across slopes, collapse and transfer");
             var chart = JsonUtility.FromJson<Stage3Chart>(game.chartFile.text);
-            Check(chart.notes.Length==279 && chart.notes.Count(n=>n.duration>0)==16, "Chart: 279 regular notes including 16 holds, plus 3 Mash gates");
+            Check(chart.notes.Length==274 && chart.notes.Count(n=>n.duration>0)==16, "Chart: 274 regular notes including 16 holds, plus 3 Mash gates");
+            Check(chart.notes.All(n=>n.time<Stage3Route.FractureStart || n.time>=Stage3Route.FractureResume-.001f),"First collapse has no regular input until two beats after landing");
             Check(chart.notes.All(n=>Mathf.Abs(n.time-Stage3Route.Beat(184))>.19f && Mathf.Abs(n.time-Stage3Route.Beat(216))>.19f),"Turn cues have a readable break in the chart");
             Check(Mathf.Abs(chart.duration-game.music.clip.length)<.001f && chart.bpm==Stage3Route.Bpm && chart.offset==Stage3Route.Offset,"Chart, route and original audio share duration and beat grid");
             Check(chart.notes.Zip(chart.notes.Skip(1),(a,b)=>a.time<b.time).All(v=>v),"Chart is strictly time ordered");

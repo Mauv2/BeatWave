@@ -29,6 +29,10 @@ for phrase in range(0, 416, 16):
         beat = phrase + step
         if beat < 4 or beat > 408 or any(a-0.5 <= beat <= b+0.5 for a,b in GATES):
             continue
+        # The first collapse is a 22 m drop. Let the camera reveal the landing
+        # before resuming input two beats after touchdown (beat 120).
+        if 112 < beat < 122:
+            continue
         # A beat of breathing room around each reversal makes the new direction readable.
         if any(abs(beat-turn)<=.5 for turn in (184,216)):
             continue

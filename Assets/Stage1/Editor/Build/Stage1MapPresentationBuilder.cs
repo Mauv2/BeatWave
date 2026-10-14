@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public static class Stage1MapPresentationBuilder
 {
-    const string AssetFolder = "Assets/Stage1Presentation";
+    const string AssetFolder = "Assets/Stage1/Art";
     static Sprite square;
     static Material lineMaterial;
     static readonly Color Gold = new Color(0.93f, 0.71f, 0.32f);

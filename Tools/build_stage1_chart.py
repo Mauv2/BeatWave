@@ -82,7 +82,7 @@ config=dict(duration=len(audio)/rate,eventEntry=attack(38.633),
             judgeTime=t,noteKind=0,holdTime=0.) for t in events],
             analysisPulseBpm=138.5,regularNotes=len(notes),holds=sum(n['noteKind']==1 for n in notes),
             attackTimes=[b['time'] for b in beats])
-output=ROOT/'Assets/Charts';output.mkdir(exist_ok=True)
+output=ROOT/'Assets/notedata JSON';output.mkdir(exist_ok=True)
 (output/'Stage1Notes.json').write_text(json.dumps(notes,indent=2)+'\n',encoding='utf-8')
 (output/'Stage1Timing.json').write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({k:v for k,v in config.items() if k!='attackTimes'},indent=2))

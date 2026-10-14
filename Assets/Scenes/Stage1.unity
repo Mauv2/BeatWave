@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965d729545f5cfd49bcd7fcc53734d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: notedata JSON/notedata.json
   mashNeedHitCount: 5
   mashLimitTime: 2
   holdTime: 1.5
@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: Charts/Stage1Notes.json
+  jsonFileName: notedata JSON/Stage1Notes.json
   chartFile: {fileID: 4900000, guid: 907ee6a72f554024a89c157ae901f5cd, type: 3}
   songClip: {fileID: 8300000, guid: dea87fa8e439e9e49bd6e1a4a648b705, type: 3}
   placeOnStart: 0
@@ -55597,7 +55597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6393baf0afc7a04c94de4dcdbf4682a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: Charts/Stage1Notes.json
+  jsonFileName: notedata JSON/Stage1Notes.json
   chartFile: {fileID: 4900000, guid: 907ee6a72f554024a89c157ae901f5cd, type: 3}
   songClip: {fileID: 8300000, guid: dea87fa8e439e9e49bd6e1a4a648b705, type: 3}
   placeOnStart: 1

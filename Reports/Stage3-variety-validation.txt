@@ -19,7 +19,8 @@ PASS Mash presents only an input hint, without count or completion ring
 PASS Three musical Mash gates and five falling ground slabs
 PASS Playable route follows actual inclined ground colliders
 PASS Route remains continuous across slopes, collapse and transfer
-PASS Chart: 279 regular notes including 16 holds, plus 3 Mash gates
+PASS Chart: 274 regular notes including 16 holds, plus 3 Mash gates
+PASS First collapse has no regular input until two beats after landing
 PASS Turn cues have a readable break in the chart
 PASS Chart, route and original audio share duration and beat grid
 PASS Chart is strictly time ordered
@@ -31,7 +32,7 @@ PASS Quiet coda is charted, natural silent tail is clear
 PASS Mash phrases do not overlap regular notes or holds
 PASS All notes finish before the actual audio clip ends
 PASS No missing scripts
-PASS All 279 ordinary runtime notes registered
+PASS All 274 ordinary runtime notes registered
 PASS Out-of-window press rejected
 PASS ESC menu pauses audio and gameplay
 PASS Musical stage machinery freezes with the pause menu

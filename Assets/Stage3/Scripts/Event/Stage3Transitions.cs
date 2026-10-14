@@ -13,12 +13,14 @@ namespace BeatWave.Stage3
         public SpriteRenderer depths;
         public Image wash;
         Vector3[] pieceOrigins,debrisOrigins;
+        Stage3FracturePresentation fracture;
         public bool AllResolved { get {foreach(var gate in gates)if(!gate.Resolved)return false;return true;} }
         public Stage3MashGate ActiveGate {get{foreach(var gate in gates)if(gate.Active)return gate;return null;}}
         void Awake()
         {
             pieceOrigins=new Vector3[collapsePieces.Length];for(int i=0;i<pieceOrigins.Length;i++)pieceOrigins[i]=collapsePieces[i].position;
             debrisOrigins=new Vector3[debris.Length];for(int i=0;i<debris.Length;i++)debrisOrigins[i]=debris[i].position;
+            fracture=new Stage3FracturePresentation(this);
         }
         void Update()
         {
@@ -31,7 +33,7 @@ namespace BeatWave.Stage3
             for(int i=0;i<collapsePieces.Length;i++)
             {
                 float dt=Mathf.Max(0,collapse-i*.07f);
-                float shake=gates[0].Active?Mathf.Sin(time*43+i)*(.012f+.045f*gates[0].Charge):0;
+                float shake=gates[0].Active?Mathf.Sin(time*43+i)*(.008f+.025f*gates[0].Charge+.075f*gates[0].PulseAt(time)):0;
                 collapsePieces[i].position=pieceOrigins[i]+new Vector3(shake+(i-2)*dt*.36f,-4.7f*dt*dt,0);
                 collapsePieces[i].rotation=Quaternion.Euler(0,0,(i%2==0?1:-1)*dt*26);
                 collapsePieces[i].gameObject.SetActive(dt<3.2f);
@@ -59,10 +61,16 @@ namespace BeatWave.Stage3
             for(int i=0;i<gates.Length;i++)
             {
                 float dt=time-gates[i].releaseTime;
-                if(dt>=0)flash=Mathf.Max(flash,Mathf.Exp(-dt*5)*(gates[i].Success?.5f:.18f));
+                float strength=i==0?(gates[i].Success?.22f:.08f):(gates[i].Success?.5f:.18f);
+                if(dt>=0)flash=Mathf.Max(flash,Mathf.Exp(-dt*5)*strength);
             }
             flash=Mathf.Max(flash,Mathf.SmoothStep(0,.65f,Mathf.InverseLerp(Stage3Route.Beat(412),Stage3Route.Duration,time)));
             wash.color=new Color(.7f,.88f,1,flash);
+            fracture?.Present(time);
+        }
+        public void FrameFracture(float time,ref Vector3 target,ref float size)
+        {
+            fracture?.FrameCamera(time,ref target,ref size);
         }
         public float Focus(float time,out Vector3 target)
         {

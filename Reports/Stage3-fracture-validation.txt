@@ -1,0 +1,25 @@
+PASS No input required during the fall or at touchdown
+PASS Fresh gate state after start
+PASS Player stays framed; first note readable for >=1.2 s at 30 FPS, aspect 1.78
+PASS Player stays framed; first note readable for >=1.2 s at 60 FPS, aspect 1.78
+PASS Player stays framed; first note readable for >=1.2 s at 144 FPS, aspect 1.78
+PASS Player stays framed; first note readable for >=1.2 s at 30 FPS, aspect 1.33
+PASS Player stays framed; first note readable for >=1.2 s at 60 FPS, aspect 1.33
+PASS Player stays framed; first note readable for >=1.2 s at 144 FPS, aspect 1.33
+PASS First Mash press immediately lights and widens the floor cracks
+PASS Pause freezes music, character, crack pulse and rejects Mash input
+PASS Gate success resolves correctly
+PASS Gate reports exactly one judgement
+PASS Music continues through gate resolution
+PASS Every continued Mash press has feedback beyond the threshold
+PASS First three post-landing Tap inputs accepted after success
+PASS Both outcomes land in the lower route and disable broken ground collision
+PASS Temporary guides clear before the next phrase
+PASS No input required during the fall or at touchdown
+PASS Fresh gate state after retry
+PASS Gate failure resolves correctly
+PASS Gate reports exactly one judgement
+PASS Music continues through gate resolution
+PASS First three post-landing Tap inputs accepted after failure
+PASS Both outcomes land in the lower route and disable broken ground collision
+PASS Temporary guides clear before the next phrase

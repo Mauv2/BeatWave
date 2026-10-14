@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965d729545f5cfd49bcd7fcc53734d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: notedata.json
+  jsonFileName: notedata JSON/notedata.json
   mashNeedHitCount: 5
   mashLimitTime: 2
   holdTime: 1.5

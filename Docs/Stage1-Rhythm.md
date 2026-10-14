@@ -4,12 +4,12 @@ Stage1에 실제 연결된 `Nientum Fortune Waltz (mp3cut.net).mp3`를 유지한
 
 ## 채보
 
-- `Assets/Charts/Stage1Notes.json`: 일반 노트 105개, 그중 Hold 8개. `noteType`은 0=위(W), 1=아래(S), `noteKind`는 0=Tap, 1=Hold다.
-- `Assets/Charts/Stage1Timing.json`: 고정 이벤트 Tap 8개, 구간 전환 시각, 분석한 어택 시각. 고정 이벤트 스포너는 Tap만 생성한다.
+- `Assets/notedata JSON/Stage1Notes.json`: 일반 노트 105개, 그중 Hold 8개. `noteType`은 0=위(W), 1=아래(S), `noteKind`는 0=Tap, 1=Hold다.
+- `Assets/notedata JSON/Stage1Timing.json`: 고정 이벤트 Tap 8개, 구간 전환 시각, 분석한 어택 시각. 고정 이벤트 스포너는 Tap만 생성한다.
 - 초반 피아노는 여유 있는 간격, 편성이 두꺼워지는 구간은 응답 노트를 추가했다. 쉼표와 이벤트 경계에는 일반 노트를 배치하지 않는다.
 - 분석용 기준 펄스는 138.5 BPM이지만 고정 BPM에 기계적으로 양자화하지 않는다. 스윙과 연주 타이밍을 반영하도록 국소 위상과 실제 어택을 사용한다.
 - 외부 MP3 디코더의 패딩 차이가 판정 오차로 이어지지 않도록 **Unity가 임포트한 PCM**을 분석한다. 첫 노트는 1.202438초다.
-- 기존 수동 채보 `Assets/notedata.json`은 다른 씬에서도 참조하므로 보존했다. Stage1의 두 NoteMapPlacer에는 새 JSON TextAsset을 직접 연결해 빌드에도 포함한다.
+- 기존 수동 채보 `Assets/notedata JSON/notedata.json`은 다른 씬에서도 참조하므로 보존했다. Stage1의 두 NoteMapPlacer에는 새 JSON TextAsset을 직접 연결해 빌드에도 포함한다.
 
 ## 이동과 전환
 

@@ -22,6 +22,8 @@ namespace BeatWave.Stage3
         public float LastPressTime { get; private set; }=-100;
         public bool Active => game.Clock!=null && game.Clock.HasStarted && game.Clock.SongTime>=startTime && game.Clock.SongTime<releaseTime;
         public float Charge => Mathf.Clamp01((float)Hits/requiredHits);
+        bool IsFracture => game.transitions!=null && game.transitions.gates[0]==this;
+        public float PulseAt(float time) => Hits==0 || time<LastPressTime ? 0 : Mathf.Exp(-(time-LastPressTime)*18);
         void Start()
         {
             note.isEventNote=true;
@@ -48,7 +50,7 @@ namespace BeatWave.Stage3
             // are internal judging data, never a counter or filled progress ring.
             caption.text=Resolved ? "" : "MASH  W / S";
             rings.localRotation=Quaternion.Euler(0,0,actionLabel=="LAST WISH"?-time*20:Mathf.Sin(time*6)*3);
-            float pulse=Mathf.Exp(-Mathf.Max(0,time-LastPressTime)*12);
+            float pulse=IsFracture?PulseAt(time):Mathf.Exp(-Mathf.Max(0,time-LastPressTime)*12);
             note.transform.localScale=Vector3.one*(1.3f+.16f*pulse);
             note.isMashActive=Active;note.currentHitCount=Hits;
             rings.localScale=Vector3.one*(1+.09f*pulse);
@@ -62,14 +64,15 @@ namespace BeatWave.Stage3
             {
                 var effect=Instantiate(game.judge.hitEffectPrefab,note.transform.position,Quaternion.identity);
                 effect.name="Stage3 Mash impact";
-                effect.transform.localScale*=.55f;
+                bool fracture=IsFracture;
+                effect.transform.localScale*=fracture?.34f:.55f;
                 foreach(var particles in effect.GetComponentsInChildren<ParticleSystem>(true))
                 {
                     var main=particles.main;
                     main.startColor=Hits%2==0?new Color(.45f,.85f,1):new Color(1,.83f,.48f);
                 }
                 foreach(var renderer in effect.GetComponentsInChildren<Renderer>(true))renderer.sortingOrder=70;
-                Destroy(effect,.6f);
+                Destroy(effect,fracture?.3f:.6f);
                 HitEffectsSpawned++;
             }
             return true;
