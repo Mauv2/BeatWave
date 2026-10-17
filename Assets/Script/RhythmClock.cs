@@ -8,6 +8,7 @@ public class RhythmClock : MonoBehaviour
     public bool MenuPaused { get; private set; }
     public bool FlowPaused { get; private set; }
     public bool TravelEnabled { get; private set; }
+    public event System.Action<bool> MenuPauseChanged;
     public bool HasStarted => Source != null && Source.clip != null && AudioSettings.dspTime >= dspStart;
     public bool IsPaused => MenuPaused || FlowPaused;
     public double SongTime => Source == null ? 0d : System.Math.Min(Source.clip == null ? 0d : Source.clip.length,
@@ -54,6 +55,7 @@ public class RhythmClock : MonoBehaviour
     void ChangePause(bool menu, bool flow)
     {
         bool wasPaused = IsPaused;
+        bool menuChanged = MenuPaused != menu;
         double now = SongTime;
         MenuPaused = menu;
         FlowPaused = flow;
@@ -66,5 +68,6 @@ public class RhythmClock : MonoBehaviour
             Source.time = (float)pausedTime;
             Source.PlayScheduled(dspStart);
         }
+        if (menuChanged) MenuPauseChanged?.Invoke(menu);
     }
 }

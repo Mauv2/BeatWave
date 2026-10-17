@@ -6140,6 +6140,13 @@ MonoBehaviour:
   heightOffset: 2.9
   normalSize: 6.5
   jumpSize: 7.2
+  eventPoints:
+  - {fileID: 34452998}
+  - {fileID: 2100745663}
+  - {fileID: 1376633988}
+  - {fileID: 895121690}
+  - {fileID: 153374488}
+  presentationStrength: 1
 --- !u!1 &521622801
 GameObject:
   m_ObjectHideFlags: 0
@@ -6919,7 +6926,7 @@ MonoBehaviour:
   playerRb: {fileID: 1755936712}
   playerAnim: {fileID: 1755936714}
   caveStartPoint: {fileID: 1675723031}
-  music1: {fileID: 0}
+  music1: {fileID: 997522521}
   music2: {fileID: 0}
   caveMusic: {fileID: 8300000, guid: f8b574bf96723ac4eb2cfdb9ec56fab3, type: 3}
   normalVolume: 0.5
@@ -6927,7 +6934,7 @@ MonoBehaviour:
   useSecondMusic: 0
   judgeManager: {fileID: 1298131814}
   stopDelay: 1
-  restartDelay: 1
+  restartDelay: 0
   noteMapPlacer: {fileID: 297332112}
 --- !u!4 &632122693
 Transform:
@@ -148251,6 +148258,8 @@ GameObject:
   - component: {fileID: 1755936714}
   - component: {fileID: 1755936711}
   - component: {fileID: 1755936712}
+  - component: {fileID: 1755936715}
+  - component: {fileID: 1755936716}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -148430,6 +148439,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4822398208919762009}
+--- !u!114 &1755936715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755936707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa98ea5dbdeb6847837814c434ef593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timingFile: {fileID: 4900000, guid: 25c8646508bc27e4fb8bfc44ab55795b, type: 3}
+  lineMaterial: {fileID: 2100000, guid: 59e088196ab417049910ada03c7a6c11, type: 2}
+  noteRoot: {fileID: 2109741190}
+--- !u!114 &1755936716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755936707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d4f90acb249fd46903f076b7dd32d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempoFile: {fileID: 4900000, guid: 1c772f40934907b478ae7384f418708f, type: 3}
+  chartFile: {fileID: 4900000, guid: 907ee6a72f554024a89c157ae901f5cd, type: 3}
+  animator: {fileID: 4822398208919762009}
+  runCycleSeconds: 0.5
+  pacingStrength: 1
 --- !u!1 &1757670014
 GameObject:
   m_ObjectHideFlags: 0
@@ -171762,7 +171803,7 @@ Animator:
   m_GameObject: {fileID: 1908850869301588713}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 132805fe309e7a946b2a57ab0f7a678b, type: 2}
+  m_Controller: {fileID: 9100000, guid: e185b8cdb40dfd348a2682b3ebd1a4cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

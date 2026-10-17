@@ -19,6 +19,9 @@ public class CaveEventManager : MonoBehaviour
     bool isPlayingEvent;
     AudioSource transitionTail, fadedSource;
     float restoreVolume;
+    bool tailMenuPaused;
+    Coroutine tailFade;
+    RhythmClock transitionClock;
 
     public void StartCaveEvent()
     {
@@ -41,10 +44,9 @@ public class CaveEventManager : MonoBehaviour
         // Pausing the only AudioSource here would make a volume tween inaudible.
         CreateTransitionTail(music1);
         clock.SetFlowPaused(true);
-        float fadeOutTime = fallTransition != null
-            ? stopDelay + fallTransition.jumpDuration + fallTransition.fallDuration + fallTransition.fadeInDuration
-            : Mathf.Max(stopDelay, crossFadeTime);
-        StartCoroutine(FadeTransitionTail(clock, Mathf.Max(0.01f, fadeOutTime)));
+        float fadeOutTime = stopDelay + restartDelay
+            + (fallTransition != null && caveStartPoint != null ? fallTransition.Duration : 0f);
+        tailFade = StartCoroutine(FadeTransitionTail(clock, Mathf.Max(0.01f, fadeOutTime)));
 
         if (useSecondMusic && music2 == null)
         {
@@ -55,7 +57,7 @@ public class CaveEventManager : MonoBehaviour
         if (fallTransition != null) yield return fallTransition.PlayFallTransition(caveStartPoint);
         else if (player != null && caveStartPoint != null) player.position = caveStartPoint.position;
         if (restartDelay > 0f) yield return new WaitForSeconds(restartDelay);
-        StopTransitionTail();
+        if (tailFade != null) { StopCoroutine(tailFade); tailFade = null; }
         if (playerRb != null) playerRb.velocity = Vector2.zero;
 
         float chartStart = (float)clock.SongTime;
@@ -80,6 +82,7 @@ public class CaveEventManager : MonoBehaviour
         if (judgeManager != null) judgeManager.enabled = true;
         if (playerAnim != null) playerAnim.SetRunning(true);
         yield return FadeCaveMusic(clock);
+        StopTransitionTail();
         isPlayingEvent = false;
     }
 
@@ -99,40 +102,56 @@ public class CaveEventManager : MonoBehaviour
         transitionTail.spatialBlend = 0f;
         transitionTail.timeSamples = source.timeSamples;
         transitionTail.Play();
+        tailMenuPaused = false;
+        transitionClock = RhythmClock.GetOrCreate();
+        transitionClock.MenuPauseChanged += SetTailPaused;
+        SetTailPaused(transitionClock.MenuPaused);
+    }
+
+    void Update()
+    {
+        if (transitionTail == null) return;
+        SetTailPaused(transitionClock.MenuPaused || Time.timeScale <= 0f);
+    }
+
+    void SetTailPaused(bool paused)
+    {
+        if (transitionTail == null) return;
+        if (paused == tailMenuPaused) return;
+        if (paused) transitionTail.Pause(); else transitionTail.UnPause();
+        tailMenuPaused = paused;
     }
 
     IEnumerator FadeTransitionTail(RhythmClock clock, float duration)
     {
         float volume = transitionTail != null ? transitionTail.volume : 0f;
         float elapsed = 0f;
-        bool menuPaused = false;
         while (transitionTail != null && elapsed < duration)
         {
             bool paused = clock.MenuPaused || Time.timeScale <= 0f;
-            if (paused != menuPaused)
-            {
-                if (paused) transitionTail.Pause(); else transitionTail.UnPause();
-                menuPaused = paused;
-            }
             if (!paused)
             {
                 elapsed += Time.deltaTime;
-                transitionTail.volume = Mathf.Lerp(volume, 0f, Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                // Keep a quiet bridge until the scheduled cave audio is audible.
+                transitionTail.volume = Mathf.Lerp(volume, volume * 0.08f,
+                    Mathf.SmoothStep(0f, 1f, elapsed / duration));
             }
             yield return null;
         }
-        StopTransitionTail();
     }
 
     IEnumerator FadeCaveMusic(RhythmClock clock)
     {
         float elapsed = 0f;
+        float tailVolume = transitionTail != null ? transitionTail.volume : 0f;
         while (fadedSource != null && elapsed < crossFadeTime)
         {
             if (!clock.IsPaused && clock.HasStarted)
             {
                 elapsed += Time.deltaTime;
-                fadedSource.volume = Mathf.Lerp(0f, restoreVolume, Mathf.SmoothStep(0f, 1f, elapsed / crossFadeTime));
+                float blend = Mathf.SmoothStep(0f, 1f, elapsed / crossFadeTime);
+                fadedSource.volume = Mathf.Lerp(0f, restoreVolume, blend);
+                if (transitionTail != null) transitionTail.volume = Mathf.Lerp(tailVolume, 0f, blend);
             }
             yield return null;
         }
@@ -142,6 +161,8 @@ public class CaveEventManager : MonoBehaviour
 
     void StopTransitionTail()
     {
+        if (transitionClock != null) transitionClock.MenuPauseChanged -= SetTailPaused;
+        transitionClock = null;
         if (transitionTail == null) return;
         transitionTail.Stop();
         Destroy(transitionTail.gameObject);
@@ -151,6 +172,7 @@ public class CaveEventManager : MonoBehaviour
     void OnDisable()
     {
         StopAllCoroutines();
+        tailFade = null;
         StopTransitionTail();
         if (fadedSource != null) fadedSource.volume = restoreVolume;
         fadedSource = null;

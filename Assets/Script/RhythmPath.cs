@@ -89,7 +89,59 @@ public sealed class RhythmPath
         }
         if (mover.switchback != null && startTime <= mover.switchback.StartTime && startTime + duration >= mover.switchback.EndTime)
             path.ApplySwitchback(mover.switchback);
+        var direction = mover.GetComponent<Stage1MusicDirection>();
+        if (direction != null && direction.enabled) path.AlignJumpTimes(direction.AttackTimes);
+        var tempo=mover.GetComponent<Stage1TempoMotion>();
+        if(tempo!=null && tempo.enabled)tempo.Retime(path.positions,path.jumps,startTime,Step);
         return path;
+    }
+    // Retiming changes traversal speed, not the authored geometry. The notes and
+    // player subsequently sample this same path; section endpoints stay fixed.
+    void AlignJumpTimes(float[] attacks)
+    {
+        if (attacks == null || attacks.Length == 0 || jumps.Count == 0) return;
+        double end = StartTime + (positions.Count - 1) * Step;
+        var source = new List<double> { StartTime, end };
+        foreach (var cue in jumps) { source.Add(cue.time); source.Add(Math.Min(cue.endTime,end)); }
+        source.Sort();
+        for (int i=source.Count-1;i>0;i--) if(source[i]-source[i-1]<.025) source.RemoveAt(i);
+        source[source.Count-1]=end;
+        var destination = source.ToArray();
+        for(int i=1;i<source.Count-1;i++)
+        {
+            double best=source[i], distance=.30;
+            foreach(float beat in attacks)
+            {
+                double d=Math.Abs(beat-source[i]);
+                // Avoid collapsing short ground/air segments onto the same beat.
+                double before=(beat-destination[i-1])/(source[i]-source[i-1]);
+                double after=(source[i+1]-beat)/(source[i+1]-source[i]);
+                if(d<distance && before>=.65 && before<=1.55 && after>=.65 && after<=1.55)
+                { best=beat;distance=d; }
+            }
+            destination[i]=best;
+        }
+        var old=positions.ToArray();
+        int segment=0;
+        for(int i=0;i<positions.Count;i++)
+        {
+            double time=StartTime+i*Step;
+            while(segment<destination.Length-2 && time>destination[segment+1])segment++;
+            double u=(time-destination[segment])/(destination[segment+1]-destination[segment]);
+            float index=Mathf.Clamp((float)((source[segment]+u*(source[segment+1]-source[segment])-StartTime)/Step),0,old.Length-1);
+            int a=Mathf.FloorToInt(index);
+            positions[i]=Vector2.Lerp(old[a],old[Mathf.Min(a+1,old.Length-1)],index-a);
+        }
+        for(int j=0;j<jumps.Count;j++)
+        {
+            var cue=jumps[j];
+            for(int i=0;i<source.Count;i++)
+            {
+                if(Math.Abs(cue.time-source[i])<.025)cue.time=destination[i];
+                if(Math.Abs(cue.endTime-source[i])<.025)cue.endTime=destination[i];
+            }
+            jumps[j]=cue;
+        }
     }
     public float DirectionAt(double songTime)
     {

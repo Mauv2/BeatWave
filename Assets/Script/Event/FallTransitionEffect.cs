@@ -25,6 +25,10 @@ public class FallTransitionEffect : MonoBehaviour
     public RawImage backgroundImage;
     public Texture nextBackground;
 
+    // Includes the black-screen hold and reveal, not just the falling motion.
+    public float Duration => player == null ? 0f : jumpDuration + fallDuration
+        + (blackFade != null ? fadeInDuration + fadeOutDuration : 0f) + 0.2f;
+
     public IEnumerator PlayFallTransition(Transform spawnPoint)
     {
         if (player == null || spawnPoint == null)

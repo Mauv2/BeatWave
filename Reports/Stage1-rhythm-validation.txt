@@ -1,3 +1,5 @@
+PASS Musical direction has timing, notes and existing art bindings
+PASS Phrase camera includes fixed-event note positions
 PASS Both sections use the dedicated build-included Stage1 JSON
 PASS Chart route duration equals imported audio: 101.6163s
 PASS Eight event notes use absolute song timestamps
@@ -8,10 +10,19 @@ PASS No same-lane taps overlap held notes or their release window
 PASS Regular chart has clear event boundaries and no notes past music end
 PASS Every event judgement starts on a measured audio attack
 PASS Original selected Stage1 music is retained
+PASS Player and judge markers draw above foreground terrain, with character part order preserved
 PASS Pause freezes song and player together
-PASS Cave resumes at authored phrase boundary: 49.386
+PASS Pause freezes camera zoom and an active landing effect
+PASS Landing effects finish during the fixed event instead of remaining frozen
+PASS Cave continues the same song without a post-arrival delay
+PASS Pause during falling freezes audible tail, fade and cave beat
+PASS Cave resumes at authored phrase boundary: 49.385
+PASS Camera settles at cave arrival before the first input: (0.32, 0.24, 10.00)
 PASS Route continues through the final audio tail
 PASS Existing tilemap covers the song ending at (468.65, -27.12)
+PASS Falling music remains audible and fades continuously until arrival; continuous=True, decreasing=True, peak=0.76142
+PASS Cave resumes the original source at full volume and releases the tail; peak=0.90090
+PASS Resumed audio sample and note clock remain synchronized
 PASS Result opens only at the actual audio end (last sample 101.616)
 PASS All 105 regular notes spawned across both sections
 PASS All regular timing judgements and 8 holds completed
@@ -20,3 +31,15 @@ PASS Result totals include every note; misses=0
 PASS Note positions match their scheduled marker positions; max error=0.0000
 PASS Hold ribbons follow straight ground; max deviation=0.0000
 PASS Cave continuation and pause/resume completed
+PASS Audio transition, transition pause/resume and cave fade-in completed
+PASS At least 75% of jump endpoints align with measured attacks: 22 / 28
+PASS Retimed trajectory stays continuous; largest 10ms step=0.197
+PASS Running, switchback, jump, fixed event, fall and outro camera states exercised
+PASS Fixed event holds one frame containing every spawn and judgement point; drift=0.0000
+PASS Normal travel keeps the character in the left third: 6075 / 6075
+PASS Late chained jumps hold one zoom; size variation=0.0060
+PASS Landing destinations visible before every launch: 14 / 14
+PASS Music-driven landing accents executed: 14
+PASS Judgement markers visible at every regular input: 105 / 105
+PASS Notes visible at least 0.6 seconds before input: 105 / 105
+PASS Tempo-paced running preserves original audio pitch and real-time clock: 14379 samples

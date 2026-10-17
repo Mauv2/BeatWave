@@ -1,0 +1,16 @@
+PASS Tempo profile and original note chart are bound
+PASS Section 0 start/end coordinates and times preserved
+PASS Section 0 every jump's timing and airborne trajectory unchanged
+PASS Section 0 held-note path and travel speed unchanged
+PASS Section 0 monotonic, bounded song-time mapping=0.875..1.123
+PASS Section 0 no route discontinuity; largest 10ms displacement=0.174
+PASS Section 0 pacing changes traversal; maximum position difference=0.837; ground speed=2.90..6.89
+PASS Section 1 start/end coordinates and times preserved
+PASS Section 1 every jump's timing and airborne trajectory unchanged
+PASS Section 1 held-note path and travel speed unchanged
+PASS Section 1 monotonic, bounded song-time mapping=0.859..1.144
+PASS Section 1 no route discontinuity; largest 10ms displacement=0.195
+PASS Section 1 pacing changes traversal; maximum position difference=1.216; ground speed=4.00..7.03
+PASS Stage1 uses an isolated controller with a run-only tempo multiplier
+PASS Hit, interaction and flight animations are not tempo-scaled
+PASS Tempo profile finite and within safe musical range for the full song

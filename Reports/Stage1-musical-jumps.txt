@@ -1,0 +1,15 @@
+Direction enabled=True; attacks=225
+JumpTrigger (JumpTrigger): 2.642 -> 3.507; nearest attack error 0.000 / 0.000
+Leftward seesaw cue (JumpTrigger): 4.378 -> 5.533; nearest attack error 0.000 / 0.000
+Rightward seesaw cue (JumpTrigger): 6.050 -> 7.843; nearest attack error 0.058 / 0.000
+: 8.134 -> 10.728; nearest attack error 0.000 / 0.000
+JumpTrigger (6) (JumpTrigger): 35.945 -> 36.845; nearest attack error 0.000 / 0.000
+JumpTrigger (7) (JumpTrigger): 36.970 -> 37.658; nearest attack error 0.125 / 0.000
+JumpTrigger (8) (JumpTrigger): 38.122 -> 38.640; nearest attack error 0.000 / 0.007
+JumpTrigger (9) (JumpTrigger): 60.228 -> 61.586; nearest attack error 0.000 / 0.000
+JumpTrigger (10) (JumpTrigger): 93.124 -> 94.007; nearest attack error 0.000 / 0.000
+JumpTrigger (11) (JumpTrigger): 94.448 -> 95.388; nearest attack error 0.070 / 0.151
+JumpTrigger (12) (JumpTrigger): 95.388 -> 95.742; nearest attack error 0.151 / 0.000
+JumpTrigger (13) (JumpTrigger): 96.973 -> 97.832; nearest attack error 0.000 / 0.000
+JumpTrigger (14) (JumpTrigger): 98.332 -> 99.266; nearest attack error 0.000 / 0.000
+JumpTrigger (15) (JumpTrigger): 99.266 -> 100.518; nearest attack error 0.000 / 1.252

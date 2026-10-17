@@ -17,6 +17,22 @@ public static class Stage1RhythmBuilder
     }
     public static Timing ReadTiming() => JsonUtility.FromJson<Timing>(File.ReadAllText("Assets/notedata JSON/Stage1Timing.json"));
 
+    [MenuItem("BeatWave/Stage1/Apply Cave Audio Transition")]
+    public static void ApplyCaveAudioTransition()
+    {
+        if (EditorApplication.isPlaying || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Stage1")
+            throw new System.InvalidOperationException("Open Stage1 in edit mode first.");
+        var cave = Object.FindObjectOfType<CaveEventManager>();
+        Undo.RecordObject(cave, "Connect Stage1 cave music continuation");
+        cave.music1 = GameObject.Find("Music1").GetComponent<AudioSource>();
+        cave.useSecondMusic = false;
+        // Resume the preserved cave beat as soon as the cave is revealed.
+        cave.restartDelay = 0f;
+        EditorUtility.SetDirty(cave);
+        EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+        EditorSceneManager.SaveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+    }
+
     [MenuItem("BeatWave/Stage1/Apply Music Chart")]
     public static void Apply()
     {
