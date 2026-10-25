@@ -1,0 +1,30 @@
+달빛에 부서진 고딕 석교 (10) layer=6 enabled=True active=True pos=(241.84, -4.06, 0.00) box=(34.81, 5.12) offset=(6.55, -1.06) jump=-
+개별 (3) layer=0 enabled=True active=True pos=(230.93, -5.02, 0.00) box=(3.04, 2.55) offset=(0.00, -0.30) jump=-
+개별2 (2) layer=0 enabled=True active=True pos=(151.79, -5.27, 0.00) box=(2.88, 3.93) offset=(0.00, -0.08) jump=-
+달빛에 부서진 고딕 석교 (2) layer=6 enabled=True active=True pos=(170.55, -4.06, 0.00) box=(83.71, 5.29) offset=(31.00, -0.98) jump=-
+고딕 석조 플랫폼 타일 layer=6 enabled=True active=True pos=(1.94, -3.08, 0.00) box=(105.08, 3.53) offset=(41.68, -1.86) jump=-
+개별 (1) layer=0 enabled=True active=True pos=(146.25, -5.02, 0.00) box=(3.04, 2.69) offset=(0.00, -0.23) jump=-
+고딕 성당의 촛불 석조 플랫폼 layer=6 enabled=True active=True pos=(280.16, -2.24, 0.00) box=(133.08, 2.81) offset=(55.67, -2.22) jump=-
+개별2 (3) layer=0 enabled=True active=True pos=(225.62, -5.27, 0.00) box=(2.88, 3.92) offset=(0.00, -0.09) jump=-
+개별 layer=0 enabled=True active=True pos=(265.68, -4.63, 0.00) box=(3.04, 2.76) offset=(0.00, -0.19) jump=-
+개별2 layer=0 enabled=True active=True pos=(104.98, -5.27, 0.00) box=(2.88, 3.93) offset=(0.00, -0.09) jump=-
+개별2 layer=0 enabled=False active=True pos=(104.98, -5.27, 0.00) box=(2.88, 3.87) offset=(0.00, -0.12) jump=-
+개별2 (1) layer=0 enabled=True active=True pos=(141.50, -5.27, 0.00) box=(2.88, 3.93) offset=(0.00, -0.08) jump=-
+개별2 (1) layer=0 enabled=False active=True pos=(141.50, -5.27, 0.00) box=(2.88, 3.77) offset=(0.00, -0.17) jump=-
+개별 layer=0 enabled=True active=True pos=(100.16, -5.02, 0.00) box=(3.04, 2.64) offset=(0.00, -0.26) jump=-
+개별 layer=0 enabled=False active=True pos=(100.16, -5.02, 0.00) box=(3.04, 2.69) offset=(0.00, -0.23) jump=-
+달빛에 부서진 고딕 석교 layer=6 enabled=True active=True pos=(115.69, -4.06, 0.00) box=(39.54, 5.00) offset=(8.92, -1.12) jump=-
+개별 (2) layer=0 enabled=True active=True pos=(158.04, -5.02, 0.00) box=(3.04, 2.75) offset=(0.00, -0.20) jump=-
+JumpTrigger (5) layer=0 enabled=True active=True pos=(148.80, -4.24, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=6
+JumpTrigger (10) layer=0 enabled=True active=True pos=(161.52, -4.60, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=7
+JumpTrigger (11) layer=0 enabled=True active=True pos=(233.74, -4.60, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=5
+JumpTrigger (1) layer=0 enabled=True active=True pos=(102.40, -4.12, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=6
+JumpTrigger (4) layer=0 enabled=True active=True pos=(143.86, -4.42, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=5
+JumpTrigger (6) layer=0 enabled=True active=True pos=(261.54, -4.32, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=8
+JumpTrigger layer=0 enabled=True active=True pos=(97.26, -4.72, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=5
+JumpTrigger (12) layer=0 enabled=True active=True pos=(228.52, -4.60, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=5
+JumpTrigger (7) layer=0 enabled=True active=True pos=(268.04, -3.66, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=6
+JumpTrigger (2) layer=0 enabled=True active=True pos=(107.12, -4.28, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=6
+JumpTrigger (8) layer=0 enabled=True active=True pos=(155.04, -4.60, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=7
+JumpTrigger (3) layer=0 enabled=True active=True pos=(138.64, -3.82, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=6
+JumpTrigger (9) layer=0 enabled=True active=True pos=(223.62, -4.60, 0.00) box=(1.00, 1.00) offset=(0.00, 0.00) jump=5

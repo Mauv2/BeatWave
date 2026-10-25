@@ -13,6 +13,16 @@ public sealed class RhythmPath
     public double StartTime { get; private set; }
     public float Speed { get; private set; }
     public float FeetOffset { get; private set; }
+    public static RhythmPath FromSamples(double startTime, float feetOffset, IList<Vector2> samples,
+        IEnumerable<JumpCue> jumpCues)
+    {
+        if (samples == null || samples.Count < 2) throw new ArgumentException("A route needs at least two 10ms samples.");
+        var path = new RhythmPath { StartTime = startTime, FeetOffset = feetOffset };
+        path.positions.AddRange(samples);
+        if (jumpCues != null) path.jumps.AddRange(jumpCues);
+        path.Speed = (samples[samples.Count - 1].x - samples[0].x) / ((samples.Count - 1) * Step);
+        return path;
+    }
     public Vector2 Evaluate(double songTime)
     {
         float index = Mathf.Clamp((float)(songTime - StartTime) / Step, 0, positions.Count - 1);

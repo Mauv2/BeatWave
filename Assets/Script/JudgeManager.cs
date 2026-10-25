@@ -19,6 +19,16 @@ public class JudgeManager : MonoBehaviour
     [Header("Timing (seconds)")]
     public float perfectWindow = 0.04f, greatWindow = 0.08f, goodWindow = 0.12f;
     public float inputOffsetSeconds;
+    [Header("Note judgment sounds")]
+    public AudioClip tapHitSound;
+    [Tooltip("Played once when the Hold head is accepted. Falls back to Tap Hit Sound.")]
+    public AudioClip holdHeadSound;
+    [Tooltip("Played once on successful Hold completion. Falls back to Hold Head Sound, then Tap Hit Sound.")]
+    public AudioClip holdEndSound;
+    [Tooltip("Played for each accepted Mash press. Falls back to Tap Hit Sound.")]
+    public AudioClip mashHitSound;
+    [Range(0f, 1f)] public float noteSoundVolume = 0.7f;
+    AudioSource noteSoundSource;
     bool isGameOver, isResultSaved;
     readonly List<Note> notes = new List<Note>();
     RhythmClock clock;
@@ -27,6 +37,37 @@ public class JudgeManager : MonoBehaviour
     public double JudgeTime => clock == null ? 0d : clock.SongTime + inputOffsetSeconds;
 
     void Awake() { clock = RhythmClock.GetOrCreate(); }
+    void OnEnable() { if (clock != null) clock.MenuPauseChanged += OnMenuPauseChanged; }
+    void OnDisable()
+    {
+        if (clock != null) clock.MenuPauseChanged -= OnMenuPauseChanged;
+        if (noteSoundSource != null) noteSoundSource.Stop();
+    }
+    void OnMenuPauseChanged(bool paused)
+    {
+        if (paused && noteSoundSource != null) noteSoundSource.Stop();
+    }
+    public void PlayNoteHitSound(NoteKind kind, bool holdEnd = false)
+    {
+        if (!isActiveAndEnabled || Time.timeScale <= 0f || (clock != null && clock.MenuPaused) || isGameOver || isResultSaved) return;
+        AudioClip clip = tapHitSound;
+        if (kind == NoteKind.Hold)
+            clip = holdEnd && holdEndSound != null ? holdEndSound : holdHeadSound != null ? holdHeadSound : tapHitSound;
+        else if (kind == NoteKind.Mash)
+            clip = mashHitSound != null ? mashHitSound : tapHitSound;
+        if (clip == null || noteSoundVolume <= 0f) return;
+        if (noteSoundSource == null)
+        {
+            // Own source: music fades/flow pauses must not change judgment audio.
+            var soundObject = new GameObject("Note Judgment Audio");
+            soundObject.transform.SetParent(transform, false);
+            noteSoundSource = soundObject.AddComponent<AudioSource>();
+            noteSoundSource.playOnAwake = false;
+            noteSoundSource.loop = false;
+            noteSoundSource.spatialBlend = 0f;
+        }
+        noteSoundSource.PlayOneShot(clip, noteSoundVolume);
+    }
     void Start()
     {
         currentHp = maxHp;
@@ -73,9 +114,12 @@ public class JudgeManager : MonoBehaviour
                 KeyCode key = note.line == NoteLine.Up ? KeyCode.W : KeyCode.S;
                 note.holdTimer = Mathf.Max(0f, (float)(now - note.judgeTime));
                 var visual = note.GetComponent<HoldNoteVisual>();
-                if (note.holdEffect != null && visual != null && visual.startCircle != null && visual.endCircle != null)
-                    note.holdEffect.transform.position = visual.GetPoint(
-                        Mathf.Clamp01(note.holdTimer / Mathf.Max(0.001f, note.holdTime)));
+                float progress = Mathf.Clamp01(note.holdTimer / Mathf.Max(0.001f, note.holdTime));
+                if (visual != null)
+                {
+                    visual.UpdateHold(progress);
+                    if (note.holdEffect != null) note.holdEffect.transform.position = visual.GetPoint(progress);
+                }
                 if (now >= note.judgeTime + note.holdTime) Complete(note, note.startJudge);
                 else if (!Input.GetKey(key)) Miss(note);
             }
@@ -103,6 +147,7 @@ public class JudgeManager : MonoBehaviour
         if (activeMash != null)
         {
             activeMash.currentHitCount++;
+            PlayNoteHitSound(NoteKind.Mash);
             if (activeMash.currentHitCount >= activeMash.needHitCount) Complete(activeMash, "Perfect");
             return true;
         }
@@ -112,11 +157,18 @@ public class JudgeManager : MonoBehaviour
         if (note.kind == NoteKind.Hold)
         {
             note.isHolding = true;
+            note.holdTimer = 0f;
             note.startJudge = result;
+            PlayNoteHitSound(NoteKind.Hold);
+            var visual = note.GetComponent<HoldNoteVisual>();
+            if (visual != null) visual.StartHold();
             if (holdEffectPrefab != null)
             {
-                note.holdEffect = Instantiate(holdEffectPrefab, note.transform.position, Quaternion.identity);
-                ColorEffect(note.holdEffect, note.line);
+                note.holdEffect = Instantiate(holdEffectPrefab,
+                    visual != null ? visual.GetPoint(0f) : note.transform.position, Quaternion.identity);
+                // Keep the authored yellow colour and render above the note/terrain.
+                foreach (var renderer in note.holdEffect.GetComponentsInChildren<ParticleSystemRenderer>(true))
+                    renderer.sortingOrder = 60;
             }
         }
         else Complete(note, result);
@@ -140,9 +192,12 @@ public class JudgeManager : MonoBehaviour
         Vector3 pos = note.transform.position;
         var visual = note.GetComponent<HoldNoteVisual>();
         if (note.kind == NoteKind.Hold && visual != null && visual.endCircle != null) pos = visual.endCircle.position;
+        if (note.kind == NoteKind.Hold && visual != null) visual.CompleteHold();
         ApplyJudge(result);
         ShowJudgeText(result, pos);
         SpawnHitEffect(pos, note.line);
+        // Mash already plays on each press, including the completing press.
+        if (note.kind != NoteKind.Mash) PlayNoteHitSound(note.kind, holdEnd: true);
         Release(note);
     }
     void Miss(Note note)

@@ -26,7 +26,10 @@ public static class Stage1RhythmAcceptance
     static bool tailContinuous=true, tailDecreases=true;
     static double transitionPauseAt, transitionSongTime;
     static float lastTailVolume, frozenTailVolume, tailPeak, cavePeak;
-    static int frozenTailSample;
+    static int frozenTailSample, previousAudioSample;
+    static AudioSource originalSource;
+    static float originalVolume;
+    static double pauseSongTime;
     static readonly float[] audioSamples = new float[1024];
     static Stage1RhythmBuilder.Timing timing;
     static RhythmClock clock;
@@ -53,7 +56,7 @@ public static class Stage1RhythmAcceptance
     static bool tempoPlaybackValid=true;
     static int tempoSamples;
     static readonly HashSet<double> landingPreviews=new HashSet<double>();
-    static readonly float[] Shots = {5.65f,8.1f,26f,42f,53f,61.7f,78f,98f,101f};
+    static readonly float[] Shots = {5.65f,8.1f,26f,42f,54f,61.7f,78f,98f,101f};
 
     static Stage1RhythmAcceptance()
     {
@@ -90,7 +93,7 @@ public static class Stage1RhythmAcceptance
             ordered &= t>previous; previous=t;
             attacks &= timing.attackTimes.Any(a=>Mathf.Abs(a-t)<.001f);
             overlaps |= laneEnd[lane]+.16f>t; laneEnd[lane]=t+d;
-            boundaries &= t+d<timing.eventEntry || t>timing.caveResume+.6f && t+d<timing.duration;
+            boundaries &= t+d<timing.eventEntry || t>=timing.caveFirstNote-.001f && t+d<timing.duration;
         }
         Check(chart.Count==timing.regularNotes && ordered,"Regular chart count and strict chronological order: "+chart.Count);
         Check(attacks,"Every regular note starts on a measured imported-audio attack");
@@ -198,7 +201,8 @@ public static class Stage1RhythmAcceptance
         if(!cave && clock.TravelEnabled && mover.Path!=null && mover.Path.StartTime>1)
         {
             cave=true;CaptureNotes();
-            Check(Math.Abs(mover.Path.StartTime-timing.caveResume)<.08,"Cave resumes at authored phrase boundary: "+mover.Path.StartTime.ToString("F3"));
+            Check(Math.Abs(mover.Path.StartTime-timing.caveArrival)<.3,"Cave arrives after uninterrupted fall: "+mover.Path.StartTime.ToString("F3"));
+            Check(notes.Length>0 && notes[0].judgeTime-t>=1.0,"First cave note gives at least one second to prepare: "+(notes[0].judgeTime-t).ToString("F3"));
             var arrival=Camera.main.WorldToViewportPoint(mover.transform.position);
             Check(arrival.x>.27f && arrival.x<.4f && arrival.y>.2f && arrival.y<.45f,
                 "Camera settles at cave arrival before the first input: "+arrival);
@@ -288,51 +292,47 @@ public static class Stage1RhythmAcceptance
     }
     static void CheckTransitionAudio(double now)
     {
-        var tail=(AudioSource)TransitionTail.GetValue(caveManager);
-        if(clock.FlowPaused && !clock.TravelEnabled)
+        if(!transitionSeen && caveManager.IsTransitioning)
         {
-            if(!transitionSeen)
+            transitionSeen=true;transitionSongTime=clock.SongTime;
+            originalSource=clock.Source;originalVolume=clock.Source.volume;
+            previousAudioSample=clock.Source.timeSamples;lastTailVolume=originalVolume;
+            Check(caveManager.keepSongPlaying && !clock.FlowPaused,"Cave uses uninterrupted song playback");
+        }
+        if(!transitionSeen || audioComplete)return;
+        var source=clock.Source;
+        if(!clock.IsPaused && clock.HasStarted)
+        {
+            tailContinuous &= source==originalSource && source.isPlaying && source.timeSamples>=previousAudioSample
+                && Math.Abs(source.time-clock.SongTime)<.15 && !clock.FlowPaused;
+            previousAudioSample=source.timeSamples;
+            if(!clock.TravelEnabled)
             {
-                transitionSeen=true;transitionSongTime=clock.SongTime;
-                lastTailVolume=clock.Source.volume;
-                Check(!caveManager.useSecondMusic && caveManager.restartDelay==0,
-                    "Cave continues the same song without a post-arrival delay");
-            }
-            tailContinuous &= tail!=null && tail.volume>0 && (clock.MenuPaused || tail.isPlaying);
-            if(tail==null)return;
-            if(!clock.MenuPaused)
-            {
-                tailDecreases &= tail.volume<=lastTailVolume+.001f;
-                lastTailVolume=tail.volume;
-                tailPeak=Mathf.Max(tailPeak,AudioPeak(tail));
-            }
-            if(!transitionPaused && tail.volume<.8f)
-            {
-                Object.FindObjectOfType<PauseManager>().PauseGame();
-                transitionPaused=true;transitionPauseAt=now;
-                frozenTailSample=tail.timeSamples;frozenTailVolume=tail.volume;
-            }
-            else if(transitionPaused && !transitionResumed && now-transitionPauseAt>.7)
-            {
-                Check(!tail.isPlaying && Math.Abs(tail.timeSamples-frozenTailSample)<tail.clip.frequency*.1
-                    && Mathf.Abs(tail.volume-frozenTailVolume)<.001f && Math.Abs(clock.SongTime-transitionSongTime)<.001,
-                    "Pause during falling freezes audible tail, fade and cave beat");
-                Object.FindObjectOfType<PauseManager>().ResumeGame();transitionResumed=true;
+                tailDecreases &= source.volume<=lastTailVolume+.001f;
+                lastTailVolume=source.volume;tailPeak=Mathf.Max(tailPeak,AudioPeak(source));
             }
         }
-        else if(transitionSeen && !audioComplete && clock.TravelEnabled && clock.HasStarted && !clock.IsPaused)
+        if(!transitionPaused && !clock.TravelEnabled && source.volume<originalVolume*.8f)
         {
-            cavePeak=Mathf.Max(cavePeak,AudioPeak(clock.Source));
-            if(clock.SongTime<transitionSongTime+caveManager.crossFadeTime+.2)return;
+            Object.FindObjectOfType<PauseManager>().PauseGame();
+            transitionPaused=true;transitionPauseAt=now;pauseSongTime=clock.SongTime;
+            frozenTailSample=source.timeSamples;frozenTailVolume=source.volume;
+        }
+        else if(transitionPaused && !transitionResumed && now-transitionPauseAt>.7)
+        {
+            Check(!source.isPlaying && Math.Abs(source.timeSamples-frozenTailSample)<source.clip.frequency*.1
+                && Mathf.Abs(source.volume-frozenTailVolume)<.001f && Math.Abs(clock.SongTime-pauseSongTime)<.001,
+                "Explicit menu pause freezes song and fade during falling");
+            Object.FindObjectOfType<PauseManager>().ResumeGame();transitionResumed=true;previousAudioSample=0;
+        }
+        if(clock.TravelEnabled && !clock.IsPaused && !caveManager.IsTransitioning)
+        {
             audioComplete=true;
-            Check(tailContinuous && tailDecreases && tailPeak>.00001f,
-                "Falling music remains audible and fades continuously until arrival; continuous="+tailContinuous
-                +", decreasing="+tailDecreases+", peak="+tailPeak.ToString("F5"));
-            Check(clock.Source==caveManager.music1 && clock.Source.isPlaying && cavePeak>.00001f
-                && Mathf.Abs(clock.Source.volume-1f)<.001f && tail==null,
-                "Cave resumes the original source at full volume and releases the tail; peak="+cavePeak.ToString("F5"));
-            Check(Math.Abs(clock.Source.time-clock.SongTime)<.15,
-                "Resumed audio sample and note clock remain synchronized");
+            Check(tailContinuous && clock.SongTime>transitionSongTime+3.8,
+                "Original audio advances through entire fall without rewind or replacement");
+            Check(tailDecreases && tailPeak>.00001f && lastTailVolume>0 && Mathf.Abs(source.volume-originalVolume)<.03f,
+                "Audible music ducks and returns to original volume");
+            Check(TransitionTail.GetValue(caveManager)==null,"No duplicate transition source");
         }
     }
     static float AudioPeak(AudioSource source)

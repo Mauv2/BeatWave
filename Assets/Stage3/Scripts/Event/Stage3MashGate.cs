@@ -59,6 +59,7 @@ namespace BeatWave.Stage3
         {
             if(!Active||Resolved||game.Clock.IsPaused||Time.timeScale<=0)return false;
             Hits++;LastPressTime=(float)game.Clock.SongTime;
+            game.judge.PlayNoteHitSound(NoteKind.Mash);
             game.playerAnimation.PlayInteract();
             if(game.judge.hitEffectPrefab!=null)
             {

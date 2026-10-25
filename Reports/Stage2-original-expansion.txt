@@ -1,0 +1,1 @@
+Original layout restored without moving/scaling its terrain. Continuations=2; duration=170.064; samples=17008; jumps=39; holds converted to head/tail taps=1; notes=234. All route samples supported by original ground or a gap jump.

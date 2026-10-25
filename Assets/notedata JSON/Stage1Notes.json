@@ -322,31 +322,7 @@
   {
     "noteType": 1,
     "noteKind": 0,
-    "createTime": 50.242982,
-    "holdTime": 0.0,
-    "needHitCount": 0,
-    "mashLimitTime": 0.0
-  },
-  {
-    "noteType": 0,
-    "noteKind": 0,
-    "createTime": 50.684161,
-    "holdTime": 0.0,
-    "needHitCount": 0,
-    "mashLimitTime": 0.0
-  },
-  {
-    "noteType": 1,
-    "noteKind": 1,
-    "createTime": 51.107925,
-    "holdTime": 1.729887,
-    "needHitCount": 0,
-    "mashLimitTime": 0.0
-  },
-  {
-    "noteType": 1,
-    "noteKind": 0,
-    "createTime": 53.702755,
+    "createTime": 54.596723,
     "holdTime": 0.0,
     "needHitCount": 0,
     "mashLimitTime": 0.0

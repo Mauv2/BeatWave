@@ -1,0 +1,1866 @@
+[
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 1.980306,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 2.909104,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 3.826293,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 4.755091,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 5.672279,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 7.518265,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 8.447063,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 9.364252,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 10.29305,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 12.139036,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 13.067834,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 13.985023,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 14.902211,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 15.831009,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 16.759807,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 18.141395,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 20.44017,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 22.286156,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 23.214955,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 25.978129,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 2,
+    "createTime": 27.359717,
+    "holdTime": 0.0,
+    "needHitCount": 5,
+    "mashLimitTime": 2.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 29.681712,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 31.516088,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 31.968878,
+    "holdTime": 0.940408,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 33.362075,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 34.290873,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 35.208061,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 36.136859,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 37.054048,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 37.982846,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 38.900034,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 39.828832,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 40.74602,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 41.21042,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 42.592007,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 43.520805,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 44.449603,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 45.390011,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 46.28398,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 47.212778,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 47.677177,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 48.129966,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 48.594365,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 49.058764,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 49.523163,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 49.975952,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 50.440351,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 50.904751,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 51.35754,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 51.821939,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 52.286338,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 52.750737,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 53.215136,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 53.679535,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 54.132324,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 54.596723,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 55.061122,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 55.525522,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 55.978311,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 56.4311,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 56.907109,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 57.371508,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 57.824297,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 59.217494,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 59.670283,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 60.134683,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 60.599082,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 61.063481,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 61.51627,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 61.980669,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 62.445068,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 62.909467,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 63.362256,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 63.826655,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 64.291054,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 64.743844,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 65.208243,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 65.672642,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 66.137041,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 66.60144,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 67.065839,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 67.518628,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 67.983027,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 69.364615,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 70.281803,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 70.757812,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 71.210601,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 71.675,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 72.127789,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 72.592188,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 73.068197,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 73.520986,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 73.985385,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 74.449785,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 75.366973,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 75.831372,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 76.295771,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 76.74856,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 77.212959,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 77.677358,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 78.141757,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 78.594546,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 79.511735,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 80.440533,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 81.369331,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 82.286519,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 84.132506,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 85.061304,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 85.978492,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 86.90729,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 87.824478,
+    "holdTime": 0.917189,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 89.670465,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 90.599263,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 91.528061,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 92.445249,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 93.362438,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 94.291236,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 96.137222,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 97.983209,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 98.900397,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 99.829195,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 100.746383,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 101.675181,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 102.59237,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 103.068379,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 104.438356,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 105.367154,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 106.284342,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 107.213141,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 108.141939,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 108.594728,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 109.059127,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 109.523526,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 109.976315,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 110.440714,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 110.905113,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 111.369512,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 111.833912,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 112.286701,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 112.7511,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 113.215499,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 114.597086,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 115.084705,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 115.549104,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 115.967063,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 116.443073,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 117.83627,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 118.289059,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 118.753458,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 119.206247,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 119.670646,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 120.135045,
+    "holdTime": 0.928799,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 121.516633,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 121.981032,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 122.445431,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 122.89822,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 123.362619,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 123.827018,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 124.291417,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 124.744206,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 125.208605,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 125.673005,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 126.137404,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 126.590193,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 127.054592,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 127.518991,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 127.98339,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 128.447789,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 128.900578,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 130.282166,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 130.746565,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 131.210964,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 131.675363,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 132.139762,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 132.592551,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 133.05695,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 133.521349,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 133.985748,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 134.438537,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 134.902937,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 135.367336,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 135.831735,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 136.284524,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 136.748923,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 137.213322,
+    "holdTime": 0.917188,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 138.594909,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 139.070918,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 139.512098,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 139.976497,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 140.440896,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 140.905295,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 141.369694,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 142.286882,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 142.751281,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 143.21568,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 143.668469,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 144.132868,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 144.597268,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 145.514456,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 145.978855,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 146.454864,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 147.372052,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 147.824841,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 148.28924,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 148.742029,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 149.206429,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 149.670828,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 150.135227,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 150.599626,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 151.064025,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 151.516814,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 151.981213,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 152.445612,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 152.910011,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 153.3628,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 153.8272,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 154.291599,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 154.744388,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 155.208787,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 155.673186,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 156.137585,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 156.590374,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 1,
+    "createTime": 157.054773,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 158.436361,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 158.90076,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 159.365159,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 159.829558,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 160.746746,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 0,
+    "createTime": 161.675544,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 162.592732,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 1,
+    "noteKind": 1,
+    "createTime": 163.057132,
+    "holdTime": 0.928798,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 164.473549,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  },
+  {
+    "noteType": 0,
+    "noteKind": 0,
+    "createTime": 165.367517,
+    "holdTime": 0.0,
+    "needHitCount": 0,
+    "mashLimitTime": 0.0
+  }
+]

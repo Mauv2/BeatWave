@@ -53,8 +53,8 @@
     }
   ],
   "analysisPulseBpm": 138.5,
-  "regularNotes": 105,
-  "holds": 8,
+  "regularNotes": 102,
+  "holds": 7,
   "attackTimes": [
     0.343299,
     0.917993,
@@ -281,5 +281,7 @@
     98.331508,
     98.697222,
     99.266111
-  ]
+  ],
+  "caveArrival": 53.178039,
+  "caveFirstNote": 54.596723
 }

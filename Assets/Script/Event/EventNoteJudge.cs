@@ -64,6 +64,7 @@ public class EventNoteJudge : MonoBehaviour
                     isHolding = true;
                     holdKey = up ? KeyCode.W : KeyCode.S;
                     startJudge = grade;
+                    if (judge != null) judge.PlayNoteHitSound(NoteKind.Hold);
                 }
                 else Finish(grade);
                 return;
@@ -76,6 +77,7 @@ public class EventNoteJudge : MonoBehaviour
         if (currentNote == null) return;
         Vector3 pos = currentNote.transform.position;
         if (judge != null) judge.ReportEventJudge(grade, pos);
+        if (grade != "Miss" && judge != null) judge.PlayNoteHitSound(currentNote.kind, holdEnd: true);
         if (grade != "Miss" && hitEffectPrefab != null)
             Destroy(Instantiate(hitEffectPrefab, pos, Quaternion.identity), 1f);
         currentNote.isJudged = true;

@@ -26,6 +26,7 @@ public class Stage1CameraDirector : MonoBehaviour
     RhythmClock clock;
     RhythmPath path;
     FallTransitionEffect fall;
+    CaveEventManager cave;
     float depth, cachedAspect;
     Vector3 velocity, previousPlayer, eventCenter;
     float eventSize;
@@ -36,6 +37,7 @@ public class Stage1CameraDirector : MonoBehaviour
         view=GetComponent<Camera>();depth=transform.position.z;
         transform.SetParent(null,true);clock=RhythmClock.GetOrCreate();
         fall=FindObjectOfType<FallTransitionEffect>();
+        cave=FindObjectOfType<CaveEventManager>();
     }
 
     void LateUpdate()
@@ -51,7 +53,7 @@ public class Stage1CameraDirector : MonoBehaviour
         Bounds safe=PlayerBounds(position);
         CurrentShot=Shot.Running;
 
-        if(clock.FlowPaused && !clock.TravelEnabled)
+        if(!clock.TravelEnabled && (clock.FlowPaused || (cave!=null && cave.IsTransitioning)))
         {
             CurrentShot=Shot.Fall;
             // Settle on the cave teleport behind black, before the reveal.

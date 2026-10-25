@@ -126379,7 +126379,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e3495f7144426854c854d8c137ee1db7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.58
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -126478,7 +126478,7 @@ MonoBehaviour:
   judgePointUp: {fileID: 2000446773}
   judgePointDown: {fileID: 1672892503}
   judgeTextPrefab: {fileID: 8550629993828623691, guid: dacc8d1037023d04b819ccf0f7568d80, type: 3}
-  holdEffectPrefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
+  holdEffectPrefab: {fileID: 7627304123461817746, guid: f514a22199a6c5740bdd8dae91275e40, type: 3}
   hitEffectPrefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   score: 0
   combo: 0
@@ -126498,6 +126498,11 @@ MonoBehaviour:
   greatWindow: 0.08
   goodWindow: 0.12
   inputOffsetSeconds: 0
+  tapHitSound: {fileID: 8300000, guid: e3e030756db236744b9318a6c5cf0c7b, type: 3}
+  holdHeadSound: {fileID: 8300000, guid: e3e030756db236744b9318a6c5cf0c7b, type: 3}
+  holdEndSound: {fileID: 8300000, guid: e3e030756db236744b9318a6c5cf0c7b, type: 3}
+  mashHitSound: {fileID: 8300000, guid: e3e030756db236744b9318a6c5cf0c7b, type: 3}
+  noteSoundVolume: 0.7
 --- !u!82 &1298131816
 AudioSource:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public static class Stage1RhythmBuilder
 {
     [System.Serializable] public class Timing
     {
-        public float duration, eventEntry, caveResume;
+        public float duration, eventEntry, caveResume, caveArrival, caveFirstNote;
         public int regularNotes, holds;
         public EventNoteData[] eventNotes;
         public float[] attackTimes;
@@ -26,7 +26,10 @@ public static class Stage1RhythmBuilder
         Undo.RecordObject(cave, "Connect Stage1 cave music continuation");
         cave.music1 = GameObject.Find("Music1").GetComponent<AudioSource>();
         cave.useSecondMusic = false;
-        // Resume the preserved cave beat as soon as the cave is revealed.
+        cave.keepSongPlaying = true;
+        cave.continuousTravelTime = ReadTiming().caveResume;
+        cave.transitionVolumeRatio = .25f;
+        cave.crossFadeTime = .65f;
         cave.restartDelay = 0f;
         EditorUtility.SetDirty(cave);
         EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
@@ -71,7 +74,7 @@ public static class Stage1RhythmBuilder
         DescribePath(report, "surface", RhythmPath.Build(mover, body, main.groundLayer, 0, timing.eventEntry), timing.eventEntry);
         mover.transform.position = main.caveStartPoint.position;
         Physics2D.SyncTransforms();
-        var cavePath = RhythmPath.Build(mover, body, main.groundLayer, timing.caveResume, music.clip.length - timing.caveResume);
+        var cavePath = RhythmPath.Build(mover, body, main.groundLayer, timing.caveArrival, music.clip.length - timing.caveArrival);
         DescribePath(report, "cave", cavePath, music.clip.length);
         mover.transform.position = old;
         Physics2D.SyncTransforms();

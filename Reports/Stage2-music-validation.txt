@@ -1,0 +1,12 @@
+PASS Dedicated Stage2 chart: 233 notes
+PASS Legacy shared placers disabled only in Stage2 scene
+PASS Full imported song/route duration: 170.064s
+PASS 16 Hold notes and one Mash preserved in the full chart
+PASS Ordered notes, no same-lane overlap, Hold notes avoid jump gaps
+PASS Continuous ground under every non-airborne sample; max mismatch=0.00046
+PASS Music-driven speed range=2.21..8.22
+PASS 24 beat-aligned jumps across eight music sections
+PASS Stage2 uses its own animation controller
+PASS Music-aware background framing and independent camera connected
+PASS Unused prototype event trigger is inactive, including physics callbacks
+PASS Existing judgment sound assignments retained

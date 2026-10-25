@@ -16,6 +16,11 @@ public class CaveEventManager : MonoBehaviour
     public JudgeManager judgeManager;
     public float stopDelay = 0.5f, restartDelay = 0.5f;
     public NoteMapPlacer noteMapPlacer;
+    [Header("Continuous song transition")]
+    public bool keepSongPlaying;
+    public float continuousTravelTime;
+    [Range(0.01f, 1f)] public float transitionVolumeRatio = 0.22f;
+    public bool IsTransitioning => isPlayingEvent;
     bool isPlayingEvent;
     AudioSource transitionTail, fadedSource;
     float restoreVolume;
@@ -40,13 +45,19 @@ public class CaveEventManager : MonoBehaviour
         music1 = clock.Source != null ? clock.Source : music1;
         float originalVolume = music1 != null ? music1.volume : normalVolume;
 
-        // Preserve the cave's first beat while a separate audible tail fades through the fall.
-        // Pausing the only AudioSource here would make a volume tween inaudible.
-        CreateTransitionTail(music1);
-        clock.SetFlowPaused(true);
+        fadedSource = music1;
+        restoreVolume = originalVolume;
+        // Legacy song switches retain their tail; continuous playback uses the original source.
+        if (!keepSongPlaying)
+        {
+            CreateTransitionTail(music1);
+            clock.SetFlowPaused(true);
+        }
         float fadeOutTime = stopDelay + restartDelay
             + (fallTransition != null && caveStartPoint != null ? fallTransition.Duration : 0f);
-        tailFade = StartCoroutine(FadeTransitionTail(clock, Mathf.Max(0.01f, fadeOutTime)));
+        var fading = keepSongPlaying ? music1 : transitionTail;
+        tailFade = StartCoroutine(FadeCaveMusic(clock, fading,
+            originalVolume * (keepSongPlaying ? transitionVolumeRatio : .08f), fadeOutTime));
 
         if (useSecondMusic && music2 == null)
         {
@@ -57,11 +68,13 @@ public class CaveEventManager : MonoBehaviour
         if (fallTransition != null) yield return fallTransition.PlayFallTransition(caveStartPoint);
         else if (player != null && caveStartPoint != null) player.position = caveStartPoint.position;
         if (restartDelay > 0f) yield return new WaitForSeconds(restartDelay);
+        if (keepSongPlaying)
+            while (clock.IsPaused || clock.SongTime < continuousTravelTime) yield return null;
         if (tailFade != null) { StopCoroutine(tailFade); tailFade = null; }
         if (playerRb != null) playerRb.velocity = Vector2.zero;
 
         float chartStart = (float)clock.SongTime;
-        bool switchSong = useSecondMusic && music2 != null && caveMusic != null;
+        bool switchSong = !keepSongPlaying && useSecondMusic && music2 != null && caveMusic != null;
         if (switchSong)
         {
             music2.Stop();
@@ -75,13 +88,14 @@ public class CaveEventManager : MonoBehaviour
         }
         fadedSource = switchSong ? music2 : music1;
         restoreVolume = switchSong ? normalVolume : originalVolume;
-        if (fadedSource != null) fadedSource.volume = 0f;
+        if (!keepSongPlaying && fadedSource != null) fadedSource.volume = 0f;
         if (switchSong) clock.BeginSong(music2);
-        else clock.SetFlowPaused(false);
+        else if (!keepSongPlaying) clock.SetFlowPaused(false);
         clock.BeginTravel(playerMove);
         if (judgeManager != null) judgeManager.enabled = true;
         if (playerAnim != null) playerAnim.SetRunning(true);
-        yield return FadeCaveMusic(clock);
+        yield return FadeCaveMusic(clock, fadedSource, restoreVolume, crossFadeTime, transitionTail);
+        fadedSource = null;
         StopTransitionTail();
         isPlayingEvent = false;
     }
@@ -122,41 +136,27 @@ public class CaveEventManager : MonoBehaviour
         tailMenuPaused = paused;
     }
 
-    IEnumerator FadeTransitionTail(RhythmClock clock, float duration)
+    // One volume tween handles fade-out, recovery and legacy crossfade.
+    IEnumerator FadeCaveMusic(RhythmClock clock, AudioSource source, float target,
+        float duration, AudioSource outgoing = null)
     {
-        float volume = transitionTail != null ? transitionTail.volume : 0f;
+        if (source == null) yield break;
+        float initial = source.volume;
+        float outgoingVolume = outgoing != null ? outgoing.volume : 0f;
         float elapsed = 0f;
-        while (transitionTail != null && elapsed < duration)
+        while (source != null && elapsed < duration)
         {
-            bool paused = clock.MenuPaused || Time.timeScale <= 0f;
-            if (!paused)
+            if (!clock.MenuPaused && Time.timeScale > 0f)
             {
                 elapsed += Time.deltaTime;
-                // Keep a quiet bridge until the scheduled cave audio is audible.
-                transitionTail.volume = Mathf.Lerp(volume, volume * 0.08f,
-                    Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                float blend = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+                source.volume = Mathf.Lerp(initial, target, blend);
+                if (outgoing != null) outgoing.volume = Mathf.Lerp(outgoingVolume, 0f, blend);
             }
             yield return null;
         }
-    }
-
-    IEnumerator FadeCaveMusic(RhythmClock clock)
-    {
-        float elapsed = 0f;
-        float tailVolume = transitionTail != null ? transitionTail.volume : 0f;
-        while (fadedSource != null && elapsed < crossFadeTime)
-        {
-            if (!clock.IsPaused && clock.HasStarted)
-            {
-                elapsed += Time.deltaTime;
-                float blend = Mathf.SmoothStep(0f, 1f, elapsed / crossFadeTime);
-                fadedSource.volume = Mathf.Lerp(0f, restoreVolume, blend);
-                if (transitionTail != null) transitionTail.volume = Mathf.Lerp(tailVolume, 0f, blend);
-            }
-            yield return null;
-        }
-        if (fadedSource != null) fadedSource.volume = restoreVolume;
-        fadedSource = null;
+        if (source != null) source.volume = target;
+        if (outgoing != null) outgoing.volume = 0f;
     }
 
     void StopTransitionTail()

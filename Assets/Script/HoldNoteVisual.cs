@@ -44,4 +44,36 @@ public class HoldNoteVisual : MonoBehaviour
         return startCircle != null && endCircle != null
             ? Vector3.Lerp(startCircle.position, endCircle.position, progress) : transform.position;
     }
+
+    public void StartHold()
+    {
+        SetVisible(startCircle, false);
+        UpdateHold(0f);
+    }
+
+    public void UpdateHold(float progress)
+    {
+        if (!hasEndpoints || holdBody == null) return;
+        Vector3 current = Vector3.Lerp(localStart, localEnd, Mathf.Clamp01(progress));
+        holdBody.localPosition = (current + localEnd) * .5f;
+        var sprite = holdBody.GetComponent<SpriteRenderer>();
+        if (sprite == null) return;
+        float remaining = Vector3.Distance(current, localEnd);
+        sprite.size = new Vector2(remaining, bodyHeight);
+        sprite.enabled = remaining > .01f;
+    }
+
+    public void CompleteHold()
+    {
+        SetVisible(startCircle, false);
+        SetVisible(holdBody, false);
+        SetVisible(endCircle, false);
+    }
+
+    static void SetVisible(Transform part, bool visible)
+    {
+        if (part == null) return;
+        foreach (var renderer in part.GetComponentsInChildren<SpriteRenderer>(true))
+            renderer.enabled = visible;
+    }
 }

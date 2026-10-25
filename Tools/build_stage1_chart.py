@@ -6,6 +6,32 @@ The music has swing and expressive timing; a single rigid BPM grid is not enough
 """
 import json
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+
+def apply_cave_entry(notes, config):
+    # Keep the full fall presentation and give the player time to read the cave.
+    arrival = config['caveResume'] + 3.8
+    first = next(t for t in config['attackTimes'] if t >= arrival + 1.2)
+    notes = [n for n in notes if not config['caveResume'] < n['createTime'] <= first]
+    notes.append(dict(noteType=1, noteKind=0, createTime=first,
+                      holdTime=0., needHitCount=0, mashLimitTime=0.))
+    notes.sort(key=lambda n: n['createTime'])
+    config.update(caveArrival=round(arrival, 6), caveFirstNote=first,
+                  regularNotes=len(notes), holds=sum(n['noteKind']==1 for n in notes))
+    return notes
+
+# Reuse previously measured attacks without reanalysing or changing the rest of the chart.
+if '--cave-entry-only' in sys.argv:
+    folder = ROOT / 'Assets/notedata JSON'
+    config = json.loads((folder/'Stage1Timing.json').read_text())
+    notes = apply_cave_entry(json.loads((folder/'Stage1Notes.json').read_text()), config)
+    (folder/'Stage1Notes.json').write_text(json.dumps(notes, indent=2)+'\n', encoding='utf-8')
+    (folder/'Stage1Timing.json').write_text(json.dumps(config, indent=2)+'\n', encoding='utf-8')
+    print(f"First cave input {config['caveFirstNote']}; {len(notes)} notes; {config['holds']} holds")
+    sys.exit(0)
+
 import numpy as np
 from scipy import signal
 
@@ -82,6 +108,7 @@ config=dict(duration=len(audio)/rate,eventEntry=attack(38.633),
             judgeTime=t,noteKind=0,holdTime=0.) for t in events],
             analysisPulseBpm=138.5,regularNotes=len(notes),holds=sum(n['noteKind']==1 for n in notes),
             attackTimes=[b['time'] for b in beats])
+notes = apply_cave_entry(notes, config)
 output=ROOT/'Assets/notedata JSON';output.mkdir(exist_ok=True)
 (output/'Stage1Notes.json').write_text(json.dumps(notes,indent=2)+'\n',encoding='utf-8')
 (output/'Stage1Timing.json').write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
