@@ -45,7 +45,7 @@ public class GameSelectManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             currentIndex--;
 
@@ -57,7 +57,7 @@ public class GameSelectManager : MonoBehaviour
             RotateVinyl();
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             currentIndex++;
 

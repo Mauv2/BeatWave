@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929015a25ce37b449a1d2d61f44fbd5d, type: 3}
   m_Name: LastWishMusic
   m_EditorClassIdentifier: 
-  musicName: Last Wish / Stage 3
+  musicName: "\uB9C8\uC9C0\uB9C9 \uC18C\uC6D0"
   previewClip: {fileID: 8300000, guid: e3495f7144426854c854d8c137ee1db7, type: 3}
   gameClip: {fileID: 8300000, guid: e3495f7144426854c854d8c137ee1db7, type: 3}
   sceneName: Stage3

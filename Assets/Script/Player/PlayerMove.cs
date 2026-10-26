@@ -22,6 +22,37 @@ public class PlayerMove : MonoBehaviour
     float originalGravity;
     RhythmClock rhythmClock;
     int nextJump;
+    public bool IsWalkingOff { get; private set; }
+    float endingSpeed, endingFeetOffset, endingHalfWidth;
+
+    public void BeginEndingWalk(float speed)
+    {
+        if (IsWalkingOff) return;
+        IsWalkingOff = true;
+        endingSpeed = Mathf.Max(.1f, speed);
+        rhythmClock = RhythmClock.GetOrCreate();
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        var collider = GetComponent<Collider2D>();
+        endingFeetOffset = collider != null ? transform.position.y - collider.bounds.min.y : 0;
+        endingHalfWidth = collider != null ? collider.bounds.extents.x : .5f;
+        var tempo = GetComponent<Stage1TempoMotion>();
+        if (tempo != null) tempo.enabled = false;
+        var animation = GetComponentInChildren<PlayerAnimController>();
+        if (animation != null) { animation.SetFlying(false); animation.SetRunning(true); }
+        if (facingVisual != null)
+        {
+            var scale = facingVisual.localScale;
+            scale.x = Mathf.Abs(scale.x);
+            facingVisual.localScale = scale;
+        }
+    }
+
+    public bool HasExitedScreen(Camera camera, float margin)
+    {
+        return IsWalkingOff && camera.WorldToViewportPoint(
+            transform.position - Vector3.right * (endingHalfWidth + Mathf.Max(0, margin))).x > 1f;
+    }
     public RhythmPath Path { get; private set; }
     public bool HasRhythmPath => Path != null;
     public float OriginalGravity => rb != null ? originalGravity : GetComponent<Rigidbody2D>().gravityScale;
@@ -42,6 +73,15 @@ public class PlayerMove : MonoBehaviour
     }
     void Update()
     {
+        if (IsWalkingOff)
+        {
+            if (rhythmClock.MenuPaused || Time.timeScale <= 0) return;
+            var next = transform.position + Vector3.right * endingSpeed * Time.deltaTime;
+            foreach (var hit in Physics2D.RaycastAll(new Vector2(next.x, next.y - endingFeetOffset + .5f), Vector2.down, 1.5f, groundLayer))
+                if (!hit.collider.isTrigger && hit.rigidbody != rb) { next.y = hit.point.y + endingFeetOffset; break; }
+            transform.position = next;
+            return;
+        }
         if (Path == null || rhythmClock == null || isPaused || !rhythmClock.TravelEnabled ||
             rhythmClock.IsPaused || !rhythmClock.HasStarted) return;
         // Render/input and physics use the same DSP time, including the vertical jump.
@@ -69,7 +109,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Path != null) return;
+        if (IsWalkingOff || Path != null) return;
         var clock = FindObjectOfType<RhythmClock>();
         if (clock != null)
         {
@@ -104,6 +144,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Jump(float power)
     {
+        if (IsWalkingOff) return;
         // 공중 점프 방지
         if (!IsGrounded())
             return;
@@ -123,7 +164,7 @@ public class PlayerMove : MonoBehaviour
 
     public void TriggerJump(float power)
     {
-        if (Path != null) return;
+        if (IsWalkingOff || Path != null) return;
         rb.velocity = new Vector2(rb.velocity.x, 0f);
 
         rb.AddForce(

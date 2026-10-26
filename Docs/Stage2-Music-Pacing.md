@@ -1,5 +1,7 @@
 # Stage2: full-song pacing
 
+> Current layout (2026-10-26): see `Stage2-Moonlit-Causeway.md`. The original 234-note chart and horizontal speed are retained; a Stage2-specific castle causeway replaces the repeated original layout with 21 two-beat bridge jumps. Historical revisions below describe earlier layouts.
+
 Stage2 now uses the full 170.064-second Unity-imported recording of `별빛 술래잡기 (off vocal).mp3`.
 The measured pulse is approximately 129.985 BPM. The recording's pitch and playback rate are unchanged.
 

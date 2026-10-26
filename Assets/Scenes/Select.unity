@@ -1851,7 +1851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Last Wish - Stage 3
+  m_Text: "\uB9C8\uC9C0\uB9C9 \uC18C\uC6D0"
 --- !u!222 &1130900958
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -31,6 +31,20 @@ public class Stage1CameraDirector : MonoBehaviour
     Vector3 velocity, previousPlayer, eventCenter;
     float eventSize;
     bool initialized, eventFramed, caveArrived;
+    bool endingFrozen;
+    Vector3 endingPosition;
+    Quaternion endingRotation;
+    float endingSize;
+
+    public void FreezeForEnding()
+    {
+        endingFrozen = true;
+        CurrentShot = Shot.Outro;
+        transform.SetParent(null, true);
+        endingPosition = transform.position;
+        endingRotation = transform.rotation;
+        endingSize = view.orthographicSize;
+    }
 
     void Awake()
     {
@@ -42,6 +56,12 @@ public class Stage1CameraDirector : MonoBehaviour
 
     void LateUpdate()
     {
+        if (endingFrozen)
+        {
+            transform.SetPositionAndRotation(endingPosition, endingRotation);
+            view.orthographicSize = endingSize;
+            return;
+        }
         if(player==null || view==null || clock.MenuPaused || (clock.FlowPaused && clock.TravelEnabled))return;
         float aspect=Mathf.Max(.5f,view.aspect);
         if(path!=player.Path || Mathf.Abs(aspect-cachedAspect)>.01f) BindPath(aspect);

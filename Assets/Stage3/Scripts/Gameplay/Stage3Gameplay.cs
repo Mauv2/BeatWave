@@ -101,6 +101,8 @@ namespace BeatWave.Stage3
             {
                 var note=visibleNotes[i];if(note==null)continue;
                 bool visible=note.judgeTime-time<3.5 && note.judgeTime+note.holdTime-time>-.2;
+                // Held notes own their renderer state (hidden head and shrinking body).
+                if (visible && note.isHolding) continue;
                 foreach(var renderer in noteRenderers[i])if(renderer!=null)renderer.enabled=visible;
             }
             bool gateActive=transitions!=null && transitions.ActiveGate!=null;

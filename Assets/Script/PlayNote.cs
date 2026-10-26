@@ -3,6 +3,12 @@ using UnityEngine;
 [DefaultExecutionOrder(-200)]
 public class PlayNote : MonoBehaviour
 {
+    [Header("Song ending")]
+    public bool walkOffAfterSong;
+    [Min(.1f)] public float endingWalkSpeed = 3.5f;
+    [Min(0f)] public float endingExitMargin = .15f;
+    public UnityEngine.Events.UnityEvent onWalkOffStarted = new UnityEngine.Events.UnityEvent();
+    Camera endingCamera;
     public JudgeManager judgeManager;
     public PlayerMove playerMover;
     public AudioSource musicSource;
@@ -36,9 +42,27 @@ public class PlayNote : MonoBehaviour
     public void ReadNoteJsonLoad() { }
     void Update()
     {
+        if (endingCamera != null)
+        {
+            if (clock.MenuPaused || Time.timeScale <= 0) return;
+            if (playerMover.HasExitedScreen(endingCamera, endingExitMargin))
+            {
+                endingCamera = null;
+                judgeManager.SaveResultAndGoToResult();
+            }
+            return;
+        }
         if (!resultCalled && clock.Finished && clock.TravelEnabled && judgeManager != null && !judgeManager.HasPendingNotes)
         {
             resultCalled = true;
+            if (walkOffAfterSong && playerMover != null && playerMover.isActiveAndEnabled && Camera.main != null)
+            {
+                endingCamera = Camera.main;
+                clock.SuspendTravel();
+                playerMover.BeginEndingWalk(endingWalkSpeed);
+                onWalkOffStarted.Invoke();
+                return;
+            }
             judgeManager.SaveResultAndGoToResult();
         }
     }

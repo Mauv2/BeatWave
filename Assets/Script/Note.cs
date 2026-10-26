@@ -17,6 +17,40 @@ public enum NoteKind
 
 public class Note : MonoBehaviour
 {
+    [Header("Regular W / S appearance")]
+    public Sprite upSprite, downSprite;
+    public Material laneMaterial;
+    public Color upHoldColor = new Color(1f, .4f, .85f, .85f);
+    public Color downHoldColor = new Color(.35f, .7f, 1f, .85f);
+
+    // Spawners assign line/kind/event status after Instantiate, before Start.
+    void Start() { ApplyLaneAppearance(); }
+
+    public void ApplyLaneAppearance()
+    {
+        if (isEventNote || kind == NoteKind.Mash) return;
+        var image = line == NoteLine.Up ? upSprite : downSprite;
+        if (image == null) return;
+        var hold = GetComponent<HoldNoteVisual>();
+        if (kind == NoteKind.Hold && hold != null)
+        {
+            SetImage(hold.startCircle, image);
+            var body = hold.holdBody != null ? hold.holdBody.GetComponent<SpriteRenderer>() : null;
+            if (body != null) body.color = line == NoteLine.Up ? upHoldColor : downHoldColor;
+        }
+        else SetImage(transform, image);
+    }
+
+    void SetImage(Transform target, Sprite image)
+    {
+        if (target == null) return;
+        var renderer = target.GetComponent<SpriteRenderer>();
+        if (renderer == null) return;
+        renderer.sprite = image;
+        renderer.color = Color.white;
+        if (laneMaterial != null) renderer.sharedMaterial = laneMaterial;
+    }
+
     public bool hasTiming { get; private set; }
     public double judgeTime { get; private set; }
     public RhythmClock clock { get; private set; }

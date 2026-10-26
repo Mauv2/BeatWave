@@ -14,7 +14,7 @@ using Object = UnityEngine.Object;
 public static class Stage2MusicValidation
 {
     const string Key = "BeatWave.Stage2.MusicValidation";
-    const string Report = "Reports/Stage2-music-validation.txt";
+    const string Report = "Reports/Stage2-causeway-validation.txt";
     static readonly List<string> report = new List<string>();
     static readonly MethodInfo Complete = typeof(JudgeManager).GetMethod("Complete", BindingFlags.Instance | BindingFlags.NonPublic);
     static readonly FieldInfo ActiveMash = typeof(JudgeManager).GetField("activeMash", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -24,6 +24,7 @@ public static class Stage2MusicValidation
     static JudgeManager judge;
     static Note[] notes;
     static int hits, holds, shot, expected, jumps, previews, visiblePreviews, delayedEditorInputs;
+    static int expectedHolds, expectedJumps;
     static float maxNoteError, maxHoldError, lastTime;
     static double deadline, pauseUntil, frozenTime, nextMashPress;
     static Vector3 frozenPosition;
@@ -57,10 +58,17 @@ public static class Stage2MusicValidation
         report.Clear();
         var p = Object.FindObjectOfType<Stage2NoteMapPlacer>(); var route = p.route;
         var chart = p.ReadChart(); var profile = route.Data;
-        Check(p != null && chart.Length == 233, "Dedicated Stage2 chart: 233 notes");
+        var authoredChart = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Stage2/Data/Stage2OriginalNotes.json");
+        Check(p != null && p.chartFile == authoredChart && chart.Length == 234, "Original Stage2 chart binding retained: 234 notes");
+        var authoredRoute = JsonUtility.FromJson<Stage2MusicRoute.Profile>(File.ReadAllText("Assets/Stage2/Data/Stage2OriginalRoute.json"));
+        Check(profile.frames.Length == authoredRoute.frames.Length && profile.frames.Select((f,i) =>
+            f.time == authoredRoute.frames[i].time && f.x == authoredRoute.frames[i].x &&
+            f.speed == authoredRoute.frames[i].speed && f.bpm == authoredRoute.frames[i].bpm &&
+            f.energy == authoredRoute.frames[i].energy).All(equal => equal),
+            "Every original music-time, horizontal position, speed, BPM and energy sample preserved");
         Check(Object.FindObjectsOfType<NoteMapPlacer>().All(n => !n.enabled), "Legacy shared placers disabled only in Stage2 scene");
         Check(Mathf.Abs(p.songClip.length - profile.duration) < .001f, "Full imported song/route duration: " + p.songClip.length.ToString("F3") + "s");
-        Check(chart.Count(n => n.noteKind == 1) == 16 && chart.Count(n => n.noteKind == 2) == 1, "16 Hold notes and one Mash preserved in the full chart");
+        Check(chart.Count(n => n.noteKind == 1) == 15 && chart.Count(n => n.noteKind == 2) == 1, "Original 15 Holds and one Mash preserved");
         var laneEnd = new[] { -1f, -1f }; float previous = -1; bool safe = true;
         foreach (var note in chart)
         {
@@ -81,7 +89,13 @@ public static class Stage2MusicValidation
         }
         Check(error < .002f, "Continuous ground under every non-airborne sample; max mismatch=" + error.ToString("F5"));
         Check(minSpeed >= 2.19f && maxSpeed <= 8.22f && maxSpeed > 8f, "Music-driven speed range=" + minSpeed.ToString("F2") + ".." + maxSpeed.ToString("F2"));
-        Check(profile.jumps.Length == 24 && profile.sections.Length == 8, "24 beat-aligned jumps across eight music sections");
+        Check(profile.jumps.Length == 21 && profile.sections.Length == 8, "21 bridge gaps across eight Stage2 music sections");
+        double phase = -profile.frames[0].beat * 60 / profile.referenceBpm;
+        Check(profile.jumps.All(j => Math.Abs((j.start-phase)*profile.referenceBpm/60-Math.Round((j.start-phase)*profile.referenceBpm/60)) < .001 &&
+            Math.Abs((j.end-j.start)*profile.referenceBpm/60-2) < .001), "Every bridge jump starts on the measured beat and spans two beats");
+        Check(route.presentation != null && route.presentation.backgrounds.Length == 4 &&
+            route.presentation.backdropTiles.Length == 6 && route.presentation.gate != null,
+            "Stage2-only backdrops, crossfade and nave gate are connected");
         Check(AssetDatabase.GetAssetPath(route.animator.runtimeAnimatorController) == "Assets/Stage2/Stage2Tempo.controller", "Stage2 uses its own animation controller");
         Check(!route.backdrop.enabled && route.view.transform.parent == null, "Music-aware background framing and independent camera connected");
         Check(Object.FindObjectsOfType<EventTrigger>().Length == 0, "Unused prototype event trigger is inactive, including physics callbacks");
@@ -116,7 +130,8 @@ public static class Stage2MusicValidation
             started = true; Application.runInBackground = true; deadline = now + 200;
             if (!reloadLocked) { reloadLocked = true; EditorApplication.LockReloadAssemblies(); }
             judge = placer.judge; judge.enabled = false; notes = placer.Notes.ToArray(); expected = notes.Length;
-            Check(expected == 233 && placer.player.HasRhythmPath, "Runtime spawned all notes and bound the shared song-time path");
+            expectedHolds=placer.ReadChart().Count(n=>n.noteKind==1);expectedJumps=placer.route.Data.jumps.Length;
+            Check(expected == 234 && placer.player.HasRhythmPath, "Runtime spawned all 234 authored notes and bound the shared song-time path");
             foreach (var note in notes)
             {
                 maxNoteError = Mathf.Max(maxNoteError, Vector3.Distance(note.transform.position, placer.PositionAtTime(note.judgeTime, note.line)));
@@ -127,13 +142,13 @@ public static class Stage2MusicValidation
             }
             Check(maxNoteError < .001f, "All note heads align with player path; error=" + maxNoteError.ToString("F5"));
             Check(maxHoldError < .15f, "Hold body follows the moving marker; max deviation=" + maxHoldError.ToString("F4"));
-            Directory.CreateDirectory("Docs/Preview/Stage2-Music");
+            Directory.CreateDirectory("Docs/Preview/Stage2-Causeway");
         }
         if (SceneManager.GetActiveScene().name == "ResultScene")
         {
             var result = GameResultManager.Instance.resultData;
             Check(result.perfect + result.great + result.good == expected && result.miss == 0, "Full playback judged all " + expected + " notes, Miss=0");
-            Check(holds == 16 && jumps == 24, "All 16 Hold ends and 24 automatic jumps completed");
+            Check(holds == expectedHolds && jumps == expectedJumps, "All "+expectedHolds+" Hold ends and "+expectedJumps+" bridge jumps completed");
             Check(lastTime >= 169.9f, "Result opens only after full music playback (last sample " + lastTime.ToString("F3") + "s)");
             Check(resumed, "Menu pause/resume verified during playback");
             report.Add("INFO delayed editor callbacks retimed for synthetic input only: " + delayedEditorInputs);
@@ -188,7 +203,7 @@ public static class Stage2MusicValidation
         }
         if (shot < Shots.Length && t >= Shots[shot])
         {
-            ScreenCapture.CaptureScreenshot("Docs/Preview/Stage2-Music/" + (++shot).ToString("00") + ".png");
+            ScreenCapture.CaptureScreenshot("Docs/Preview/Stage2-Causeway/" + (++shot).ToString("00") + ".png");
             report.Add("INFO playback " + t.ToString("F2") + "s; speed=" + placer.route.CurrentSpeed.ToString("F2") + "; judged=" + hits);
             File.WriteAllLines(Report, report);
         }

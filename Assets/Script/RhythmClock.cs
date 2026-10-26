@@ -65,6 +65,11 @@ public class RhythmClock : MonoBehaviour
             timeOrigin = pausedTime;
             dspStart = AudioSettings.dspTime + 0.05d;
             Source.Stop();
+            if (Source.clip != null && pausedTime >= Source.clip.length)
+            {
+                if (menuChanged) MenuPauseChanged?.Invoke(menu);
+                return;
+            }
             Source.time = (float)pausedTime;
             Source.PlayScheduled(dspStart);
         }

@@ -114,6 +114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5a71ee2f348094e83c6ccfad98d841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upSprite: {fileID: 0}
+  downSprite: {fileID: 0}
+  laneMaterial: {fileID: 0}
+  upHoldColor: {r: 1, g: 0.4, b: 0.85, a: 0.85}
+  downHoldColor: {r: 0.35, g: 0.7, b: 1, a: 0.85}
   startJudge: Perfect
   holdEffect: {fileID: 0}
   isEventNote: 0
@@ -164,14 +169,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.984, y: 4.84}
+    oldSize: {x: 1.2, y: 1.1653291}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1.2, y: 1.1653291}
   m_EdgeRadius: 0
 --- !u!50 &-2597118951424246602
 Rigidbody2D:

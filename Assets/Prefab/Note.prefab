@@ -114,6 +114,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5a71ee2f348094e83c6ccfad98d841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upSprite: {fileID: 21300000, guid: 553193e1f786b2e499e2d805cc617a7a, type: 3}
+  downSprite: {fileID: 21300000, guid: 824dc50e39c28fd46b1d1f22fa40ee65, type: 3}
+  laneMaterial: {fileID: 2100000, guid: 827f381788b61bc4d8a39e843a57bb83, type: 2}
+  upHoldColor: {r: 0.9, g: 0.65, b: 0.82, a: 0.85}
+  downHoldColor: {r: 0.58, g: 0.76, b: 0.9, a: 0.85}
+  startJudge: Perfect
+  holdEffect: {fileID: 0}
+  isEventNote: 0
   line: 0
   kind: 0
   isJudged: 0

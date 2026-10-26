@@ -1,0 +1,33 @@
+PASS Original Stage2 chart binding retained: 234 notes
+PASS Every original music-time, horizontal position, speed, BPM and energy sample preserved
+PASS Legacy shared placers disabled only in Stage2 scene
+PASS Full imported song/route duration: 170.064s
+PASS Original 15 Holds and one Mash preserved
+PASS Ordered notes, no same-lane overlap, Hold notes avoid jump gaps
+PASS Continuous ground under every non-airborne sample; max mismatch=0.00000
+PASS Music-driven speed range=2.21..8.22
+PASS 21 bridge gaps across eight Stage2 music sections
+PASS Every bridge jump starts on the measured beat and spans two beats
+PASS Stage2-only backdrops, crossfade and nave gate are connected
+PASS Stage2 uses its own animation controller
+PASS Music-aware background framing and independent camera connected
+PASS Unused prototype event trigger is inactive, including physics callbacks
+PASS Existing judgment sound assignments retained
+PASS Runtime spawned all 234 authored notes and bound the shared song-time path
+PASS All note heads align with player path; error=0.00000
+PASS Hold body follows the moving marker; max deviation=0.0179
+INFO playback 6.00s; speed=5.01; judged=5
+INFO playback 22.00s; speed=4.32; judged=17
+PASS Pause freezes music time and player position
+INFO playback 40.01s; speed=6.09; judged=33
+INFO playback 55.01s; speed=7.54; judged=57
+INFO playback 85.01s; speed=5.90; judged=108
+INFO playback 115.00s; speed=6.72; judged=143
+INFO playback 140.00s; speed=8.07; judged=190
+INFO playback 166.01s; speed=4.57; judged=234
+PASS Full playback judged all 234 notes, Miss=0
+PASS All 15 Hold ends and 21 bridge jumps completed
+PASS Result opens only after full music playback (last sample 170.064s)
+PASS Menu pause/resume verified during playback
+INFO delayed editor callbacks retimed for synthetic input only: 9
+PASS All sampled note approaches visible 0.7s before judgment: 228/228

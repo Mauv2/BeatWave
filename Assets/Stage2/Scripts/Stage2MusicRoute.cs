@@ -11,6 +11,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
     public Animator animator;
     public Camera view;
     public BackgroundLoop backdrop;
+    public Stage2StageDirector presentation;
     public float runCycleSeconds = .5f;
     [Serializable] public struct Frame { public float time, x, y, speed, bpm, beat, energy; }
     [Serializable] public struct Leap { public float start, end, fromY, toY, height; }
@@ -119,6 +120,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
         var f = Sample(clock.SongTime);
         var ahead = Sample(clock.SongTime + .65);
         float size = Mathf.Lerp(5.7f, 6.6f, Mathf.InverseLerp(4.4f, 8.2f, f.speed));
+        if (presentation != null) size += presentation.CameraExpansion((float)clock.SongTime);
         if (Airborne(clock.SongTime) || Airborne(clock.SongTime + .65)) size += .35f;
         float blend = 1f - Mathf.Exp(-5f * Time.deltaTime);
         // Keep the player on the left third and reveal landing platforms early.
@@ -130,6 +132,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
     }
     void PresentBackdrop()
     {
+        if (presentation != null) { presentation.Present((float)clock.SongTime); return; }
         if (backdrop == null || backdrop.backgrounds.Length == 0) return;
         var sprite = backdrop.backgrounds[Mathf.Clamp(background, 0, backdrop.backgrounds.Length - 1)];
         float scale = Mathf.Max(view.orthographicSize * 2.1f / sprite.bounds.size.y,
