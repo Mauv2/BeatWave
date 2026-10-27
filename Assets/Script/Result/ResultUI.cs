@@ -56,6 +56,12 @@ public class ResultUI : MonoBehaviour
         StartCoroutine(ChangeSceneRoutine("Title"));
     }
 
+    public void SeletGame()
+    {
+        if (isChangingScene) return;
+        StartCoroutine(ChangeSceneRoutine("Select"));
+    }
+
     IEnumerator ChangeSceneRoutine(string sceneName)
     {
         isChangingScene = true;
