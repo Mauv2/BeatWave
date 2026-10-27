@@ -116,7 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upSprite: {fileID: 0}
   downSprite: {fileID: 0}
-  laneMaterial: {fileID: 0}
   upHoldColor: {r: 1, g: 0.4, b: 0.85, a: 0.85}
   downHoldColor: {r: 0.35, g: 0.7, b: 1, a: 0.85}
   startJudge: Perfect

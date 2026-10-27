@@ -20,6 +20,7 @@ public static class Stage2MoonlitBuilder
     static Material glowMaterial;
     static Material stoneMaterial,guideMaterial;
     static Mesh quad;
+    static float[] contourTimes, contourX, contourY;
     static readonly List<Stage2StageDirector.Decoration> decorations=new List<Stage2StageDirector.Decoration>();
     static readonly List<Stage2StageDirector.Lantern> lanterns=new List<Stage2StageDirector.Lantern>();
 
@@ -46,6 +47,7 @@ public static class Stage2MoonlitBuilder
         BuildRoute(source,placer.ReadChart());
         File.WriteAllText(RoutePath,JsonUtility.ToJson(source));AssetDatabase.ImportAsset(RoutePath);
         Undo.RecordObject(route,"Stage2 causeway route");route.routeFile=AssetDatabase.LoadAssetAtPath<TextAsset>(RoutePath);
+        route.ReloadProfile();
         var old=scene.GetRootGameObjects().FirstOrDefault(o=>o.name==RootName);
         if(old!=null)
         {
@@ -88,6 +90,7 @@ public static class Stage2MoonlitBuilder
             left=route.Sample(leap.end).x;floor=leap.toY;
         }
         for(int i=0;i<sections.Length;i++) BuildArchitecture(i,sections[i]);
+        BuildLandmarks(sections);
         var atmosphere=Group("10 - Song-time atmosphere",root);
         director.motes=Enumerable.Range(0,42).Select(i=>Glow("Dust "+i,atmosphere,Vector3.zero,
             Vector3.one*(i%7==0?.15f:.07f),-8)).ToArray();
@@ -110,6 +113,7 @@ public static class Stage2MoonlitBuilder
         director.Present(0);
         EditorUtility.SetDirty(route);EditorUtility.SetDirty(placer);EditorUtility.SetDirty(director);
         EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
+        Stage2EventsBuilder.Build();
         Debug.Log("Stage2 Moonlit Causeway built: "+source.jumps.Length+" music-aligned bridge gaps; original chart and horizontal speed retained.");
     }
     static void BuildRoute(Stage2MusicRoute.Profile p,Stage2NoteMapPlacer.Entry[] chart)
@@ -138,14 +142,33 @@ public static class Stage2MoonlitBuilder
             jumps.Add(new Stage2MusicRoute.Leap{start=start,end=start+length,fromY=ground,toY=floors[i],height=i>=15?1.55f:1.3f});
             ground=floors[i];
         }
-        p.jumps=jumps.ToArray();p.useSampledHeight=false;
+        // Broad musical phrases form terraces and long ramps; Hold intervals stay on one slope.
+        contourTimes=new float[]{0,5,13,18,30,36,43,48,56,63,71,78,85,94,102,109,118,124,133,140,148,156,163,170.064f};
+        contourY=new float[]{-3.1755366f,-3.1755366f,.8f,.8f,.8f,3.2f,7.3f,7.3f,11.5f,11.5f,7,7,-4.5f,-5.5f,-6.2f,-6.2f,-1,2.5f,7.5f,12,12,6,3,3};
+        for(int k=1;k<contourTimes.Length-1;k++)
+            foreach(var n in chart.Where(n=>n.noteKind==1))
+                if(contourTimes[k]>n.createTime-.35f&&contourTimes[k]<n.createTime+n.holdTime+.35f)
+                    contourTimes[k]=n.createTime+n.holdTime+.4f;
+        // A single structural collapse opens the lower cloister on the existing jump.
+        var descent=jumps.OrderBy(j=>Mathf.Abs(j.start-82)).First();
+        var knots=contourTimes.Select((t,i)=>new Vector2(t,contourY[i])).ToList();
+        knots.Add(new Vector2(descent.start,7));knots.Add(new Vector2(descent.end,-4));
+        knots=knots.OrderBy(v=>v.x).ToList();
+        contourTimes=knots.Select(v=>v.x).ToArray();contourY=knots.Select(v=>v.y).ToArray();
+        contourX=contourTimes.Select(t=>SourceX(p,t)).ToArray();
+        for(int k=0;k<jumps.Count;k++)
+        {
+            var j=jumps[k]; j.fromY=Contour(SourceX(p,j.start));j.toY=Contour(SourceX(p,j.end));
+            j.height=k>=15?2.1f:1.75f;jumps[k]=j;
+        }
+        p.jumps=jumps.ToArray();p.useSampledHeight=true;
         for(int i=0;i<p.frames.Length;i++)
         {
-            float t=p.frames[i].time,y=p.frames[0].y;
+            float t=p.frames[i].time,y=Contour(p.frames[i].x);
             foreach(var j in jumps)
             {
                 if(t<j.start)break;
-                if(t>=j.end){y=j.toY;continue;}
+                if(t>=j.end)continue;
                 float u=(t-j.start)/(j.end-j.start);y=Mathf.Lerp(j.fromY,j.toY,u)+4*j.height*u*(1-u);break;
             }
             p.frames[i].y=y;
@@ -165,30 +188,48 @@ public static class Stage2MoonlitBuilder
         while(lo<hi){int mid=(lo+hi)/2;if(frames[mid].x<x)lo=mid+1;else hi=mid;}
         if(lo==0)return 0;var a=frames[lo-1];var b=frames[lo];return Mathf.Lerp(a.time,b.time,Mathf.InverseLerp(a.x,b.x,x));
     }
+    static float SourceX(Stage2MusicRoute.Profile p,float t)
+    {
+        int i=Array.FindIndex(p.frames,f=>f.time>=t);if(i<0)return p.frames.Last().x;
+        if(i==0)return p.frames[0].x;
+        var a=p.frames[i-1];var b=p.frames[i];return Mathf.Lerp(a.x,b.x,Mathf.InverseLerp(a.time,b.time,t));
+    }
+    static float Contour(float x)
+    {
+        for(int i=1;i<contourX.Length;i++)if(x<=contourX[i])
+            return Mathf.Lerp(contourY[i-1],contourY[i],Mathf.InverseLerp(contourX[i-1],contourX[i],x));
+        return contourY.Last();
+    }
     static void BuildSurface(float left,float right,float floor,Transform[] sections,int span)
     {
-        var cuts=new List<float>{left};
-        foreach(var s in route.Data.sections){float x=route.Sample(s.start).x;if(x>left+.05f&&x<right-.05f)cuts.Add(x);}
-        cuts.Add(right);
+        var cuts=new List<float>{left,right};
+        cuts.AddRange(contourX.Where(x=>x>left+.001f&&x<right-.001f));
+        cuts.AddRange(route.Data.sections.Select(s=>route.Sample(s.start).x).Where(x=>x>left+.001f&&x<right-.001f));
+        cuts=cuts.Distinct().OrderBy(x=>x).ToList();
         for(int c=0;c<cuts.Count-1;c++)
         {
             float a=cuts[c],b=cuts[c+1];int section=SectionAt(TimeAt((a+b)*.5f));
-            var parent=Group("Stone span "+span+"."+c,sections[section]);
-            var ground=Group("Walkable stone",parent);ground.gameObject.layer=6;
-            ground.position=new Vector3((a+b)/2,floor-.25f,0);
-            ground.gameObject.AddComponent<BoxCollider2D>().size=new Vector2(b-a+.02f,.5f);
+            var parent=Group("Stone ramp "+span+"."+c,sections[section]);
+            float ya=Contour(a),yb=Contour(b);
+            var ground=Group("Walkable sloped stone",parent);ground.gameObject.layer=6;
+            // Polygon vertices follow the same contour as the music path, including tiny seam overlaps.
+            float slope=(yb-ya)/(b-a);
+            ground.gameObject.AddComponent<PolygonCollider2D>().points=new[]{
+                new Vector2(a-.01f,ya-slope*.01f),new Vector2(b+.01f,yb+slope*.01f),
+                new Vector2(b+.01f,yb-1),new Vector2(a-.01f,ya-1)};
             string file=section==1||section>=5?"고딕 성당의 촛불 석조 플랫폼.png":section>=2?"달빛에 부서진 고딕 석교.png":"고딕 석조 플랫폼 타일.png";
             var sprite=Sprite(Art+file);
             float sy=section>=2&&section<=4?.60f:1f;
             float floorOffset=section==1||section>=5?-1.12f:section>=2?.78f:-.09554f;
-            float naturalWidth=sprite.bounds.size.x*(section>=2&&section<=4?.71f:1f);
-            int count=Mathf.Max(1,Mathf.CeilToInt((b-a)/naturalWidth));
-            float width=(b-a)/count;
+            float length=Vector2.Distance(new Vector2(a,ya),new Vector2(b,yb));
+            int count=Mathf.Max(1,Mathf.CeilToInt(length/5.5f));float width=length/count;
+            Quaternion rotation=Quaternion.Euler(0,0,Mathf.Atan(slope)*Mathf.Rad2Deg);
             for(int i=0;i<count;i++)
             {
+                float u=(i+.5f)/count;
                 var o=Group("Authored "+file+" "+i,parent);var r=o.gameObject.AddComponent<SpriteRenderer>();r.sprite=sprite;r.sortingOrder=0;
-                o.localScale=new Vector3((width+.015f)/sprite.bounds.size.x,sy,1);
-                o.position=new Vector3(a+width*(i+.5f),floor-floorOffset,0);
+                o.localScale=new Vector3((width+.025f)/sprite.bounds.size.x,sy,1);
+                o.rotation=rotation;o.position=new Vector3(Mathf.Lerp(a,b,u),Mathf.Lerp(ya,yb,u),0)-rotation*new Vector3(0,floorOffset,0);
                 r.color=section==4?new Color(.78f,.85f,.96f):Color.white;
             }
         }
@@ -214,7 +255,7 @@ public static class Stage2MoonlitBuilder
             var f=route.Sample(TimeAt(x));float floor=f.y;
             string structure=section==1||section==6||section==7?"13_broken_arch":"14_ruined_column_1";
             Decor("Stone architecture",structure,middle,x,floor-1,section==1||section>=6?7:5.5f,-18,new Color(.62f,.69f,.86f),.08f);
-            if(section==2||section==4)Decor("Hanging banner","18_hanging_banner",middle,x+3,floor+3.8f,3.5f,-15,new Color(.68f,.72f,.90f),.08f);
+            if(section==2||section==4)Decor("Cloister banner","16_banner_post",middle,x+3,floor-1,5.5f,-15,new Color(.68f,.72f,.90f),.08f);
             if(section==0||section==5||section>=6)
             {
                 Decor("Causeway banner","16_banner_post",middle,x+2,floor-1,5,-10,new Color(.78f,.82f,.97f),0);
@@ -234,6 +275,37 @@ public static class Stage2MoonlitBuilder
             float y=route.Sample(TimeAt(x)).y;
             Decor("Near ruined parapet","20_broken_railing",middle,x,y-3.6f,2.1f,6,new Color(.22f,.29f,.47f),-.10f);
         }
+    }
+    static void BuildLandmarks(Transform[] sections)
+    {
+        // Three oversized silhouettes establish the castle's changing elevation.
+        int[] indices={2,4,6};float[] times={42,96,139};
+        for(int k=0;k<indices.Length;k++)
+        {
+            var f=route.Sample(times[k]);var parent=Group("Landmark - lunar sanctuary "+k,sections[indices[k]]);
+            Decor("Monumental moon arch","13_broken_arch",parent,f.x+5,f.y-4,18,-25,new Color(.46f,.56f,.76f),.04f);
+            Decor("Left guardian","07_knight_statue",parent,f.x-5,f.y-2,9,-20,new Color(.50f,.60f,.79f),.02f);
+            var halo=Glow("Moon halo",parent,new Vector3(f.x+4,f.y+5,2),new Vector3(10,10,1),-30);
+            halo.sharedMaterial=glowMaterial;
+            Ring("Moon seal",parent,new Vector3(f.x+4,f.y+5,1),3.3f,.045f,-29,new Color(.60f,.78f,1,.65f));
+            Ring("Inner lunar seal",parent,new Vector3(f.x+4,f.y+5,1),2.9f,.018f,-29,new Color(.60f,.78f,1,.4f));
+            for(int j=0;j<5;j++)
+                Decor("Suspended stone rib","22_thin_column",parent,f.x-8+j*6,f.y-12,10+j%2*3,-24,new Color(.36f,.43f,.61f),.03f);
+        }
+        foreach(var j in route.Data.jumps)
+        {
+            var f=route.Sample(j.start);var parent=sections[SectionAt(j.start)];
+            Decor("Broken bridge support","06_broken_pillar",parent,f.x-1,f.y-9,8,-5,new Color(.50f,.59f,.75f),0);
+            Ring("Takeoff rune",parent,new Vector3(f.x,f.y-.12f,0),.48f,.025f,2,new Color(.5f,.8f,1,.5f));
+        }
+    }
+    static void Ring(string name,Transform parent,Vector3 center,float radius,float width,int order,Color tint)
+    {
+        var o=Group(name,parent);var line=o.gameObject.AddComponent<LineRenderer>();
+        line.sharedMaterial=AssetDatabase.GetBuiltinExtraResource<Material>("Sprites-Default.mat");
+        line.useWorldSpace=false;line.loop=true;line.positionCount=96;line.widthMultiplier=width;
+        line.startColor=line.endColor=tint;line.sortingOrder=order;o.position=center;
+        for(int i=0;i<96;i++){float a=i*Mathf.PI*2/96;line.SetPosition(i,new Vector3(Mathf.Cos(a),Mathf.Sin(a),0)*radius);}
     }
     static void EnsureResources()
     {

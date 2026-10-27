@@ -44,6 +44,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
             return profile;
         }
     }
+    public void ReloadProfile() { profile=null; loadedRoute=null; }
     public float CurrentSpeed { get; private set; }
     public Frame Sample(double time)
     {
@@ -126,6 +127,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
         // Keep the player on the left third and reveal landing platforms early.
         var target = new Vector3(transform.position.x + 4.5f + .12f * f.speed,
             Mathf.Max(f.y, ahead.y) + 3f, -10f);
+        if(presentation!=null&&presentation.stageEvents!=null)target=presentation.stageEvents.CameraTarget((float)clock.SongTime,target);
         view.transform.position = Vector3.Lerp(view.transform.position, target, blend);
         view.orthographicSize = Mathf.Lerp(view.orthographicSize, size, blend);
         PresentBackdrop();

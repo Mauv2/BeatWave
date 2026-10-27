@@ -18,7 +18,7 @@ public static class Stage2MusicValidation
     static readonly List<string> report = new List<string>();
     static readonly MethodInfo Complete = typeof(JudgeManager).GetMethod("Complete", BindingFlags.Instance | BindingFlags.NonPublic);
     static readonly FieldInfo ActiveMash = typeof(JudgeManager).GetField("activeMash", BindingFlags.Instance | BindingFlags.NonPublic);
-    static readonly float[] Shots = { 6, 22, 40, 55, 85, 115, 140, 166 };
+    static readonly float[] Shots = { 26.9f, 27.36f, 80.9f, 82.2f, 83.1f, 139.4f, 141.3f, 143 };
     static RhythmClock clock;
     static Stage2NoteMapPlacer placer;
     static JudgeManager judge;

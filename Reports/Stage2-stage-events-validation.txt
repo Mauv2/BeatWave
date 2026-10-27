@@ -1,0 +1,10 @@
+PASS Distinct collapse and reconstruction
+PASS Authored 11m descent on existing jump; sampled endpoints interpolate across 0.01s frames
+PASS Bridge intact before collapse
+PASS Pieces fall and release collision
+PASS Frozen song time freezes fragments
+PASS Reconstruction begins below route
+PASS Reconstruction complete before departure
+PASS Restored bridge persists
+PASS Restart restores upper bridge
+PASS Restart clears apparitions

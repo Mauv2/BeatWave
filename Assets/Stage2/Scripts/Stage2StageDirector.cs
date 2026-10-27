@@ -5,6 +5,7 @@ using UnityEngine;
 public sealed class Stage2StageDirector : MonoBehaviour
 {
     public Stage2MusicRoute route;
+    public Stage2StageEvents stageEvents;
     public Sprite[] backgrounds;
     public SpriteRenderer[] backdropTiles;
     public Decoration[] decorations;
@@ -40,7 +41,7 @@ public sealed class Stage2StageDirector : MonoBehaviour
     {
         int section=SectionAt(time);
         float target=section==3||section==6 ? .25f : section==1 ? -.15f : 0f;
-        return target*Mathf.SmoothStep(0,1,(time-route.Data.sections[section].start)/2f);
+        return target*Mathf.SmoothStep(0,1,(time-route.Data.sections[section].start)/2f)+(stageEvents!=null?stageEvents.Expansion(time):0);
     }
     public void Present(float time)
     {
@@ -67,7 +68,7 @@ public sealed class Stage2StageDirector : MonoBehaviour
                 r.sprite=sprite; r.flipX=((tile+i-1)&1)!=0;
                 r.transform.localScale=Vector3.one*scale;
                 r.transform.position=new Vector3(camera.transform.position.x-offset+(i-1)*width,camera.transform.position.y,12);
-                var color=Palette[Mathf.Min(index,Palette.Length-1)]*(1f+pulse*.018f);
+                var color=Palette[Mathf.Min(index,Palette.Length-1)]*(1f+pulse*.018f)*(stageEvents!=null?stageEvents.BackgroundStrength(time):1);
                 color.a=layer==0?1:transition; r.color=color;
             }
         }
@@ -78,6 +79,7 @@ public sealed class Stage2StageDirector : MonoBehaviour
             pos.x+=(camera.transform.position.x-d.anchor.x)*d.parallax;
             d.target.position=pos;
         }
+        if(stageEvents!=null)stageEvents.Present(time);
         block=block??new MaterialPropertyBlock();
         if(gate!=null) gate.position=gateAnchor+Vector3.up*(7f*Mathf.SmoothStep(0,1,(time-gateTime-.06f)/1.1f));
         if(lanterns!=null) foreach(var lamp in lanterns)
