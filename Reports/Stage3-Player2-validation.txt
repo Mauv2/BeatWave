@@ -1,0 +1,8 @@
+PASS Player run
+PASS Player Attack
+PASS Player run
+PASS Player Jump
+PASS Player Idle
+PASS Player Attack
+PASS Player Idle
+PASS Player2 movement and judgment bindings; jump sample=23.70005

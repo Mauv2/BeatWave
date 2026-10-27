@@ -8,6 +8,7 @@ using DG.Tweening;
 
 public class JudgeManager : MonoBehaviour
 {
+    const float NoteJudgmentVolume = .35f;
     public JudgePoint judgePointUp, judgePointDown;
     public GameObject judgeTextPrefab, holdEffectPrefab, hitEffectPrefab;
     public int score, combo, perfectCount, greatCount, goodCount, missCount;
@@ -27,7 +28,6 @@ public class JudgeManager : MonoBehaviour
     public AudioClip holdEndSound;
     [Tooltip("Played for each accepted Mash press. Falls back to Tap Hit Sound.")]
     public AudioClip mashHitSound;
-    [Range(0f, 1f)] public float noteSoundVolume = 0.7f;
     AudioSource noteSoundSource;
     bool isGameOver, isResultSaved;
     readonly List<Note> notes = new List<Note>();
@@ -35,12 +35,19 @@ public class JudgeManager : MonoBehaviour
     public bool HasPendingNotes => notes.Exists(n => n != null && !n.isJudged);
     public double JudgeTime => clock == null ? 0d : clock.SongTime + inputOffsetSeconds;
 
-    void Awake() { clock = RhythmClock.GetOrCreate(); }
-    void OnEnable() { if (clock != null) clock.MenuPauseChanged += OnMenuPauseChanged; }
+    void Awake()
+    {
+        clock = RhythmClock.GetOrCreate();
+        // Fixed events disable normal judging but still use its judgment audio.
+        clock.MenuPauseChanged += OnMenuPauseChanged;
+    }
     void OnDisable()
     {
-        if (clock != null) clock.MenuPauseChanged -= OnMenuPauseChanged;
         if (noteSoundSource != null) noteSoundSource.Stop();
+    }
+    void OnDestroy()
+    {
+        if (clock != null) clock.MenuPauseChanged -= OnMenuPauseChanged;
     }
     void OnMenuPauseChanged(bool paused)
     {
@@ -48,13 +55,13 @@ public class JudgeManager : MonoBehaviour
     }
     public void PlayNoteHitSound(NoteKind kind, bool holdEnd = false)
     {
-        if (!isActiveAndEnabled || Time.timeScale <= 0f || (clock != null && clock.MenuPaused) || isGameOver || isResultSaved) return;
+        if (!gameObject.activeInHierarchy || Time.timeScale <= 0f || (clock != null && clock.MenuPaused) || isGameOver || isResultSaved) return;
         AudioClip clip = tapHitSound;
         if (kind == NoteKind.Hold)
             clip = holdEnd && holdEndSound != null ? holdEndSound : holdHeadSound != null ? holdHeadSound : tapHitSound;
         else if (kind == NoteKind.Mash)
             clip = mashHitSound != null ? mashHitSound : tapHitSound;
-        if (clip == null || noteSoundVolume <= 0f) return;
+        if (clip == null) return;
         if (noteSoundSource == null)
         {
             // Own source: music fades/flow pauses must not change judgment audio.
@@ -65,7 +72,7 @@ public class JudgeManager : MonoBehaviour
             noteSoundSource.loop = false;
             noteSoundSource.spatialBlend = 0f;
         }
-        noteSoundSource.PlayOneShot(clip, noteSoundVolume);
+        noteSoundSource.PlayOneShot(clip, GameAudioManager.ClipVolume(clip) * NoteJudgmentVolume);
     }
     void Start()
     {
@@ -88,8 +95,8 @@ public class JudgeManager : MonoBehaviour
         if (Time.timeScale <= 0f || clock == null || clock.MenuPaused || !clock.HasStarted || isGameOver || isResultSaved) return;
         double now = JudgeTime;
         notes.RemoveAll(n => n == null || n.isJudged);
-        if (Input.GetKeyDown(KeyCode.W)) TryHit(NoteLine.Up);
-        if (Input.GetKeyDown(KeyCode.S)) TryHit(NoteLine.Down);
+        if (PicoBoxInputManager.GetDown(NoteLine.Up)) TryHit(NoteLine.Up);
+        if (PicoBoxInputManager.GetDown(NoteLine.Down)) TryHit(NoteLine.Down);
         // No debug key to bypass the chart and write an incomplete result.
         for (int i = notes.Count - 1; i >= 0; i--)
         {
@@ -98,7 +105,6 @@ public class JudgeManager : MonoBehaviour
             if (note.kind == NoteKind.Mash) continue;
             if (note.isHolding)
             {
-                KeyCode key = note.line == NoteLine.Up ? KeyCode.W : KeyCode.S;
                 note.holdTimer = Mathf.Max(0f, (float)(now - note.judgeTime));
                 var visual = note.GetComponent<HoldNoteVisual>();
                 float progress = Mathf.Clamp01(note.holdTimer / Mathf.Max(0.001f, note.holdTime));
@@ -108,7 +114,7 @@ public class JudgeManager : MonoBehaviour
                     if (note.holdEffect != null) note.holdEffect.transform.position = visual.GetPoint(progress);
                 }
                 if (now >= note.judgeTime + note.holdTime) Complete(note, note.startJudge);
-                else if (!Input.GetKey(key)) Miss(note);
+                else if (!PicoBoxInputManager.GetHeld(note.line)) Miss(note);
             }
             else if (now > note.judgeTime + goodWindow || clock.Finished) Miss(note);
             if (isGameOver) break;

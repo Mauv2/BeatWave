@@ -69,8 +69,8 @@ public sealed class MashNote : MonoBehaviour
         if(clock==null||!clock.HasStarted||clock.IsPaused||Time.timeScale<=0)return;
         if(Active && automaticInput)
         {
-            if(Input.GetKeyDown(KeyCode.W))Press();
-            if(Input.GetKeyDown(KeyCode.S))Press();
+            if(PicoBoxInputManager.GetDown(NoteLine.Up))Press();
+            if(PicoBoxInputManager.GetDown(NoteLine.Down))Press();
         }
         float time=(float)clock.SongTime;
         if(!Resolved && time>=releaseTime)Resolve();

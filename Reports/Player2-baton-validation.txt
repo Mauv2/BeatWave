@@ -1,0 +1,6 @@
+PASS running state and cycle continue during attack
+PASS duplicate same-frame input ignored
+PASS jumping state continues during attack
+PASS arm freezes while paused
+PASS four repeated attacks while 6 distinct running frames continue
+PASS arm mirrors with facing direction

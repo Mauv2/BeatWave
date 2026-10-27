@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
@@ -23,6 +24,46 @@ public class BookOpenEffect : MonoBehaviour
     [SerializeField] private float contentFadeDuration = 0.3f;
 
     private bool isOpen = false;
+
+    [Header("Result Audio")]
+    [SerializeField] private AudioSource resultAudio;
+    [SerializeField] private AudioClip bookOpenSound;
+    [SerializeField] private AudioClip resultMusic;
+    private Coroutine audioRoutine;
+
+    private IEnumerator PlayResultAudio()
+    {
+        if (bookOpenSound != null)
+        {
+            resultAudio.loop = false;
+            resultAudio.clip = bookOpenSound;
+            GameAudioManager.ConfigureSource(resultAudio);
+            resultAudio.Play();
+            yield return new WaitForSecondsRealtime(bookOpenSound.length);
+        }
+
+        if (isOpen && resultMusic != null)
+        {
+            resultAudio.clip = resultMusic;
+            GameAudioManager.ConfigureSource(resultAudio);
+            resultAudio.loop = true;
+            resultAudio.Play();
+        }
+        audioRoutine = null;
+    }
+
+    private void StopResultAudio()
+    {
+        if (audioRoutine != null) StopCoroutine(audioRoutine);
+        audioRoutine = null;
+        if (resultAudio != null) resultAudio.Stop();
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(OpenBook));
+        StopResultAudio();
+    }
 
     private void Start()
     {
@@ -56,6 +97,9 @@ public class BookOpenEffect : MonoBehaviour
     {
         if (isOpen) return;
         isOpen = true;
+
+        StopResultAudio();
+        if (resultAudio != null) audioRoutine = StartCoroutine(PlayResultAudio());
 
         Sequence seq = DOTween.Sequence();
 
@@ -104,6 +148,8 @@ public class BookOpenEffect : MonoBehaviour
     {
         if (!isOpen) return;
         isOpen = false;
+
+        StopResultAudio();
 
         Sequence seq = DOTween.Sequence();
 

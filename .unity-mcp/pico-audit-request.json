@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"return new {scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty,devices=UnityEngine.InputSystem.Gamepad.all.Select(p=>new{p.displayName,p.layout}).ToArray()};"}}

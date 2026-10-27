@@ -1,0 +1,1 @@
+{"tool":"execute_code","args":{"action":"execute","code":"var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();if(string.IsNullOrEmpty(s.path)&&!s.isDirty)UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Stage1.unity\");return new{scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,playing=EditorApplication.isPlaying};"}}

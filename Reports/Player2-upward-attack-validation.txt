@@ -1,0 +1,5 @@
+PASS arm angle -55
+PASS arm angle 80
+PASS arm angle -55
+PASS upward attacks preserve 6 running frames
+PASS attack preserves jump state

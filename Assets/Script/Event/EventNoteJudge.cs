@@ -9,7 +9,7 @@ public class EventNoteJudge : MonoBehaviour
     EventNoteData currentData;
     float eventTimer;
     bool isHolding;
-    KeyCode holdKey;
+    NoteLine holdLine;
     string startJudge;
     JudgeManager judge;
     RhythmClock clock;
@@ -47,10 +47,10 @@ public class EventNoteJudge : MonoBehaviour
         if (isHolding)
         {
             if (now >= currentData.judgeTime + currentData.holdTime) Finish(startJudge);
-            else if (!Input.GetKey(holdKey)) Finish("Miss");
+            else if (!PicoBoxInputManager.GetHeld(holdLine)) Finish("Miss");
             return;
         }
-        bool up = Input.GetKeyDown(KeyCode.W), down = Input.GetKeyDown(KeyCode.S);
+        bool up = PicoBoxInputManager.GetDown(NoteLine.Up), down = PicoBoxInputManager.GetDown(NoteLine.Down);
         if (up || down)
         {
             if (playerAnim != null) playerAnim.PlayInteract();
@@ -62,7 +62,7 @@ public class EventNoteJudge : MonoBehaviour
                 if (currentNote.kind == NoteKind.Hold)
                 {
                     isHolding = true;
-                    holdKey = up ? KeyCode.W : KeyCode.S;
+                    holdLine = up ? NoteLine.Up : NoteLine.Down;
                     startJudge = grade;
                     if (judge != null) judge.PlayNoteHitSound(NoteKind.Hold);
                 }

@@ -1,0 +1,7 @@
+Original Run frame count observed: 9
+Run state preserved: True
+Downstroke pose count: 3
+Same-frame duplicate ignored: True
+Pause freezes attack: True
+Jump preserved: True
+Returns to original body and held baton: True

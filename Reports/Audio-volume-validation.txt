@@ -1,0 +1,8 @@
+PASS master=0 listener=0 mixerDb=0
+PASS master=0.5 listener=0.5 mixerDb=0
+PASS master=1 listener=1 mixerDb=0
+PASS title source Panel normalized=0.6871122 ignoreListenerVolume=False
+PASS dynamic judgment audio plays and obeys listener master
+PASS Stage2 song gain=0.3141617, pitch=1, playback active
+PASS result music normalized, looping=True
+PASS book sound normalized

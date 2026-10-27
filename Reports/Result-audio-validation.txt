@@ -1,0 +1,3 @@
+Opening: 책넘기는소리, playing=True, loop=False
+After sound: 매직하프, playing=True, loop=True
+Close stops audio=True

@@ -10,14 +10,17 @@ internal static class UnityMcpReconnect
 {
     static readonly string RequestPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../.unity-mcp/reconnect.request"));
     static bool connecting;
+    static double nextRequestCheck;
 
     static UnityMcpReconnect()
     {
-        EditorApplication.delayCall += CheckRequest;
+        EditorApplication.update += CheckRequest;
     }
 
     static void CheckRequest()
     {
+        if (connecting || EditorApplication.timeSinceStartup < nextRequestCheck) return;
+        nextRequestCheck = EditorApplication.timeSinceStartup + 1;
         if (File.Exists(RequestPath) && File.ReadAllText(RequestPath).Trim() == "requested")
             Connect();
     }

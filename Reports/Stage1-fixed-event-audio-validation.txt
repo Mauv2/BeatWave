@@ -1,0 +1,7 @@
+Fixed event disables normal judge=True
+EventNoteJudge Perfect plays sound=True
+Menu pause stops event sound=True
+Menu pause blocks sound=True
+Resume permits event sound=True
+Judgment volume=0.35
+Clip=노트 팝 소리

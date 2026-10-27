@@ -94,6 +94,7 @@ public class GameSelectManager : MonoBehaviour
         {
             previewAudioSource.Stop();
             previewAudioSource.clip = currentMusic.previewClip;
+            GameAudioManager.ConfigureSource(previewAudioSource);
             previewAudioSource.Play();
         }
     }

@@ -37,6 +37,7 @@ public class RhythmClock : MonoBehaviour
         Source.playOnAwake = false;
         Source.loop = false;
         Source.pitch = 1f;
+        GameAudioManager.ConfigureSource(Source);
         Source.time = Mathf.Clamp(startTime, 0f, Source.clip.length);
         Source.PlayScheduled(dspStart);
     }

@@ -87,10 +87,10 @@ public class CaveEventManager : MonoBehaviour
             noteMapPlacer.PlaceNotesFromTime(chartStart, caveStartPoint);
         }
         fadedSource = switchSong ? music2 : music1;
-        restoreVolume = switchSong ? normalVolume : originalVolume;
-        if (!keepSongPlaying && fadedSource != null) fadedSource.volume = 0f;
+        restoreVolume = switchSong ? GameAudioManager.ClipVolume(caveMusic) : originalVolume;
         if (switchSong) clock.BeginSong(music2);
         else if (!keepSongPlaying) clock.SetFlowPaused(false);
+        if (!keepSongPlaying && fadedSource != null) fadedSource.volume = 0f;
         clock.BeginTravel(playerMove);
         if (judgeManager != null) judgeManager.enabled = true;
         if (playerAnim != null) playerAnim.SetRunning(true);

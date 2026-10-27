@@ -59,6 +59,7 @@ public class MusicSelectManager : MonoBehaviour
         }
 
         previewAudioSource.clip = musicData.previewClip;
+        GameAudioManager.ConfigureSource(previewAudioSource);
         previewAudioSource.Play();
     }
 

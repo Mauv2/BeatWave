@@ -1,0 +1,5 @@
+PASS compact strike frame and unchanged route position
+PASS attack returns to run
+PASS airborne attack returns to jump
+PASS ten repeated attacks; no crescent objects=True
+PASS sprite-only clip; no body translation/scale animation

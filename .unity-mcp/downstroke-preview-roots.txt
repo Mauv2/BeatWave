@@ -1,0 +1,9 @@
+EventSystem
+PlayManager
+PauseManager
+Canvas
+GameResultManager
+Main Camera
+Stage3 - Last Wish Observatory
+Observatory Moonlight
+GameObject

@@ -1,0 +1,7 @@
+PicoBox input integration
+Mapping: leftShoulder -> W / Up; rightShoulder -> S / Down.
+Keyboard W/S remain combined with controller input.
+Consumer paths: JudgeManager Tap/Hold/Mash, EventNoteJudge, automatic MashNote.
+Unity 2022.3.60f1: production scripts compiled without CS errors in batch validation.
+Device observed in live editor: POKKEN CONTROLLER / SwitchProControllerHID.
+Synthetic edge tests in Editor mode did not validate frame edges; live hardware gameplay remains to be checked.

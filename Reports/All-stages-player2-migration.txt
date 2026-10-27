@@ -1,0 +1,11 @@
+Stage1: Player2 active=True, Player inactive=True, stale/cross-scene references=0, judgment uses Player2=True, all four sounds=노트 팝 소리, sound equality=True
+Preserved root position/scale, collider size/offset, move speed, jump force and marker offsets: True
+Stage2: Player2 active=True, Player inactive=True, stale/cross-scene references=0, judgment uses Player2=True, all four sounds=노트 팝 소리, sound equality=True
+Preserved root position/scale, collider size/offset, move speed, jump force and marker offsets: True
+Stage3: Player2 active=True, Player inactive=True, stale/cross-scene references=0, judgment uses Player2=True, all four sounds=노트 팝 소리, sound equality=True
+
+Stage1 runtime: route bound, Player2 moves; path error=2.590335, downstroke visible=True, tempo=0.997625, one active camera=True, judgment audio source created.
+Stage2 runtime: player=Player2, path=True, route animator linked=True, downstroke visible=True, tempo=0.9387805, cameras=1, judgment source=True, sound=노트 팝 소리
+Stage2 synchronized route check: error=0, traveling=True, paused=False
+Stage3 runtime: player=Player2, judgment linked=True, downstroke visible=True, judgment source=True, sound=노트 팝 소리
+Stage1 synchronized route check: error=0, traveling=True, paused=False
