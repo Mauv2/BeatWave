@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 826fd2721944bc84fbc955303a633bb3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9f381e30d90cd1d4da87a3be054ce692, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1747,13 +1747,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards:
+  - {fileID: 1761968211}
   - {fileID: 1140921961}
   - {fileID: 195591767}
-  - {fileID: 1761968211}
   musicDatas:
+  - {fileID: 11400000, guid: bf05d8b23a4ee534db0d240d5e3fc9df, type: 2}
   - {fileID: 11400000, guid: 4fee80f0f1b21004195628fa0c102336, type: 2}
   - {fileID: 11400000, guid: 5d0678de11a2c5d44991683ff56312ef, type: 2}
-  - {fileID: 11400000, guid: bf05d8b23a4ee534db0d240d5e3fc9df, type: 2}
   selectedMusicImage: {fileID: 538055483}
   previewAudioSource: {fileID: 2014620560}
   vinylCircle: {fileID: 326213406}
@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewAudioSource: {fileID: 2014620560}
-  firstMusic: {fileID: 11400000, guid: 4fee80f0f1b21004195628fa0c102336, type: 2}
+  firstMusic: {fileID: 11400000, guid: bf05d8b23a4ee534db0d240d5e3fc9df, type: 2}
   blackFade: {fileID: 955718335}
   fadeDuration: 0.5
 --- !u!82 &2014620560
@@ -2459,7 +2459,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: aa3ea63b2a9cb8e4a8fd4109d33d7d63, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e3495f7144426854c854d8c137ee1db7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
