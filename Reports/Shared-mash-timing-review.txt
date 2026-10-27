@@ -1,0 +1,10 @@
+PASS Original chart timestamps and contents unchanged: Assets/notedata JSON/Stage1Notes.json
+PASS Original chart timestamps and contents unchanged: Assets/Stage2/Data/Stage2OriginalNotes.json
+PASS Original chart timestamps and contents unchanged: Assets/Stage3/Data/LastWishChart.json
+PASS Stage2 Mash interval 27.359716..29.359716s: no Tap/Hold judgment window overlaps
+INFO Stage2 next Tap 29.681711s; gap 0.321995s; earliest accepted input 0.201995s after release
+INFO Stage2 traversal rejoins at 32.841732s, before first jump 33.341732s
+PASS Stage1 has no Mash; no timing shift required
+PASS Stage3 reserved Mash 41.066632..44.224526s has no ordinary note judgment overlap
+PASS Stage3 reserved Mash 116.856105..120.014000s has no ordinary note judgment overlap
+PASS Stage3 reserved Mash 145.277158..148.435053s has no ordinary note judgment overlap

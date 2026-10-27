@@ -6,7 +6,7 @@ namespace BeatWave.Stage3
     public sealed class Stage3Transitions : MonoBehaviour
     {
         public Stage3Gameplay game;
-        public Stage3MashGate[] gates;
+        public MashNote[] gates;
         public Transform[] collapsePieces, debris;
         public Collider2D[] collapseColliders;
         public Transform portal, portalExit, finale;
@@ -15,7 +15,7 @@ namespace BeatWave.Stage3
         Vector3[] pieceOrigins,debrisOrigins;
         Stage3FracturePresentation fracture;
         public bool AllResolved { get {foreach(var gate in gates)if(!gate.Resolved)return false;return true;} }
-        public Stage3MashGate ActiveGate {get{foreach(var gate in gates)if(gate.Active)return gate;return null;}}
+        public MashNote ActiveGate {get{foreach(var gate in gates)if(gate.Active)return gate;return null;}}
         void Awake()
         {
             pieceOrigins=new Vector3[collapsePieces.Length];for(int i=0;i<pieceOrigins.Length;i++)pieceOrigins[i]=collapsePieces[i].position;

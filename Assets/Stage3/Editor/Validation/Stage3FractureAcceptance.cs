@@ -17,7 +17,7 @@ namespace BeatWave.Stage3
         const string Key="BeatWave.Stage3.FractureAcceptance";
         static readonly List<string> report=new List<string>();
         static Stage3Gameplay game;
-        static Stage3MashGate gate;
+        static MashNote gate;
         static Note[] notes;
         static int scenario, shot, hits;
         static bool paused, resumed, resolved, locked;
@@ -100,7 +100,7 @@ namespace BeatWave.Stage3
                 if(before==0)
                 {
                     game.transitions.Present((float)game.Clock.SongTime);
-                    Check(gate.Hits==1 && crack.startColor.a>beforeAlpha+.3f && crack.startWidth>.06f,"First Mash press immediately lights and widens the floor cracks");
+                    Check(gate.Hits==1 && crack.startColor.a>beforeAlpha+.3f && crack.startWidth>.06f,"First Mash press immediately lights and widens the floor cracks (before="+beforeAlpha+", after="+crack.startColor.a+", width="+crack.startWidth+", elapsed="+((float)game.Clock.SongTime-gate.LastPressTime)+")");
                 }
                 if(gate.Hits==4&&!paused)
                 {

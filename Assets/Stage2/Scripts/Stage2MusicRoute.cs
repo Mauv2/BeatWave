@@ -46,6 +46,32 @@ public sealed class Stage2MusicRoute : MonoBehaviour
     }
     public void ReloadProfile() { profile=null; loadedRoute=null; }
     public float CurrentSpeed { get; private set; }
+    // Traversal waits at the Mash stage while the audio timeline continues.
+    // Rejoin before the next jump without moving any chart timestamps.
+    public float MashStart { get; private set; } = -1;
+    public float MashEnd { get; private set; }
+    public float MashRejoin { get; private set; }
+    public void ConfigureMash(float start, float end)
+    {
+        MashStart=start;MashEnd=end;
+        MashRejoin=Data.jumps[0].start-.5f;
+        if(MashRejoin<=end)throw new InvalidOperationException("Mash needs recovery space before the next jump.");
+    }
+    public Frame SampleTraversal(double time)
+    {
+        var musical=Sample(time);
+        if(MashStart<0 || time<MashStart || time>=MashRejoin)return musical;
+        double mapped=MashStart;float rate=0;
+        if(time>=MashEnd)
+        {
+            float span=MashRejoin-MashEnd, u=Mathf.Clamp01(((float)time-MashEnd)/span);
+            mapped=time-(MashEnd-MashStart)*(1-Mathf.SmoothStep(0,1,u));
+            rate=1+(MashEnd-MashStart)*6*u*(1-u)/span;
+        }
+        var spatial=Sample(mapped);
+        musical.x=spatial.x;musical.y=spatial.y;musical.speed=spatial.speed*rate;
+        return musical;
+    }
     public Frame Sample(double time)
     {
         var frames = Data.frames;
@@ -84,7 +110,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
         int count = Mathf.CeilToInt((float)(end - start) / .01f);
         for (int i = 0; i <= count; i++)
         {
-            var f = Sample(Math.Min(end, start + i * .01d));
+            var f = SampleTraversal(Math.Min(end, start + i * .01d));
             points.Add(new Vector2(f.x, f.y + feetOffset));
         }
         var cues = new List<RhythmPath.JumpCue>();
@@ -101,7 +127,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
     void Update()
     {
         bool traveling = clock.HasStarted && !clock.IsPaused && clock.TravelEnabled && !mover.isPaused;
-        var f = Sample(clock.SongTime);
+        var f = SampleTraversal(clock.SongTime);
         CurrentSpeed = traveling ? f.speed : 0f;
         foreach (var section in Data.sections)
             if (clock.SongTime >= section.start && clock.SongTime < section.end)
@@ -110,7 +136,7 @@ public sealed class Stage2MusicRoute : MonoBehaviour
         {
             if (hasRunParameter) animator.SetFloat(RunParameter, runCycleSeconds * f.bpm / 60f);
             animator.SetBool("isFlying", Airborne(clock.SongTime));
-            animator.SetBool("isRunning", traveling);
+            animator.SetBool("isRunning", traveling && f.speed>.01f);
         }
     }
     void LateUpdate()
@@ -118,8 +144,8 @@ public sealed class Stage2MusicRoute : MonoBehaviour
         if (view == null) return;
         if (!clock.HasStarted || clock.IsPaused || !clock.TravelEnabled || mover.isPaused)
         { PresentBackdrop(); return; }
-        var f = Sample(clock.SongTime);
-        var ahead = Sample(clock.SongTime + .65);
+        var f = SampleTraversal(clock.SongTime);
+        var ahead = SampleTraversal(clock.SongTime + .65);
         float size = Mathf.Lerp(5.7f, 6.6f, Mathf.InverseLerp(4.4f, 8.2f, f.speed));
         if (presentation != null) size += presentation.CameraExpansion((float)clock.SongTime);
         if (Airborne(clock.SongTime) || Airborne(clock.SongTime + .65)) size += .35f;

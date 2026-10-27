@@ -6,7 +6,7 @@ PASS Player stays framed; first note readable for >=1.2 s at 144 FPS, aspect 1.7
 PASS Player stays framed; first note readable for >=1.2 s at 30 FPS, aspect 1.33
 PASS Player stays framed; first note readable for >=1.2 s at 60 FPS, aspect 1.33
 PASS Player stays framed; first note readable for >=1.2 s at 144 FPS, aspect 1.33
-PASS First Mash press immediately lights and widens the floor cracks
+PASS First Mash press immediately lights and widens the floor cracks (before=0.2509804, after=0.6941177, width=0.07, elapsed=0)
 PASS Pause freezes music, character, crack pulse and rejects Mash input
 PASS Gate success resolves correctly
 PASS Gate reports exactly one judgement

@@ -41,6 +41,9 @@ namespace BeatWave.Stage3
             music.Stop();
             music.playOnAwake = false;
             Time.timeScale = 1;
+            // Bind the shared version of the original Stage3 Mash behavior.
+            if(transitions!=null)for(int i=0;i<transitions.gates.Length;i++)
+                transitions.gates[i].Initialize(clock,judge,playerAnimation,i==0);
         }
         IEnumerator Start()
         {

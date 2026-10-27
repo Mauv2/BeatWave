@@ -28,6 +28,12 @@ public sealed class Stage2NoteMapPlacer : MonoBehaviour
         var body = player.GetComponent<CapsuleCollider2D>();
         upOffset = upMarker.position - player.transform.position;
         downOffset = downMarker.position - player.transform.position;
+        foreach(var entry in ReadChart()) if(entry.noteKind==(int)NoteKind.Mash)
+        {
+            route.ConfigureMash(entry.createTime,entry.createTime+entry.mashLimitTime);
+            route.presentation.gateReleaseTime=entry.createTime+entry.mashLimitTime;
+            route.presentation.stageEvents.gateReleaseTime=entry.createTime+entry.mashLimitTime;
+        }
         player.BindPath(route.BuildPath(body, 0, songClip.length));
         foreach (var entry in ReadChart())
         {

@@ -1,33 +1,22 @@
-PASS Original Stage2 chart binding retained: 234 notes
-PASS Every original music-time, horizontal position, speed, BPM and energy sample preserved
-PASS Legacy shared placers disabled only in Stage2 scene
-PASS Full imported song/route duration: 170.064s
-PASS Original 15 Holds and one Mash preserved
-PASS Ordered notes, no same-lane overlap, Hold notes avoid jump gaps
-PASS Continuous ground under every non-airborne sample; max mismatch=0.00038
-PASS Music-driven speed range=2.21..8.22
-PASS 21 bridge gaps across eight Stage2 music sections
-PASS Every bridge jump starts on the measured beat and spans two beats
-PASS Stage2-only backdrops, crossfade and nave gate are connected
-PASS Stage2 uses its own animation controller
-PASS Music-aware background framing and independent camera connected
-PASS Unused prototype event trigger is inactive, including physics callbacks
-PASS Existing judgment sound assignments retained
+INFO Full playback of saved Stage2; original editor scene retained
 PASS Runtime spawned all 234 authored notes and bound the shared song-time path
 PASS All note heads align with player path; error=0.00000
 PASS Hold body follows the moving marker; max deviation=0.0180
-INFO playback 26.93s; speed=4.32; judged=20
+INFO playback 26.91s; speed=4.32; judged=20
 INFO playback 27.38s; speed=4.32; judged=20
+PASS Mash plays through its music interval while traversal waits
+PASS Shared Mash accepts continued presses and renders every hit until release
+PASS Mash resolution is idempotent
 PASS Pause freezes music time and player position
-INFO playback 80.91s; speed=5.99; judged=105
-INFO playback 82.21s; speed=5.98; judged=106
+INFO playback 80.92s; speed=5.99; judged=105
+INFO playback 82.22s; speed=5.98; judged=106
 INFO playback 83.11s; speed=5.96; judged=107
 INFO playback 139.41s; speed=8.07; judged=188
-INFO playback 141.30s; speed=8.08; judged=192
-INFO playback 143.01s; speed=8.13; judged=195
+INFO playback 141.31s; speed=8.08; judged=192
+INFO playback 143.02s; speed=8.13; judged=195
 PASS Full playback judged all 234 notes, Miss=0
 PASS All 15 Hold ends and 21 bridge jumps completed
 PASS Result opens only after full music playback (last sample 170.064s)
 PASS Menu pause/resume verified during playback
-INFO delayed editor callbacks retimed for synthetic input only: 5
-PASS All sampled note approaches visible 0.7s before judgment: 233/233
+INFO delayed editor callbacks retimed for synthetic input only: 7
+PASS All sampled note approaches visible 0.7s before judgment: 231/231

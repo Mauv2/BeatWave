@@ -6,6 +6,8 @@ public sealed class Stage2StageEvents : MonoBehaviour
 {
     public Stage2MusicRoute route;
     public float gateTime;
+    public float gateReleaseTime;
+    float GateEnd => gateReleaseTime>0?gateReleaseTime:gateTime;
     public LineRenderer seal, landingRing;
     public MeshRenderer gateLight;
     public SpriteRenderer guardian;
@@ -32,7 +34,7 @@ public sealed class Stage2StageEvents : MonoBehaviour
     public Vector3 CameraTarget(float time,Vector3 normal)
     {
         float enter=Mathf.SmoothStep(0,1,(time-(gateTime-1.3f))/1.1f);
-        float leave=1-Mathf.SmoothStep(0,1,(time-(gateTime+.15f))/1.1f);
+        float leave=1-Mathf.SmoothStep(0,1,(time-(GateEnd+.15f))/1.1f);
         var f=route.Sample(gateTime);
         normal=Vector3.Lerp(normal,new Vector3(f.x+3,f.y+3,-10),enter*leave);
         foreach(var e in collapses) if(!e.reconstruct)
@@ -60,7 +62,7 @@ public sealed class Stage2StageEvents : MonoBehaviour
     {
         block=block??new MaterialPropertyBlock();
         float anticipation=Mathf.SmoothStep(0,1,(time-gateTime+2)/2);
-        float release=Mathf.SmoothStep(0,1,(time-gateTime-.06f)/1.1f);
+        float release=Mathf.SmoothStep(0,1,(time-GateEnd-.06f)/1.1f);
         seal.enabled=time>gateTime-3&&release<1;
         seal.transform.localScale=Vector3.one*(1+release*1.8f);
         seal.transform.localRotation=Quaternion.Euler(0,0,-time*12);

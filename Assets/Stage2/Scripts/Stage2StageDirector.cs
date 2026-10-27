@@ -16,6 +16,7 @@ public sealed class Stage2StageDirector : MonoBehaviour
     public Transform gate;
     public Vector3 gateAnchor;
     public float gateTime;
+    public float gateReleaseTime;
     [Serializable] public struct Lantern { public MeshRenderer renderer; public float worldX, phase; }
     [Serializable] public struct Decoration
     {
@@ -81,7 +82,7 @@ public sealed class Stage2StageDirector : MonoBehaviour
         }
         if(stageEvents!=null)stageEvents.Present(time);
         block=block??new MaterialPropertyBlock();
-        if(gate!=null) gate.position=gateAnchor+Vector3.up*(7f*Mathf.SmoothStep(0,1,(time-gateTime-.06f)/1.1f));
+        if(gate!=null) gate.position=gateAnchor+Vector3.up*(7f*Mathf.SmoothStep(0,1,(time-(gateReleaseTime>0?gateReleaseTime:gateTime)-.06f)/1.1f));
         if(lanterns!=null) foreach(var lamp in lanterns)
         {
             float chase=Mathf.Exp(-Mathf.Abs(lamp.worldX-f.x-5f)*.11f);

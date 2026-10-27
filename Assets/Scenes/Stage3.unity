@@ -32497,7 +32497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0743731d11aae45936ee2f44b97a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 2128137175}
+  automaticInput: 1
   startTime: 145.27716
   releaseTime: 148.43506
   requiredHits: 8
@@ -124774,7 +124774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0743731d11aae45936ee2f44b97a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 2128137175}
+  automaticInput: 1
   startTime: 41.06663
   releaseTime: 44.224525
   requiredHits: 8
@@ -155614,7 +155614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1574329817
 Animator:
   serializedVersion: 5
@@ -158029,7 +158029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0743731d11aae45936ee2f44b97a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 2128137175}
+  automaticInput: 1
   startTime: 116.8561
   releaseTime: 120.014
   requiredHits: 10

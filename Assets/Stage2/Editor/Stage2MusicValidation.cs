@@ -17,7 +17,6 @@ public static class Stage2MusicValidation
     const string Report = "Reports/Stage2-causeway-validation.txt";
     static readonly List<string> report = new List<string>();
     static readonly MethodInfo Complete = typeof(JudgeManager).GetMethod("Complete", BindingFlags.Instance | BindingFlags.NonPublic);
-    static readonly FieldInfo ActiveMash = typeof(JudgeManager).GetField("activeMash", BindingFlags.Instance | BindingFlags.NonPublic);
     static readonly float[] Shots = { 26.9f, 27.36f, 80.9f, 82.2f, 83.1f, 139.4f, 141.3f, 143 };
     static RhythmClock clock;
     static Stage2NoteMapPlacer placer;
@@ -29,12 +28,21 @@ public static class Stage2MusicValidation
     static double deadline, pauseUntil, frozenTime, nextMashPress;
     static Vector3 frozenPosition;
     static bool paused, resumed, started, reloadLocked;
+    static MashNote mashUnderTest;
+    static bool mashChecked, mashEntered;
+    static double mashFirstTime;
+    static Vector3 mashPosition;
     static readonly HashSet<int> seen = new HashSet<int>();
     static Stage2MusicValidation()
     {
         EditorApplication.update += Tick;
         EditorApplication.playModeStateChanged += state =>
         {
+            if(state==PlayModeStateChange.EnteredEditMode && SessionState.GetBool(Key+".Override",false))
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.playModeStartScene=AssetDatabase.LoadAssetAtPath<SceneAsset>(SessionState.GetString(Key+".PreviousStart",""));
+                SessionState.SetBool(Key+".Override",false);
+            }
             if (state != PlayModeStateChange.ExitingPlayMode) return;
             if (SessionState.GetBool(Key, false))
             {
@@ -105,7 +113,22 @@ public static class Stage2MusicValidation
     public static void Begin()
     {
         Layout();
+        StartPlayback();
+    }
+    // Preserve an open, unsaved scene while validating the saved Stage2 asset.
+    public static void BeginFromSceneAsset()
+    {
+        if(EditorApplication.isPlaying)throw new InvalidOperationException("Stop playback first");
+        SessionState.SetString(Key+".PreviousStart",AssetDatabase.GetAssetPath(UnityEditor.SceneManagement.EditorSceneManager.playModeStartScene));
+        SessionState.SetBool(Key+".Override",true);
+        UnityEditor.SceneManagement.EditorSceneManager.playModeStartScene=AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Stage2.unity");
+        report.Clear();File.WriteAllText(Report,"INFO Full playback of saved Stage2; original editor scene retained\n");
+        StartPlayback();
+    }
+    static void StartPlayback()
+    {
         clock = null; placer = null; notes = null; started = paused = resumed = false;
+        mashUnderTest=null;mashChecked=mashEntered=false;
         hits = holds = shot = previews = visiblePreviews = jumps = delayedEditorInputs = 0; maxNoteError = maxHoldError = lastTime = 0; seen.Clear();
         SessionState.SetBool(Key, true); EditorApplication.isPlaying = true;
     }
@@ -130,6 +153,7 @@ public static class Stage2MusicValidation
             started = true; Application.runInBackground = true; deadline = now + 200;
             if (!reloadLocked) { reloadLocked = true; EditorApplication.LockReloadAssemblies(); }
             judge = placer.judge; judge.enabled = false; notes = placer.Notes.ToArray(); expected = notes.Length;
+            mashUnderTest=notes.Single(n=>n.kind==NoteKind.Mash).GetComponent<MashNote>();
             expectedHolds=placer.ReadChart().Count(n=>n.noteKind==1);expectedJumps=placer.route.Data.jumps.Length;
             Check(expected == 234 && placer.player.HasRhythmPath, "Runtime spawned all 234 authored notes and bound the shared song-time path");
             foreach (var note in notes)
@@ -158,6 +182,21 @@ public static class Stage2MusicValidation
         if (now > deadline) throw new TimeoutException("Stage2 playback did not finish; last time=" + lastTime);
         if (placer == null || clock == null) return;
         double t = clock.SongTime; lastTime = (float)t; jumps = placer.player.AutomaticJumpCount;
+        if(mashUnderTest!=null && mashUnderTest.Active && !mashEntered)
+        {mashEntered=true;mashFirstTime=t;mashPosition=placer.player.Path.Evaluate(mashUnderTest.startTime+.2f);}
+        if(mashUnderTest!=null && mashEntered && mashUnderTest.Active && t>mashFirstTime+.2)
+        {
+            if(clock.FlowPaused || Vector3.Distance(mashPosition,placer.player.transform.position)>.01f)
+                throw new InvalidOperationException("Mash travel mismatch: flow="+clock.FlowPaused+", drift="+Vector3.Distance(mashPosition,placer.player.transform.position)+", start="+placer.route.MashStart);
+        }
+        if(mashUnderTest!=null && mashUnderTest.Resolved && !mashChecked)
+        {
+            mashChecked=true;
+            Check(mashEntered && t-mashFirstTime>1.8 && !clock.FlowPaused,"Mash plays through its music interval while traversal waits");
+            Check(mashUnderTest.Success && mashUnderTest.Hits>mashUnderTest.requiredHits && mashUnderTest.HitEffectsSpawned==mashUnderTest.Hits,"Shared Mash accepts continued presses and renders every hit until release");
+            int score=judge.score;mashUnderTest.Resolve();Check(judge.score==score,"Mash resolution is idempotent");
+            hits++;
+        }
         if (paused && !resumed)
         {
             if (now < pauseUntil) return;
@@ -180,8 +219,8 @@ public static class Stage2MusicValidation
             if (note.kind == NoteKind.Mash)
             {
                 if (t < note.judgeTime) continue;
-                if (!note.isMashActive) { note.isMashActive = true; ActiveMash.SetValue(judge, note); clock.SetFlowPaused(true); }
-                if (now >= nextMashPress) { judge.TryHit(note.line); nextMashPress = now + .1; if (note.isJudged) hits++; }
+                var mash=note.GetComponent<MashNote>();
+                if (mash.Active && now >= nextMashPress) { mash.Press(); nextMashPress = now + .1; }
             }
             else if (!note.isHolding && t >= note.judgeTime)
             {

@@ -32,7 +32,6 @@ public class JudgeManager : MonoBehaviour
     bool isGameOver, isResultSaved;
     readonly List<Note> notes = new List<Note>();
     RhythmClock clock;
-    Note activeMash;
     public bool HasPendingNotes => notes.Exists(n => n != null && !n.isJudged);
     public double JudgeTime => clock == null ? 0d : clock.SongTime + inputOffsetSeconds;
 
@@ -74,7 +73,11 @@ public class JudgeManager : MonoBehaviour
         UpdateUI();
         if (blackFade != null) { var c = blackFade.color; c.a = 0f; blackFade.color = c; blackFade.raycastTarget = false; }
     }
-    public void RegisterNote(Note note) { if (!notes.Contains(note)) notes.Add(note); }
+    public void RegisterNote(Note note)
+    {
+        if (!notes.Contains(note)) notes.Add(note);
+        if (note.kind == NoteKind.Mash) MashNote.Attach(note, clock, this);
+    }
     public string Grade(double difference)
     {
         double diff = System.Math.Abs(difference);
@@ -85,18 +88,6 @@ public class JudgeManager : MonoBehaviour
         if (Time.timeScale <= 0f || clock == null || clock.MenuPaused || !clock.HasStarted || isGameOver || isResultSaved) return;
         double now = JudgeTime;
         notes.RemoveAll(n => n == null || n.isJudged);
-        if (activeMash == null)
-        {
-            foreach (var note in notes)
-                if (note.kind == NoteKind.Mash && now >= note.judgeTime && now <= note.judgeTime + goodWindow)
-                {
-                    activeMash = note;
-                    note.isMashActive = true;
-                    note.mashTimer = 0f;
-                    clock.SetFlowPaused(true);
-                    break;
-                }
-        }
         if (Input.GetKeyDown(KeyCode.W)) TryHit(NoteLine.Up);
         if (Input.GetKeyDown(KeyCode.S)) TryHit(NoteLine.Down);
         // No debug key to bypass the chart and write an incomplete result.
@@ -104,12 +95,8 @@ public class JudgeManager : MonoBehaviour
         {
             var note = notes[i];
             if (note == null || note.isJudged) continue;
-            if (note == activeMash)
-            {
-                note.mashTimer += Time.deltaTime;
-                if (note.mashTimer >= note.mashLimitTime) Miss(note);
-            }
-            else if (note.isHolding)
+            if (note.kind == NoteKind.Mash) continue;
+            if (note.isHolding)
             {
                 KeyCode key = note.line == NoteLine.Up ? KeyCode.W : KeyCode.S;
                 note.holdTimer = Mathf.Max(0f, (float)(now - note.judgeTime));
@@ -144,12 +131,11 @@ public class JudgeManager : MonoBehaviour
     {
         if (Time.timeScale <= 0f || clock == null || clock.MenuPaused || !clock.HasStarted || isGameOver || isResultSaved) return false;
         if (playerAnim != null) playerAnim.PlayInteract();
-        if (activeMash != null)
+        foreach (var candidate in notes)
         {
-            activeMash.currentHitCount++;
-            PlayNoteHitSound(NoteKind.Mash);
-            if (activeMash.currentHitCount >= activeMash.needHitCount) Complete(activeMash, "Perfect");
-            return true;
+            if (candidate == null || candidate.isJudged || candidate.kind != NoteKind.Mash) continue;
+            var mash = candidate.GetComponent<MashNote>();
+            if (mash != null && mash.Active) return mash.Press();
         }
         var note = FindCandidate(line);
         if (note == null) return false;
@@ -183,7 +169,7 @@ public class JudgeManager : MonoBehaviour
     Note FindHeldOrCandidate(NoteLine line)
     {
         foreach (var note in notes)
-            if (note != null && !note.isJudged && note.line == line && (note.isHolding || note == activeMash)) return note;
+            if (note != null && !note.isJudged && note.line == line && (note.isHolding || note.isMashActive)) return note;
         return FindCandidate(line);
     }
     void Complete(Note note, string result)
@@ -211,7 +197,6 @@ public class JudgeManager : MonoBehaviour
     void Release(Note note)
     {
         note.isJudged = true;
-        if (activeMash == note) { activeMash = null; clock.SetFlowPaused(false); }
         if (note.holdEffect != null) Destroy(note.holdEffect);
         if (judgePointUp != null && judgePointUp.currentNote == note) judgePointUp.currentNote = null;
         if (judgePointDown != null && judgePointDown.currentNote == note) judgePointDown.currentNote = null;
@@ -229,9 +214,6 @@ public class JudgeManager : MonoBehaviour
                 Destroy(note.gameObject);
             }
         notes.Clear();
-        bool wasMashPaused = activeMash != null;
-        activeMash = null;
-        if (wasMashPaused && clock != null) clock.SetFlowPaused(false);
         if (judgePointUp != null) judgePointUp.currentNote = null;
         if (judgePointDown != null) judgePointDown.currentNote = null;
     }

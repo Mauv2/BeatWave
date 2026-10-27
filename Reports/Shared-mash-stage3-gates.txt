@@ -1,0 +1,4 @@
+PASS ASCEND: hits=25, effects=25, resolved on music timeline
+PASS Repeated resolve does not add score
+PASS LAST WISH: hits=25, effects=25, resolved on music timeline
+PASS Repeated resolve does not add score

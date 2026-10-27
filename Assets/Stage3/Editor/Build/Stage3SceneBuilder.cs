@@ -235,9 +235,9 @@ namespace BeatWave.Stage3
             result=Sprite.Create(bridge.texture,new Rect(r.x+index*width,r.y,width,r.height),new Vector2(.5f,.735f),100,0,SpriteMeshType.FullRect);
             result.name="Last Wish fractured stone "+index;AssetDatabase.CreateAsset(result,path);return result;
         }
-        static Stage3MashGate Gate(Stage3Gameplay game,string name,Stage3Leg phrase,int hits,string action)
+        static MashNote Gate(Stage3Gameplay game,string name,Stage3Leg phrase,int hits,string action)
         {
-            var root=Child(world,name,phrase.from);var gate=root.gameObject.AddComponent<Stage3MashGate>();gate.game=game;
+            var root=Child(world,name,phrase.from);var gate=root.gameObject.AddComponent<MashNote>();
             gate.startTime=phrase.start;gate.releaseTime=phrase.end;gate.requiredHits=hits;gate.actionLabel=action;
             var p=Child(root,"Mash presentation",new Vector3(2,game.footOffset+1.2f));gate.presentation=p.gameObject;
             var n=(GameObject)PrefabUtility.InstantiatePrefab(game.mashPrefab,p);n.transform.localPosition=Vector3.zero;n.transform.localScale=Vector3.one*1.3f;
